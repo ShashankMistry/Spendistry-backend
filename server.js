@@ -17,6 +17,15 @@ app.use(express.json());
 const userRouter = require('./routes/user');
 app.use('/user', userRouter);
 
+const vendorRouter = require('./routes/vendor');
+app.use('/vendor', vendorRouter);
+
+const invoiceRouter = require('./routes/invoice');
+app.use('/invoice', invoiceRouter);
+
+const reportRouter = require('./routes/report');
+app.use('/report', reportRouter);
+
 app.listen (PORT, () => {
   console.log('listening on port', PORT);
 }

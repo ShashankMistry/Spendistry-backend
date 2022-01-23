@@ -22,8 +22,18 @@ router.get('/:id', getUser, (req, res) => {
 router.post('/', async (req, res) => {
     // res.send(`creating user ${req.body.name}`);
     const user = new User({ 
-        name: req.body.name,
+        fname: req.body.fname,
+        lname: req.body.lname,
         email: req.body.email,
+        password: req.body.password,
+        mobileNumber: req.body.mobileNumber,
+        address: req.body.address,
+        _id : req.body._id,
+        extra1 : req.body.extra1,
+        extra2 : req.body.extra2,
+        extra3 : req.body.extra3,
+        extra4 : req.body.extra4,
+        extra5 : req.body.extra5
     });
     try{
         const savedUser = await user.save();
@@ -37,11 +47,38 @@ router.post('/', async (req, res) => {
 // updating one
 router.patch('/:id',getUser, async (req, res) => {
     // res.send(`updating user ${req.params.id}`);
-    if(req.body.name != null){
-        res.user.name = req.body.name;
+    if(req.body.fname != null){
+        res.user.fname = req.body.fname;
     } 
+    if(req.body.lname != null){
+        res.user.lname = req.body.lname;
+    }
     if(req.body.email != null){
         res.user.email = req.body.email;
+    }
+    if(req.body.password != null){
+        res.user.password = req.body.password;
+    }
+    if(req.body.mobileNumber != null){
+        res.user.mobileNumber = req.body.mobileNumber;
+    }
+    if(req.body.address){
+        res.user.address = req.body.address;
+    }
+    if(req.body.extra1 != null){
+        res.user.extra1 = req.body.extra1;
+    }
+    if(req.body.extra2 != null){
+        res.user.extra2 = req.body.extra2;
+    }
+    if(req.body.extra3 != null){
+        res.user.extra3 = req.body.extra3;
+    }
+    if(req.body.extra4 != null){
+        res.user.extra4 = req.body.extra4;
+    }
+    if(req.body.extra5 != null){
+        res.user.extra5 = req.body.extra5;
     }
     try{
         const updatedUser = await res.user.save();
@@ -62,6 +99,17 @@ router.delete('/:id', getUser, async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 
+})
+
+//getting user by email
+router.get('/email/:email', async (req, res) => {
+    // res.send(`getting user by email ${req.params.email}`);
+    try {
+        const user = await User.find({email: req.params.email});
+        res.json(user);
+    } catch (err) {
+        res.status(500).json({message: err.message});
+    }
 })
 
 async function getUser(req, res, next) {
