@@ -1,5 +1,5 @@
 const express = require('express');
-const app = express();
+const router = express.Router();
 const Return = require('../models/return');
 
 //getting all
@@ -185,3 +185,5 @@ async function getReturn(req, res, next) {
     }
     res.return = returnData;
 }
+
+module.exports = router;
