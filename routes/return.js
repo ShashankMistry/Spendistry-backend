@@ -1,27 +1,28 @@
 const express = require('express');
-const router = express.Router();
-const Invoice = require('../models/invoice');
+const app = express();
+const Return = require('../models/return');
 
 //getting all
 router.get('/', async (req, res) => {
     // res.send('getting all users');
     try {
-    const invoice = await Invoice.find();
-    res.json(invoice);
+    const returnData = await Return.find();
+    res.json(returnData);
     } catch (err) {
         res.status(500).json({message: err.message});
     }
-})
+});
 
 //getting one
-router.get('/:id', getInvoice, (req, res) => {
-    res.json(res.invoice);
-})
+router.get('/:id', getReturn, (req, res) => {
+    // res.send(`getting user ${req.params.id}`);
+    res.json(res.return);
+});
 
 //creating one
 router.post('/', async (req, res) => {
-    // res.send(`creating user ${req.body.name}`);
-    const invoice = new Invoice({ 
+    // res.send('creating a user');
+    const returnData = new Return({
         invoiceNumber: req.body.invoiceNumber,
         invoiceDate: req.body.invoiceDate,
         invoiceAmount: req.body.invoiceAmount,
@@ -47,16 +48,16 @@ router.post('/', async (req, res) => {
         extra5 : req.body.extra5
     });
     try{
-        const savedInvoice = await invoice.save();
-        res.status(201).json(savedInvoice);
+        const savedReturn = await returnData.save();
+        res.status(201).json(savedReturn);
         
     } catch (err) {
         res.status(400).json({message: err.message});
     }
-})
+});
 
 // updating one
-router.patch('/:id', getInvoice, async (req, res) => {
+router.patch('/:id', getReturn, async (req, res) => {
     // res.send(`updating user ${req.params.id}`);
     if(req.body.invoiceNumber != null){
         res.invoice.invoiceNumber = req.body.invoiceNumber;
@@ -135,65 +136,52 @@ router.patch('/:id', getInvoice, async (req, res) => {
     }
 })
 
-//deleting one
-router.delete('/:id', getInvoice, async (req, res) => {
+// deleting one
+router.delete('/:id', getReturn, async (req, res) => {
     // res.send(`deleting user ${req.params.id}`);
     try{
-        await res.invoice.remove();
-        res.json({message: 'Deleted this invoice'});
+        await res.return.remove();
+        res.json({message: 'Deleted Return'});
+    } catch (err) {
+        res.status(500).json({message: err.message});
+    }
+});
+
+//getting by invoiceSentTo
+router.get('/useremail/:invoiceSentTo', async (req, res) => {
+    // res.send(`getting user ${req.params.id}`);
+    try{
+        const returnData = await Return.find({invoiceSentTo: req.params.invoiceSentTo});
+        res.json(returnData);
+    } catch (err) {
+        res.status(500).json({message: err.message});
+    }
+});
+
+//getting by invoiceSentBy
+router.get('/vendormail/:invoiceSentBy', async (req, res) => {
+    // res.send(`getting user ${req.params.id}`);
+    try{
+        const returnData = await Return.find({invoiceSentBy: req.params.invoiceSentBy});
+        res.json(returnData);
     }
     catch (err) {
         res.status(500).json({message: err.message});
     }
-})
+});
 
-//getting user by invoiceSentTo
-router.get('/filter/:invoiceSentTo/:invoiceSentBy', async (req, res) => {
-    // res.send(`getting user by invoiceSentTo ${req.params.invoiceSentTo}`);
+
+
+
+async function getReturn(req, res, next) {
+    let returnData;
     try {
-    const invoice = await Invoice.find({invoiceSentTo: req.params.invoiceSentTo , invoiceSentBy: req.params.invoiceSentBy});
-    res.json(invoice);
-    } catch (err) {
-        res.status(500).json({message: err.message});
-    }
-})
-
-//getting user by invoiceSentBy
-router.get('/vendoremail/:invoiceSentBy', async (req, res) => {
-    // res.send(`getting user by invoiceSentBy ${req.params.invoiceSentBy}`);
-    try {
-    const invoice = await Invoice.find({invoiceSentBy: req.params.invoiceSentBy});
-    res.json(invoice);
-    } catch (err) {
-        res.status(500).json({message: err.message});
-    }
-})
-
-//getting user by invoiceSentTo
-router.get('/useremail/:invoiceSentTo', async (req, res) => {
-    // res.send(`getting user by invoiceSentTo ${req.params.invoiceSentTo}`);
-    try {
-    const invoice = await Invoice.find({invoiceSentTo: req.params.invoiceSentTo});
-    res.json(invoice);
-    } catch (err) {
-        res.status(500).json({message: err.message});
-    }
-})
-
-
-async function getInvoice(req, res, next) {
-    let invoice;
-    try {
-        invoice = await Invoice.findById(req.params.id);
-        if (invoice == null) {
-            return res.status(404).json({message: 'Cannot find invoice'});
+        returnData = await Return.findById(req.params.id);
+        if (returnData == null) {
+            return res.status(404).json({message: 'Cannot find return'});
         }
     } catch (err) {
         return res.status(500).json({message: err.message});
     }
-    res.invoice = invoice;
-    next();
+    res.return = returnData;
 }
-
-module.exports = router;
-

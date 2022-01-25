@@ -26,6 +26,9 @@ app.use('/invoice', invoiceRouter);
 const reportRouter = require('./routes/report');
 app.use('/report', reportRouter);
 
+const returnRouter = require('./routes/return');
+app.use('/return', returnRouter);
+
 app.listen (PORT, () => {
   console.log('listening on port', PORT);
 }

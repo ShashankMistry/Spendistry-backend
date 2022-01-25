@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const reportSchema = new mongoose.Schema({
+const returnSchema = new mongoose.Schema({
     reportNumber: {
         type: String
     },
@@ -43,4 +43,4 @@ const reportSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('Report', reportSchema);
+module.exports = mongoose.model('Return', returnSchema);

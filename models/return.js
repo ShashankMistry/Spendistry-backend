@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const invoiceSchema = new mongoose.Schema({
+const ReturnSchema = new mongoose.Schema({
     invoiceNumber: {
         type: String
        
@@ -88,6 +88,4 @@ const invoiceSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('Invoice', invoiceSchema);
-
-    
+module.exports = mongoose.model('Return', ReturnSchema);
