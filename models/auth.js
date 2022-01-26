@@ -8,7 +8,8 @@ const authSchema = new mongoose.Schema({
         type: String
     },
     LoggedIn : {
-        type: Boolean
+        type: Boolean,
+        default: false
     }
 });
 
