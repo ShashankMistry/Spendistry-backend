@@ -29,6 +29,9 @@ app.use('/report', reportRouter);
 const returnRouter = require('./routes/return');
 app.use('/return', returnRouter);
 
+const authRouter = require('./routes/auth');
+app.use('/auth', authRouter);
+
 app.listen (PORT, () => {
   console.log('listening on port', PORT);
 }

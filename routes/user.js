@@ -29,6 +29,8 @@ router.post('/', async (req, res) => {
         mobileNumber: req.body.mobileNumber,
         address: req.body.address,
         _id : req.body._id,
+        Date : req.body.Date,
+        loggedIn: req.body.loggedIn,
         extra1 : req.body.extra1,
         extra2 : req.body.extra2,
         extra3 : req.body.extra3,
@@ -79,6 +81,12 @@ router.patch('/:id',getUser, async (req, res) => {
     }
     if(req.body.extra5 != null){
         res.user.extra5 = req.body.extra5;
+    }
+    if(req.body.loggedIn != null){
+        res.user.loggedIn = req.body.loggedIn;
+    }
+    if(req.body.Date != null){
+        res.user.Date = req.body.Date;
     }
     try{
         const updatedUser = await res.user.save();

@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', getReturn, (req, res) => {
     // res.send(`getting user ${req.params.id}`);
     res.json(res.return);
-});
+})
 
 //creating one
 router.post('/', async (req, res) => {
@@ -147,6 +147,7 @@ router.delete('/:id', getReturn, async (req, res) => {
     }
 });
 
+
 //getting by invoiceSentTo
 router.get('/useremail/:invoiceSentTo', async (req, res) => {
     // res.send(`getting user ${req.params.id}`);
@@ -170,9 +171,6 @@ router.get('/vendormail/:invoiceSentBy', async (req, res) => {
     }
 });
 
-
-
-
 async function getReturn(req, res, next) {
     let returnData;
     try {
@@ -184,6 +182,7 @@ async function getReturn(req, res, next) {
         return res.status(500).json({message: err.message});
     }
     res.return = returnData;
+    next();
 }
 
 module.exports = router;
