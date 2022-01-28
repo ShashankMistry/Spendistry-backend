@@ -25,6 +25,7 @@ router.post('/', async (req, res) => {
         fname: req.body.fname,
         lname: req.body.lname,
         email: req.body.email,
+        isVerified: req.body.isVerified,
         // password: req.body.password,
         mobileNumber: req.body.mobileNumber,
         address: req.body.address,
@@ -57,6 +58,9 @@ router.patch('/:id',getUser, async (req, res) => {
     }
     if(req.body.email != null){
         res.user.email = req.body.email;
+    }
+    if(req.body.isVerified != null){
+        res.user.isVerified = req.body.isVerified;
     }
     // if(req.body.password != null){
     //     res.user.password = req.body.password;

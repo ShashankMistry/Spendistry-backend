@@ -40,6 +40,7 @@ router.post('/', async (req, res) => {
         invoiceTime : req.body.invoiceTime,
         discount : req.body.discount,
         roundoff : req.body.roundoff,
+        city : req.body.city,
         extra1 : req.body.extra1,
         extra2 : req.body.extra2,
         extra3 : req.body.extra3,
@@ -111,6 +112,9 @@ router.patch('/:id', getInvoice, async (req, res) => {
     }
     if(req.body.roundoff != null){
         res.invoice.roundoff = req.body.roundoff;
+    }
+    if(req.body.city != null){
+        res.invoice.city = req.body.city;
     }
     if(req.body.extra1 != null){
         res.invoice.extra1 = req.body.extra1;

@@ -71,6 +71,9 @@ const invoiceSchema = new mongoose.Schema({
     roundoff : {
         type: String
     },
+    city : {
+        type: String
+    },
     extra1: {
         type: String
     },
