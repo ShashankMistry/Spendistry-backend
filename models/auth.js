@@ -10,6 +10,10 @@ const authSchema = new mongoose.Schema({
     LoggedIn : {
         type: Boolean,
         default: false
+    },
+    isVerified : {
+        type: Boolean,
+        default: false
     }
 });
 

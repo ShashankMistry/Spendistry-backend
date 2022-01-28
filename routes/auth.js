@@ -25,7 +25,8 @@ router.post('/', async (req, res) => {
     const auth = new Auth({
         _id : req.body._id,
         password : req.body.password,
-        LoggedIn : req.body.LoggedIn
+        LoggedIn : req.body.LoggedIn,
+        isVerified : req.body.isVerified
     });
     try{
         const savedAuth = await auth.save();
@@ -45,6 +46,9 @@ router.patch('/:id', getAuth, async (req, res) => {
     }
     if(req.body.LoggedIn != null){
         res.auth.LoggedIn = req.body.LoggedIn;
+    }
+    if(req.body.isVerified != null){
+        res.auth.isVerified = req.body.isVerified;
     }
     try{
         const updatedAuth = await res.auth.save();
