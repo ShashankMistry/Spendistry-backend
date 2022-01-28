@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
         fname: req.body.fname,
         lname: req.body.lname,
         email: req.body.email,
-        password: req.body.password,
+        // password: req.body.password,
         mobileNumber: req.body.mobileNumber,
         address: req.body.address,
         _id : req.body._id,
@@ -58,9 +58,9 @@ router.patch('/:id',getUser, async (req, res) => {
     if(req.body.email != null){
         res.user.email = req.body.email;
     }
-    if(req.body.password != null){
-        res.user.password = req.body.password;
-    }
+    // if(req.body.password != null){
+    //     res.user.password = req.body.password;
+    // }
     if(req.body.mobileNumber != null){
         res.user.mobileNumber = req.body.mobileNumber;
     }
@@ -82,9 +82,9 @@ router.patch('/:id',getUser, async (req, res) => {
     if(req.body.extra5 != null){
         res.user.extra5 = req.body.extra5;
     }
-    if(req.body.loggedIn != null){
-        res.user.loggedIn = req.body.loggedIn;
-    }
+    // if(req.body.loggedIn != null){
+    //     res.user.loggedIn = req.body.loggedIn;
+    // }
     if(req.body.Date != null){
         res.user.Date = req.body.Date;
     }
