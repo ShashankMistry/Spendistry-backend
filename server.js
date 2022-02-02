@@ -32,6 +32,9 @@ app.use('/return', returnRouter);
 const authRouter = require('./routes/auth');
 app.use('/auth', authRouter);
 
+const authBusinessRouter = require('./routes/authBusiness');
+app.use('/authBusiness', authBusinessRouter);
+
 app.listen (PORT, () => {
   console.log('listening on port', PORT);
 }
