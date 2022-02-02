@@ -14,6 +14,10 @@ const authBusinessSchema = new mongoose.Schema({
     isVerified : {
         type: Boolean,
         default: false
+    },
+    isPanVerified : {
+        type: Boolean,
+        default: null
     }
 });
 
