@@ -41,6 +41,14 @@ const vendorSchema = new mongoose.Schema({
     website: {
         type: String,
     },
+    currentInvoiceNumber: {
+        type: Number,
+        default: 0
+    },
+    panNumber: {
+        type: String,
+    //    required: true
+    },
     extra1: {
         type: String,
     },
