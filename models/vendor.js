@@ -49,6 +49,13 @@ const vendorSchema = new mongoose.Schema({
         type: String,
     //    required: true
     },
+    gstNumber: {
+        type: String,
+    //    required: true
+    },
+    itemsPrices: {  // itemsPrices is an array of objects
+        type: Object,
+    },    
     extra1: {
         type: String,
     },
