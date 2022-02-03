@@ -3,37 +3,36 @@ const mongoose = require('mongoose');
 const vendorSchema = new mongoose.Schema({
     fname: {
         type: String,
-        required: true
+        // required: true
     },
     lname: {
         type: String,
-        required: true
-    },
-    password: {
-        type: String,
-        required: true
+        // required: true
     },
     email: {
         type: String,
-        required: true
+        // required: true
     },
     _id: {
         type: String,
     },
     mobileNumber: {
         type: String,
-        required: true
+        // required: true
     },
     address: {
         type: String,
-        required: true
+        // required: true
     },
-    latlong: {
+    lat: {
+        type: String,
+    },
+    lng: {
         type: String,
     },
     vendorName: {
         type: String,
-        required: true
+        // required: true
     },
     tollFreeNumber: {
         type: String,
