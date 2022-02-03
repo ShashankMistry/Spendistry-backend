@@ -53,7 +53,7 @@ const vendorSchema = new mongoose.Schema({
     //    required: true
     },
     itemsPrices: {  // itemsPrices is an array of objects
-        type: Object,
+        type: Array,
     },    
     extra1: {
         type: String,
