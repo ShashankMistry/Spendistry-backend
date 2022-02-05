@@ -35,6 +35,10 @@ app.use('/auth', authRouter);
 const authBusinessRouter = require('./routes/authBusiness');
 app.use('/authBusiness', authBusinessRouter);
 
+const ItemsPrices = require('./models/ItemPricesList');
+const itemsPricesRouter = require('./routes/itemsPrices');
+app.use('/itemsPrices', itemsPricesRouter);
+
 app.listen (PORT, () => {
   console.log('listening on port', PORT);
 }
