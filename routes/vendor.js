@@ -30,8 +30,14 @@ router.post('/', async (req, res) => {
         address: req.body.address,
         _id : req.body._id,
         latlong: req.body.latlong,
+        lat: req.body.lat,
+        lng: req.body.lng,
         vendorName: req.body.vendorName,
         tollFreeNumber: req.body.tollFreeNumber,
+        currentInvoicenumber: req.body.currentInvoicenumber,
+        panNumber: req.body.panNumber,
+        gstNumber: req.body.gstNumber,
+        itemsPrices: req.body.itemsPrices,
         website: req.body.website,
         extra1: req.body.extra1,
         extra2: req.body.extra2,
@@ -81,6 +87,18 @@ router.patch('/:id',getVendor, async (req, res) => {
     }
     if(req.body.website){
         res.vendor.website = req.body.website;
+    }
+    if(req.body.currentInvoicenumber){
+        res.vendor.currentInvoicenumber = req.body.currentInvoicenumber;
+    }
+    if(req.body.panNumber){
+        res.vendor.panNumber = req.body.panNumber;
+    }
+    if(req.body.gstNumber){
+        res.vendor.gstNumber = req.body.gstNumber;
+    }
+    if(req.body.itemsPrices){
+        res.vendor.itemsPrices = req.body.itemsPrices;
     }
     if(req.body.extra1){
         res.vendor.extra1 = req.body.extra1;
