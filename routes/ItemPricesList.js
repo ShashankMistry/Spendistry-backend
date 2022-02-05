@@ -19,10 +19,10 @@ router.get('/:id', getItems, (req, res) => {
     res.json(res.item);
 })
 
-router.get('/filter/:invoiceSentTo/:price', async (req, res) => {
+router.get('/filter/:invoiceSentTo', async (req, res) => {
     // res.send(`getting user by invoiceSentTo ${req.params.invoiceSentTo}`);
     try {
-    const itemsPrices = await ItemPricesSchema.find({invoiceSentTo: req.params._id , price: req.params.ItemsPrices.price});
+    const itemsPrices = await ItemPricesSchema.find({invoiceSentTo: req.params._id});
     res.json(invoice);
     } catch (err) {
         res.status(500).json({message: err.message});
