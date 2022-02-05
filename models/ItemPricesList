@@ -9,4 +9,4 @@ const ItemPricesSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('ItemPricesSchema', itemPricesSchema);
+module.exports = mongoose.model('ItemPricesSchema', ItemPricesSchema);
