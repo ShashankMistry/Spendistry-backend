@@ -19,6 +19,16 @@ router.get('/:id', getItems, (req, res) => {
     res.json(res.item);
 })
 
+router.get('/filter/:invoiceSentTo/:price', async (req, res) => {
+    // res.send(`getting user by invoiceSentTo ${req.params.invoiceSentTo}`);
+    try {
+    const itemsPrices = await ItemPricesSchema.find({invoiceSentTo: req.params._id , price: req.params.ItemsPrices.params.price});
+    res.json(invoice);
+    } catch (err) {
+        res.status(500).json({message: err.message});
+    }
+})
+
 // creating one
 router.post('/', async (req, res) => {
     // res.send(`creating user ${req.body.name}`);
