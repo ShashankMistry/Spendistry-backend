@@ -66,7 +66,7 @@ async function getItems(req, res, next) {
     let item;
     try {
         item = await ItemPricesSchema.findById(req.params.id);
-        if (aitemuth == null) {
+        if (item == null) {
             return res.status(404).json({message: 'Cannot find Items'});
         }
     } catch (err) {
