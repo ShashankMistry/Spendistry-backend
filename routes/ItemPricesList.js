@@ -22,7 +22,7 @@ router.get('/:id', getItems, (req, res) => {
 router.get('/filter/:invoiceSentTo', async (req, res) => {
     // res.send(`getting user by invoiceSentTo ${req.params.invoiceSentTo}`);
     try {
-    const itemsPrices = await ItemPricesSchema.find({invoiceSentTo: res.item});
+    const itemsPrices = await ItemPricesSchema.find({invoiceSentTo: req.params.id});
     res.json(itemsPrices);
     } catch (err) {
         res.status(500).json({message: err.message});
