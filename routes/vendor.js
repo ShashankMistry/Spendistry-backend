@@ -36,7 +36,6 @@ router.post('/', async (req, res) => {
         currentInvoicenumber: req.body.currentInvoicenumber,
         panNumber: req.body.panNumber,
         gstNumber: req.body.gstNumber,
-        itemsPrices: req.body.itemsPrices,
         website: req.body.website,
         extra1: req.body.extra1,
         extra2: req.body.extra2,
@@ -95,9 +94,6 @@ router.patch('/:id',getVendor, async (req, res) => {
     }
     if(req.body.gstNumber){
         res.vendor.gstNumber = req.body.gstNumber;
-    }
-    if(req.body.itemsPrices){
-        res.vendor.itemsPrices = req.body.itemsPrices;
     }
     if(req.body.extra1){
         res.vendor.extra1 = req.body.extra1;
