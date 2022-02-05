@@ -35,8 +35,7 @@ app.use('/auth', authRouter);
 const authBusinessRouter = require('./routes/authBusiness');
 app.use('/authBusiness', authBusinessRouter);
 
-const ItemsPrices = require('./models/ItemPricesList');
-const itemsPricesRouter = require('./routes/itemsPrices');
+const itemsPricesRouter = require('./routes/ItemPricesList');
 app.use('/itemsPrices', itemsPricesRouter);
 
 app.listen (PORT, () => {
