@@ -29,7 +29,6 @@ router.post('/', async (req, res) => {
         mobileNumber: req.body.mobileNumber,
         address: req.body.address,
         _id : req.body._id,
-        latlong: req.body.latlong,
         lat: req.body.lat,
         lng: req.body.lng,
         vendorName: req.body.vendorName,
