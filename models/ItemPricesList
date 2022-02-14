@@ -5,7 +5,12 @@ const ItemPricesSchema = new mongoose.Schema({
         type: String
     },
     ItemsPrices: {
-        type: Array
+        type: [{
+            _id : ObjectId(),
+            barcode : String,
+            itemName : String,
+            price : Schema
+        }]
     }
 });
 
