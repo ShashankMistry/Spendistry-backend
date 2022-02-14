@@ -30,6 +30,16 @@ router.get('/filter/:id/:ItemsPrices', async (req, res) => {
     }
 })
 
+router.patch('/filter/:id/:ItemsPrices', getItems, async (req, res) => { 
+    try {
+        const itemsPrices = await ItemPricesSchema.findOneAndUpdate({"_id": req.params.id, "ItemsPrices": {$elemMatch: { "price": req.params.ItemsPrices }}}, {$set: {"ItemsPrices.$.price": req.body.price}}, {new: true});
+        res.json(itemsPrices);
+    } catch (error) {
+        res.status(500).json({message: error.message});
+        
+    }
+  })
+
 // creating one
 router.post('/', async (req, res) => {
     // res.send(`creating user ${req.body.name}`);
