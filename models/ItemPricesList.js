@@ -6,12 +6,15 @@ const ItemPricesSchema = new mongoose.Schema({
     },
     ItemsPrices: {
         type: [{
-            _id: {
+            barcode : {
                 type: String
             },
-            barcode : String,
-            itemName : String,
-            price : String
+            itemName : {
+                type: String
+            },
+            price : {
+                type: Number
+            }
         }]
     }
 });
