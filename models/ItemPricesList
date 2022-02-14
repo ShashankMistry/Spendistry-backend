@@ -8,7 +8,7 @@ const ItemPricesSchema = new mongoose.Schema({
         type: [{
             barcode : String,
             itemName : String,
-            price : Schema
+            price : String
         }]
     }
 });
