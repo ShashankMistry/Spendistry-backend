@@ -1,4 +1,5 @@
 const express = require('express');
+const { findById } = require('../models/itemPricesList');
 const router = express.Router();
 const ItemPricesSchema = require('../models/itemPricesList');
 
@@ -23,7 +24,7 @@ router.get('/filter/:id/:ItemsPrices', async (req, res) => {
     // res.send(`getting user by invoiceSentTo ${req.params.invoiceSentTo}`);
     try {
     // const itemsPrices = await ItemPricesSchema.find({"_id": req.params.id, "ItemsPrices": {$elemMatch: { "price": req.params.ItemsPrices }}});
-    const itemsPrices = await ItemPricesSchema.aggregate([{$match: {"_id": req.params.id}}, {$unwind: "$ItemsPrices"}, {$match: {"ItemsPrices._id": req.params.ItemsPrices.id}}]);
+    const itemsPrices = await ItemPricesSchema.aggregate([{$match: {"_id": req.params.id}}, {$unwind: "$ItemsPrices"}, findById(req.params.ItemsPrices)]);
     res.json(itemsPrices);
     } catch (err) {
         res.status(500).json({message: err.message});
