@@ -6,6 +6,9 @@ const ItemPricesSchema = new mongoose.Schema({
     },
     ItemsPrices: {
         type: [{
+            _id: {
+                type: String
+            },
             barcode : String,
             itemName : String,
             price : String
