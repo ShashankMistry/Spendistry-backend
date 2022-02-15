@@ -2,6 +2,7 @@ const express = require('express');
 const { findById } = require('../models/itemPricesList');
 const router = express.Router();
 const ItemPricesSchema = require('../models/itemPricesList');
+const mongoose = require('mongoose');
 
 // getting all
 router.get('/', async (req, res) => {
@@ -24,12 +25,43 @@ router.get('/filter/:id/:ItemsPrices', async (req, res) => {
     // res.send(`getting user by invoiceSentTo ${req.params.invoiceSentTo}`);
     try {
     // const itemsPrices = await ItemPricesSchema.find({"_id": req.params.id, "ItemsPrices": {$elemMatch: { "price": req.params.ItemsPrices }}});
-    const itemsPrices = await ItemPricesSchema.aggregate([{$match: {"_id": req.params.id}}, {$unwind: "$ItemsPrices"}, ItemsPrices.findById(req.params.ItemsPrices)]);
+    const itemsPrices = await ItemPricesSchema.aggregate([{$match: {"_id": req.params.id}}, {$unwind: "$ItemsPrices"}, {$match: {"ItemsPrices.price": req.params.ItemsPrices}}]);
     res.json(itemsPrices);
     } catch (err) {
         res.status(500).json({message: err.message});
     }
 })
+
+router.get('/ss/:id/:ItemsPrices', async (req, res) => {
+    // res.send(`getting user by invoiceSentTo ${req.params.invoiceSentTo}`);
+    try {
+    // const itemsPrices = await ItemPricesSchema.find({"_id": req.params.id, "ItemsPrices": {$elemMatch: { "price": req.params.ItemsPrices }}});
+    const itemsPrices = await ItemPricesSchema.aggregate([{$match: {"_id": req.params.id}}, {$unwind: "$ItemsPrices"}, {$project: {
+        "ItemsPrices": {
+            $filter: {
+                input: "$ItemsPrices",
+                as: "item",
+                // $unwind: "$item",
+                cond: {
+                    $eq: [
+                        "$$item._id",
+                        mongoose.Types.ObjectId(req.params.ItemPrices)
+                       
+                    ]
+                }
+
+        }
+
+        }
+
+    }
+    }]);
+    res.json(itemsPrices);
+    } catch (err) {
+        res.status(500).json({message: err.message});
+    }
+})
+
 
 router.patch('/filter/:id/:ItemsPrices', getItems, async (req, res) => { 
     try {
@@ -40,6 +72,40 @@ router.patch('/filter/:id/:ItemsPrices', getItems, async (req, res) => {
         
     }
   })
+
+  //find id of sub array 
+router.get('/om/:id', async (req, res) => {
+    try {
+        const item = await ItemPricesSchema.aggregate([
+            // {$unwind: "$ItemsPrices"},
+            {$project: {
+                "Items": {
+                    $filter: {
+                        input: "$ItemsPrices",
+                        as: "item",
+                        // $unwind: "$item",
+                        cond: {
+                            $eq: [
+                                "$$item._id",
+                                mongoose.Types.ObjectId(req.params.id)
+                               
+                            ]
+                        }
+
+                    }
+    
+                }
+    
+            }
+            }
+        ])
+        res.json(item);
+        
+    } catch (error) {
+        res.status(500).json({message: error.message});
+        
+    }
+})
 
 // creating one
 router.post('/', async (req, res) => {
