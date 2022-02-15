@@ -32,11 +32,23 @@ router.get('/filter/:id/:ItemsPrices', async (req, res) => {
     }
 })
 
-router.get('/ss/:id/:ItemsPrices', async (req, res) => {
-    // res.send(`getting user by invoiceSentTo ${req.params.invoiceSentTo}`);
+// old patch
+
+// router.patch('/filter/:id/:ItemsPrices', getItems, async (req, res) => { 
+//     try {
+//         const itemsPrices = await ItemPricesSchema.findOneAndUpdate({"_id": req.params.id, "ItemsPrices": {$elemMatch: { "price": req.params.ItemsPrices }}}, {$set: {"ItemsPrices.$.price": req.body.price}}, {new: true});
+//         res.json(itemsPrices);
+//     } catch (error) {
+//         res.status(500).json({message: error.message});
+        
+//     }
+//   })
+
+  // finding invoice by id
+
+  router.get('/:id/:idArr', async (req, res) => {
     try {
-    // const itemsPrices = await ItemPricesSchema.find({"_id": req.params.id, "ItemsPrices": {$elemMatch: { "price": req.params.ItemsPrices }}});
-    const itemsPrices = await ItemPricesSchema.aggregate([{$match: {"_id": req.params.id}}, {$unwind: "$ItemsPrices"}, {$project: {
+        const itemsPrices = await ItemPricesSchema.aggregate([{$match: {"_id": req.params.id}}, {$project: {
         "ItemsPrices": {
             $filter: {
                 input: "$ItemsPrices",
@@ -45,8 +57,7 @@ router.get('/ss/:id/:ItemsPrices', async (req, res) => {
                 cond: {
                     $eq: [
                         "$$item._id",
-                        mongoose.Types.ObjectId(req.params.ItemPrices)
-                       
+                        mongoose.Types.ObjectId(req.params.idArr)
                     ]
                 }
 
@@ -62,45 +73,16 @@ router.get('/ss/:id/:ItemsPrices', async (req, res) => {
     }
 })
 
+//patching with invoice id
 
-router.patch('/filter/:id/:ItemsPrices', getItems, async (req, res) => { 
+router.patch('/:id/:idArr', getItems, async (req, res) => {
     try {
-        const itemsPrices = await ItemPricesSchema.findOneAndUpdate({"_id": req.params.id, "ItemsPrices": {$elemMatch: { "price": req.params.ItemsPrices }}}, {$set: {"ItemsPrices.$.price": req.body.price}}, {new: true});
+        const itemsPrices = await ItemPricesSchema.findOneAndUpdate({"_id": req.params.id, 
+        "ItemsPrices": {
+            $elemMatch: { "_id":  mongoose.Types.ObjectId(req.params.idArr) }}}, 
+            {$set: {"ItemsPrices.$.price": req.body.price, "ItemsPrices.$.itemName": req.body.itemName }  },
+            {new: true});
         res.json(itemsPrices);
-    } catch (error) {
-        res.status(500).json({message: error.message});
-        
-    }
-  })
-
-  //find id of sub array 
-router.get('/om/:id', async (req, res) => {
-    try {
-        const item = await ItemPricesSchema.aggregate([
-            // {$unwind: "$ItemsPrices"},
-            {$project: {
-                "Items": {
-                    $filter: {
-                        input: "$ItemsPrices",
-                        as: "item",
-                        // $unwind: "$item",
-                        cond: {
-                            $eq: [
-                                "$$item._id",
-                                mongoose.Types.ObjectId(req.params.id)
-                               
-                            ]
-                        }
-
-                    }
-    
-                }
-    
-            }
-            }
-        ])
-        res.json(item);
-        
     } catch (error) {
         res.status(500).json({message: error.message});
         
@@ -121,6 +103,21 @@ router.post('/', async (req, res) => {
     }
     catch (err) {
         res.status(400).json({message: err.message});
+    }
+})
+
+
+// adding elemet to array
+
+router.put('/:id', async (req, res) => {
+    try {
+        const item = await ItemPricesSchema.findOneAndUpdate({_id: req.params.id},
+            {$push: {ItemsPrices: req.body}}
+            );
+        res.json(item);
+        console.log(req.body);
+    } catch (err) {
+        res.status(500).json({message: err.message});
     }
 })
 
@@ -147,6 +144,24 @@ router.delete('/:id', getItems, async (req, res) => {
         res.json({message: 'Deleted This UserItemList'});
     } catch (err) {
         res.status(500).json({message: err.message});
+    }
+})
+
+
+// deleting specific array element
+router.delete('/:id/:idArr', async (req, res) => {
+    try {
+      const item = await ItemPricesSchema.updateOne(
+        {_id: req.params.id},
+        {$pull: {ItemsPrices: {_id:  mongoose.Types.ObjectId(req.params.idArr)}}}
+        
+      )
+        res.json(item);
+
+        
+    } catch (error) {
+        res.status(500).json({message: error.message});
+        
     }
 })
 
