@@ -109,10 +109,10 @@ router.post('/', async (req, res) => {
 
 // adding elemet to array
 
-router.put('/addItems/:id', async (req, res) => {
+router.patch('/addItems/:id', async (req, res) => {
     try {
         const item = await ItemPricesSchema.findOneAndUpdate({_id: req.params.id},
-            {$push: {ItemsPrices: req.body}}
+            {$push: {ItemsPrices: req.body.ItemsPrices}}
             );
         res.json(item);
         console.log(req.body);
