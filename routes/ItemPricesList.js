@@ -21,7 +21,7 @@ router.get('/:id', getItems, (req, res) => {
     res.json(res.item);
 })
 
-router.get('/filter/:id/:ItemsPrices', async (req, res) => {
+router.get('/price/:id/:ItemsPrices', async (req, res) => {
     // res.send(`getting user by invoiceSentTo ${req.params.invoiceSentTo}`);
     try {
     // const itemsPrices = await ItemPricesSchema.find({"_id": req.params.id, "ItemsPrices": {$elemMatch: { "price": req.params.ItemsPrices }}});
@@ -46,7 +46,7 @@ router.get('/filter/:id/:ItemsPrices', async (req, res) => {
 
   // finding invoice by id
 
-  router.get('/:id/:idArr', async (req, res) => {
+  router.get('/findEle/:id/:idArr', async (req, res) => {
     try {
         const itemsPrices = await ItemPricesSchema.aggregate([{$match: {"_id": req.params.id}}, {$project: {
         "ItemsPrices": {
@@ -75,7 +75,7 @@ router.get('/filter/:id/:ItemsPrices', async (req, res) => {
 
 //patching with invoice id
 
-router.patch('/:id/:idArr', getItems, async (req, res) => {
+router.patch('/patchEle/:id/:idArr', getItems, async (req, res) => {
     try {
         const itemsPrices = await ItemPricesSchema.findOneAndUpdate({"_id": req.params.id, 
         "ItemsPrices": {
@@ -109,7 +109,7 @@ router.post('/', async (req, res) => {
 
 // adding elemet to array
 
-router.put('/:id', async (req, res) => {
+router.put('/addItems/:id', async (req, res) => {
     try {
         const item = await ItemPricesSchema.findOneAndUpdate({_id: req.params.id},
             {$push: {ItemsPrices: req.body}}
@@ -122,7 +122,7 @@ router.put('/:id', async (req, res) => {
 })
 
 // updating one
-router.patch('/:id', getItems, async (req, res) => {
+router.patch('/updatedItems/:id', getItems, async (req, res) => {
     // res.send(`updating user ${req.params.id}`);
     if(req.body.ItemsPrices != null){
         res.item.ItemsPrices = req.body.ItemsPrices;
@@ -149,7 +149,7 @@ router.delete('/:id', getItems, async (req, res) => {
 
 
 // deleting specific array element
-router.delete('/:id/:idArr', async (req, res) => {
+router.delete('/deleteItems/:id/:idArr', async (req, res) => {
     try {
       const item = await ItemPricesSchema.updateOne(
         {_id: req.params.id},
