@@ -116,7 +116,7 @@ router.patch('/addItems/:id', async (req, res) => {
             );
         res.json(item);
         // res.send(item.ObjectId);
-        console.log(item.ObjectId);
+        console.log(item);
     } catch (err) {
         res.status(500).json({message: err.message});
     }
