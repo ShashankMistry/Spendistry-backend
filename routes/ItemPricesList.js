@@ -110,17 +110,18 @@ router.post('/', async (req, res) => {
 // adding elemet to array
 
 router.patch('/addItems/:id', async (req, res) => {
+    var items;
     try {
-        const item = await ItemPricesSchema.findOneAndUpdate({_id: req.params.id},
+        items = await ItemPricesSchema.findOneAndUpdate({_id: req.params.id},
             {$push: {ItemsPrices: req.body.ItemsPrices}}
             );
-        res.json(item);
+        res.json(items);
         // res.send(item.ObjectId);
         
     } catch (err) {
         res.status(500).json({message: err.message});
     }
-    console.log(item.ItemsPrices[item.ItemsPrices.length - 1]._id);
+    console.log(items.ItemsPrices[item.ItemsPrices.length - 1]._id);
 })
 
 // updating one
