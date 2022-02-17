@@ -115,9 +115,8 @@ router.patch('/addItems/:id', async (req, res) => {
     try {
         items = await ItemPricesSchema.findOneAndUpdate({_id: req.params.id},
             {$push: {
-                ItemsPrices: {
                 _id: ItemId,
-                ItemsPrices: req.body.ItemsPrices}}}
+                ItemsPrices: req.body.ItemsPrices}}
             );
         res.json(items);
         // res.send(item.ObjectId);
