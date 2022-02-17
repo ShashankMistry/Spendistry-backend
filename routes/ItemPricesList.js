@@ -110,21 +110,16 @@ router.post('/', async (req, res) => {
 // adding elemet to array
 
 router.patch('/addItems/:id', async (req, res) => {
-    const ItemId = new mongoose.Types.ObjectId()
-    var items;
     try {
-        items = await ItemPricesSchema.findOneAndUpdate({_id: req.params.id},
-            {$push: {
-                _id: ItemId,
-                ItemsPrices: req.body.ItemsPrices}}
+        const item = await ItemPricesSchema.findOneAndUpdate({_id: req.params.id},
+            {$push: {ItemsPrices: req.body.ItemsPrices}}
             );
-        res.json(items);
+        res.json(item);
         // res.send(item.ObjectId);
-        // res.send(ItemId);
+        // console.log(req.body);
     } catch (err) {
         res.status(500).json({message: err.message});
     }
-    // console.log(items.ItemsPrices[items.ItemsPrices.length]._id);
 })
 
 // updating one
