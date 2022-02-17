@@ -115,7 +115,8 @@ router.patch('/addItems/:id', async (req, res) => {
             {$push: {ItemsPrices: req.body.ItemsPrices}}
             );
         res.json(item);
-        console.log(req.body);
+        // res.send(item.ObjectId);
+        console.log(item.ObjectId);
     } catch (err) {
         res.status(500).json({message: err.message});
     }
