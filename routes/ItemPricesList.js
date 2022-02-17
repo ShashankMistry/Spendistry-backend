@@ -116,10 +116,11 @@ router.patch('/addItems/:id', async (req, res) => {
             );
         res.json(item);
         // res.send(item.ObjectId);
-        console.log(item);
+        
     } catch (err) {
         res.status(500).json({message: err.message});
     }
+    console.log(item.ItemsPrices[item.ItemsPrices.length - 1]._id);
 })
 
 // updating one
