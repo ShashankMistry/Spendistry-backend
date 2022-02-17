@@ -57,7 +57,7 @@ router.get('/price/:id/:ItemsPrices', async (req, res) => {
                 cond: {
                     $eq: [
                         "$$item._id",
-                        mongoose.Types.ObjectId(req.params.idArr)
+                       req.params.idArr
                     ]
                 }
 
@@ -123,7 +123,7 @@ router.patch('/addItems/:id', async (req, res) => {
 })
 
 // updating one
-router.patch('/updatedItems/:id', getItems, async (req, res) => {
+router.patch('/updateItems/:id', getItems, async (req, res) => {
     // res.send(`updating user ${req.params.id}`);
     if(req.body.ItemsPrices != null){
         res.item.ItemsPrices = req.body.ItemsPrices;
