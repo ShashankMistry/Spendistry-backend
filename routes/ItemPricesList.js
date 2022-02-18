@@ -138,7 +138,7 @@ router.patch('/updateItems/:id', getItems, async (req, res) => {
 })
 
 // deleting one
-router.delete('delete/:id', getItems, async (req, res) => {
+router.delete('/delete/:id', getItems, async (req, res) => {
     // res.send(`deleting user ${req.params.id}`);
     try{
         await res.item.remove();
