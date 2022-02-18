@@ -138,7 +138,7 @@ router.patch('/updateItems/:id', getItems, async (req, res) => {
 })
 
 // deleting one
-router.delete('/:id', getItems, async (req, res) => {
+router.delete('delete/:id', getItems, async (req, res) => {
     // res.send(`deleting user ${req.params.id}`);
     try{
         await res.item.remove();
@@ -167,7 +167,7 @@ router.delete('/deleteItems/:id/:idArr', async (req, res) => {
 })
 
 // deleting specific array element
-router.delete('/deleteEmptyIds/:id/', async (req, res) => {
+router.delete('/deleteEmptyIds/:id', async (req, res) => {
     try {
       const item = await ItemPricesSchema.updateOne(
         {_id: req.params.id},
