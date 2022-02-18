@@ -154,7 +154,7 @@ router.delete('/deleteItems/:id/:idArr', async (req, res) => {
     try {
       const item = await ItemPricesSchema.updateOne(
         {_id: req.params.id},
-        {$pull: {ItemsPrices: {_id: mongoose.Types.ObjectId(req.params.idArr)}}}
+        {$pull: {ItemsPrices: {_id: req.params.idArr}}}
         
       )
         res.json(item);
