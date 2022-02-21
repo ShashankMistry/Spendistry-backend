@@ -3,9 +3,10 @@ const { findById } = require('../models/itemPricesList');
 const router = express.Router();
 const ItemPricesSchema = require('../models/itemPricesList');
 const mongoose = require('mongoose');
+const verify = require('../middleware/verifyUserToken');
 
 // getting all
-router.get('/', async (req, res) => {
+router.get('/', verify, async (req, res) => {
     // res.send('getting all users');
     try {
     const item = await ItemPricesSchema.find();

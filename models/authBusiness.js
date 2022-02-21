@@ -7,18 +7,18 @@ const authBusinessSchema = new mongoose.Schema({
     password : {
         type: String
     },
-    LoggedIn : {
-        type: Boolean,
-        default: false
-    },
-    isVerified : {
-        type: Boolean,
-        default: false
-    },
-    isPanVerified : {
-        type: Boolean,
-        default: null
-    }
+    // LoggedIn : {
+    //     type: Boolean,
+    //     default: false
+    // },
+    // isVerified : {
+    //     type: Boolean,
+    //     default: false
+    // },
+    // isPanVerified : {
+    //     type: Boolean,
+    //     default: null
+    // }
 });
 
 module.exports = mongoose.model('AuthBusiness', authBusinessSchema);
