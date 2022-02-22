@@ -1,12 +1,13 @@
 const express = require('express');
-const { findById } = require('../models/itemPricesList');
+// const { findById } = require('../models/itemPricesList');
 const router = express.Router();
 const ItemPricesSchema = require('../models/itemPricesList');
 const mongoose = require('mongoose');
 const verify = require('../middleware/verifyUserToken');
+const vendorVerify = require('../middleware/verifyVendorToken');
 
 // getting all
-router.get('/', verify, async (req, res) => {
+router.get('/', verify, vendorVerify, async (req, res) => {
     // res.send('getting all users');
     try {
     const item = await ItemPricesSchema.find();
