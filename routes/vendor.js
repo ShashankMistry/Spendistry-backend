@@ -37,6 +37,8 @@ router.post('/', async (req, res) => {
         panNumber: req.body.panNumber,
         gstNumber: req.body.gstNumber,
         website: req.body.website,
+        city: req.body.city,
+        state: req.body.state,
         extra1: req.body.extra1,
         extra2: req.body.extra2,
         extra3: req.body.extra3,
@@ -94,6 +96,12 @@ router.patch('/:id',getVendor, async (req, res) => {
     }
     if(req.body.gstNumber){
         res.vendor.gstNumber = req.body.gstNumber;
+    }
+    if(req.body.city){
+        res.vendor.city = req.body.city;
+    }
+    if(req.body.state){
+        res.vendor.state = req.body.state;
     }
     if(req.body.extra1){
         res.vendor.extra1 = req.body.extra1;
