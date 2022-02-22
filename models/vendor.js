@@ -24,6 +24,12 @@ const vendorSchema = new mongoose.Schema({
         type: String,
         // required: true
     },
+    city : {
+        type: String
+    },
+    state : {
+        type: String
+    },
     lat: {
         type: String,
     },

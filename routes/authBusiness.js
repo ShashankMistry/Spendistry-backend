@@ -6,22 +6,22 @@ const jwt = require('jsonwebtoken');
 
 // getting all
 
-// router.get('/', async (req, res) => {
-//     // res.send('getting all users');
-//     try {
-//     const auth = await AuthBusiness.find();
-//     res.json(auth);
-//     } catch (err) {
-//         res.status(500).json({message: err.message});
-//     }
-// })
+router.get('/', async (req, res) => {
+    // res.send('getting all users');
+    try {
+    const auth = await AuthBusiness.find();
+    res.json(auth);
+    } catch (err) {
+        res.status(500).json({message: err.message});
+    }
+})
 
 // getting one
 
-// router.get('/:id', getAuth, (req, res) => {
-//     // res.send(`getting user ${req.params.id}`);
-//     res.json(res.auth);
-// })
+router.get('/:id', getAuth, (req, res) => {
+    // res.send(`getting user ${req.params.id}`);
+    res.json(res.auth);
+})
 
 // creating one
 router.post('/', async (req, res) => {
@@ -60,7 +60,6 @@ router.post('/vendorLogin', async (req, res) => {
         //create and assign a token
         const token = jwt.sign({_id: vendor._id}, process.env.TOKEN_SECRET_VENDOR);
         res.header('auth-token-vendor', token).send(token);
-
 
         // res.status(200).json({message: 'Successfully logged in'});
 
