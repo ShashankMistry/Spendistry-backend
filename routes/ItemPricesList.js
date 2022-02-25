@@ -1,3 +1,4 @@
+   
 const express = require('express');
 // const { findById } = require('../models/itemPricesList');
 const router = express.Router();
@@ -154,14 +155,17 @@ router.delete('/delete/:id', getItems, async (req, res) => {
 // deleting specific array element
 router.delete('/deleteItems/:id/:idArr', async (req, res) => {
     try {
-        var item;
-      item = await ItemPricesSchema.updateOne(
+      const item = await ItemPricesSchema.updateOne(
         {_id: req.params.id},
-        {$pull: {ItemsPrices: {_id: req.params.idArr}}}       
+        {$pull: {ItemsPrices: {_id: req.params.idArr}}}
+        
       )
-        res.json(item);        
+        res.json(item);
+
+        
     } catch (error) {
-        res.status(500).json({message: error.message});          
+        res.status(500).json({message: error.message});
+        
     }
 })
 
