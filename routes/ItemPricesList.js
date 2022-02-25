@@ -82,7 +82,7 @@ router.patch('/patchEle/:id/:idArr', getItems, async (req, res) => {
     try {
         const itemsPrices = await ItemPricesSchema.findOneAndUpdate({"_id": req.params.id, 
         "ItemsPrices": {
-            $elemMatch: { "_id":  mongoose.Types.ObjectId(req.params.idArr) }}}, 
+            $elemMatch: { "_id":  req.params.idArr }}}, 
             {$set: {"ItemsPrices.$.price": req.body.price, "ItemsPrices.$.itemName": req.body.itemName }  },
             {new: true});
         res.json(itemsPrices);
