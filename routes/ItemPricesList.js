@@ -101,8 +101,7 @@ router.post('/', async (req, res) => {
     });
     try{
         const savedItems = await item.save();
-        console.log(item)
-        res.status(201).json(savedItems);
+                res.status(201).json(savedItems);
     }
     catch (err) {
         res.status(400).json({message: err.message});
@@ -118,8 +117,6 @@ router.patch('/addItems/:id', async (req, res) => {
             {$push: {ItemsPrices: req.body.ItemsPrices}}
             );
         res.json(item);
-        // res.send(item.ObjectId);
-        // console.log(req.body);
     } catch (err) {
         res.status(500).json({message: err.message});
     }
