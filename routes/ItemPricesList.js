@@ -157,7 +157,7 @@ router.delete('/deleteItems/:id/:idArr', async (req, res) => {
         var item;
       item = await ItemPricesSchema.updateOne(
         {_id: req.params.id},
-        {$pullAll: {ItemsPrices: [{_id: req.params.idArr}]}}       
+        {$pullAll: {ItemsPrices}}       
       )
         res.json(item);        
     } catch (error) {
