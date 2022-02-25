@@ -154,21 +154,13 @@ router.delete('/delete/:id', getItems, async (req, res) => {
 // deleting specific array element
 router.delete('/deleteItems/:id/:idArr', async (req, res) => {
     try {
-        var item = ItemPricesSchema;
-        var items;
-        if(item.ItemsPrices.length > 1){
-      items = await ItemPricesSchema.updateOne(
+        var item;
+      item = await ItemPricesSchema.updateOne(
         {_id: req.params.id},
-        {$pull: {ItemsPrices: {_id: req.params.idArr}}} 
+        {$pop: {ItemsPrices: {_id: req.params.idArr}}} 
       
       )
-        } else {
-            items = await ItemPricesSchema.updateOne(
-                {_id: req.params.id},
-                {$pullAll: {ItemsPrices}} 
-              )
-        }
-        res.json(items);
+        res.json(item);
 
         
     } catch (error) {
