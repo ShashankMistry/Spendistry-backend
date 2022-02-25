@@ -101,9 +101,8 @@ router.post('/', async (req, res) => {
     });
     try{
         const savedItems = await item.save();
-        console.log(ItemsPrices)
+        console.log(item)
         res.status(201).json(savedItems);
-       
     }
     catch (err) {
         res.status(400).json({message: err.message});
