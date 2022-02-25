@@ -157,22 +157,11 @@ router.delete('/deleteItems/:id/:idArr', async (req, res) => {
         var item;
       item = await ItemPricesSchema.updateOne(
         {_id: req.params.id},
-        {$pull: {ItemsPrices: {_id: req.params.idArr}}} 
-      
+        {$pull: {ItemsPrices: {_id: req.params.idArr}}}       
       )
-        res.json(item);
-
-        
+        res.json(item);        
     } catch (error) {
-        if(error instanceof mongoose.Error.Messages){
-            item = await ItemPricesSchema.updateOne(
-                {_id: req.params.id},
-                {$pop: {ItemsPrices}} 
-              )
-        } else {
-        res.status(500).json({message: error.message});
-        }
-        
+        res.status(500).json({message: error.message});          
     }
 })
 
