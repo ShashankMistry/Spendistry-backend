@@ -82,7 +82,7 @@ router.patch('/patchEle/:id/:idArr', getItems, async (req, res) => {
     try {
         const itemsPrices = await ItemPricesSchema.findOneAndUpdate({"_id": req.params.id, 
         "ItemsPrices": {
-            $elemMatch: { "_id":  mongoose.Types.ObjectId(req.params.idArr) }}}, 
+            $elemMatch: { "_id":  req.params.idArr }}}, 
             {$set: {"ItemsPrices.$.price": req.body.price, "ItemsPrices.$.itemName": req.body.itemName }  },
             {new: true});
         res.json(itemsPrices);
@@ -101,8 +101,7 @@ router.post('/', async (req, res) => {
     });
     try{
         const savedItems = await item.save();
-        res.status(201).json(savedItems);
-        
+                res.status(201).json(savedItems);
     }
     catch (err) {
         res.status(400).json({message: err.message});
@@ -118,8 +117,6 @@ router.patch('/addItems/:id', async (req, res) => {
             {$push: {ItemsPrices: req.body.ItemsPrices}}
             );
         res.json(item);
-        // res.send(item.ObjectId);
-        // console.log(req.body);
     } catch (err) {
         res.status(500).json({message: err.message});
     }
