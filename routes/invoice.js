@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Invoice = require('../models/invoice');
+const mongoose = require('mongoose');
 
 //getting all
 router.get('/', async (req, res) => {
@@ -23,7 +24,8 @@ router.post('/', async (req, res) => {
     // res.send(`creating user ${req.body.name}`);
     const invoice = new Invoice({ 
         _id: req.body._id,
-        invoices: req.body.invoices
+        businessName: req.body.businessName,
+        // invoices: req.body.invoices
         // invoiceNumber: req.body.invoiceNumber,
         // invoiceDate: req.body.invoiceDate,
         // invoiceAmount: req.body.invoiceAmount,
@@ -61,9 +63,10 @@ router.post('/', async (req, res) => {
 // updating one
 router.patch('/:id', getInvoice, async (req, res) => {
     // res.send(`updating user ${req.params.id}`);
-    if(req.body.invoices != null){
-        res.invoice.invoices = req.body.invoices;
+    if(req.body.businessName != null){
+        res.invoice.invoices = req.body.businessName;
     }
+
     // if(req.body.invoiceNumber != null){
     //     res.invoice.invoiceNumber = req.body.invoiceNumber;
     // }
@@ -168,18 +171,63 @@ router.delete('/:id', getInvoice, async (req, res) => {
 //     }
 // })
 
+//getting vendor by user ID (version 2)
+
+// router.get('/filter/:id/:invoices', async (req, res) => {
+//     // res.send(`getting user by invoiceSentTo ${req.params.invoiceSentTo}`);
+//     try {
+//     const invoice = await Invoice.aggregate([
+//         {$match : {"_id": req.params.id}}, {$unwind: "$invoices"}, {$match: {"invoices.invoiceSentBy": req.params.invoices}}
+//     ])
+//     res.json(invoice);
+//     } catch (err) {
+//         res.status(500).json({message: err.message});
+//     }
+// })
+
 //getting vendor by user ID
-router.get('/filter/:id/:invoices', async (req, res) => {
-    // res.send(`getting user by invoiceSentTo ${req.params.invoiceSentTo}`);
+
+router.get('/findELe/:userid/:vendorid', async (req, res) => {
     try {
-    const invoice = await Invoice.aggregate([
-        {$match : {"_id": req.params.id}}, {$unwind: "$invoices"}, {$match: {"invoices.invoiceSentBy": req.params.invoices}}
-    ])
-    res.json(invoice);
-    } catch (err) {
-        res.status(500).json({message: err.message});
+        const invoice = await Invoice.aggregate([
+            {$match: {"_id":req.params.userid}},
+            {$project: {
+                "bussinessName": {
+                    $filter: {
+                        input: "$businessName",
+                        as: "businessName",
+                        cond: {$eq: ["$$businessName._id", req.params.vendorid]}
+
+                    }
+                }
+            }}
+
+        ])
+        res.json(invoice);
+    } catch (error) {
+        res.status(500).json({message: error.message});
     }
 })
+
+//getting invoice of specific vendor by user ID
+
+router.get('/findEle/:userid/:vendorid/:invoiceid', async (req, res) => {
+    try {
+        const invoice = await Invoice.aggregate([
+            {$match: {"_id":req.params.userid}},
+            {$unwind: "$businessName"},
+            {$match: {"businessName._id": req.params.vendorid}},
+            {$unwind: "$businessName.invoices"},
+            {$match: {"businessName.invoices._id": mongoose.Types.ObjectId(req.params.invoiceid) }},
+        ])
+        res.json(invoice);
+        
+    } catch (error) {
+        res.status(500).json({message: error.message});
+        
+    }
+})
+
 
 
 // old getting by invoiceSentBy
