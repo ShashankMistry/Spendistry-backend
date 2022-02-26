@@ -242,17 +242,18 @@ router.get('/findEle/:userid/:vendorid/:invoiceid', async (req, res) => {
 //     }
 // })
 
-//getting vendor by invoiceSentBy
-router.get('/vendoremail/:invoices', async (req, res) => {
-    try {
-    const invoice = await Invoice.aggregate([
-        {$unwind: "$invoices"}, {$match: {"invoices.invoiceSentBy": req.params.invoices}}
-    ])
-    res.json(invoice);
-    } catch (err) {
-        res.status(500).json({message: err.message});
-    }
-})
+//getting vendor by invoiceSentBy v2
+
+// router.get('/vendoremail/:invoices', async (req, res) => {
+//     try {
+//     const invoice = await Invoice.aggregate([
+//         {$unwind: "$invoices"}, {$match: {"invoices.invoiceSentBy": req.params.invoices}}
+//     ])
+//     res.json(invoice);
+//     } catch (err) {
+//         res.status(500).json({message: err.message});
+//     }
+// })
 
 
 
