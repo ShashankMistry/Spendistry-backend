@@ -263,7 +263,7 @@ router.patch('/patchEle/:userid/:vendorid/:invoiceid', async (req, res) => {
     try {
         const invoice = await Invoice.update(
             {_id: req.params.userid, "businessName._id": req.params.vendorid, "businessName.invoices._id": req.params.invoiceid},
-            {$set: {"businessName.$.invoices.$": req.body.invoices}},
+            {$set: {"businessName.$.invoices": req.body.invoices}},
             
         );
         res.json(invoice);
