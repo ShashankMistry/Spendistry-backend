@@ -257,6 +257,21 @@ router.post('/addEle/:userid/:vendorid', async (req, res) => {
     }
 })
 
+// patching inside invoice of specific vendor by user ID
+
+router.patch('/patchEle/:userid/:vendorid/:invoiceid', async (req, res) => {
+    try {
+        const invoice = await Invoice.update(
+            {_id: req.params.userid, "businessName._id": req.params.vendorid, "businessName.invoices._id": req.params.invoiceid},
+            {$set: {"businessName.$.invoices.$": req.body.invoices}},
+            
+        );
+        res.json(invoice);
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+})
+
 
 
 // old getting by invoiceSentBy
