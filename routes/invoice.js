@@ -228,9 +228,9 @@ router.get('/findEle/:userid/:vendorid/:invoiceid', async (req, res) => {
     }
 })
 
-//patching inside businessName
+//adding inside businessName
 
-router.patch('/patch/:userid', async (req, res) => {
+router.post('/addEle/:userid', async (req, res) => {
     try {
         const invoice = await Invoice.findOneAndUpdate(
             {_id: req.params.userid},
@@ -242,9 +242,9 @@ router.patch('/patch/:userid', async (req, res) => {
     }
 })
 
-//patching inside specific businessName
+//adding inside specific businessName
 
-router.patch('/patchEle/:userid/:vendorid', async (req, res) => {
+router.post('/addEle/:userid/:vendorid', async (req, res) => {
     try {
         const invoice = await Invoice.update(
             {_id: req.params.userid, "businessName._id": req.params.vendorid},
