@@ -228,6 +228,35 @@ router.get('/findEle/:userid/:vendorid/:invoiceid', async (req, res) => {
     }
 })
 
+//patching inside businessName
+
+router.patch('/patch/:userid', async (req, res) => {
+    try {
+        const invoice = await Invoice.findOneAndUpdate(
+            {_id: req.params.userid},
+            {$push: {businessName: req.body.businessName}},
+        );
+        res.json(invoice);
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+})
+
+//patching inside specific businessName
+
+router.patch('/patchEle/:userid/:vendorid', async (req, res) => {
+    try {
+        const invoice = await Invoice.update(
+            {_id: req.params.userid, "businessName._id": req.params.vendorid},
+            {$push: {'businessName.$.invoices': req.body.invoices}},
+            
+        );
+        res.json(invoice);
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+})
+
 
 
 // old getting by invoiceSentBy
