@@ -261,9 +261,13 @@ router.post('/addEle/:userid/:vendorid', async (req, res) => {
 
 router.patch('/patchEle/:userid/:vendorid/:invoiceid', async (req, res) => {
     try {
-        const invoice = await Invoice.update(
-            {_id: req.params.userid, "businessName._id": req.params.vendorid, "businessName.invoices._id": req.params.invoiceid},
-            {$set: {"businessName.$.invoices": req.body.invoices}},
+        const invoice = await Invoice.findOneAndUpdate(
+            {_id: req.params.userid, "businessName._id": req.params.vendorid, "invoices": {$elemMatch: {_id: mongoose.Types.ObjectId(req.params.invoiceid)}}},
+            {$set: {"invoices.$.invoiceTitle": req.body.invoices.invoiceTitle}},
+            {new: true}
+            // {_id: req.params.userid, "businessName._id": req.params.vendorid, "businessName.invoices._id": req.params.invoiceid},
+            // {$set: {"businessName.$.invoices": req.body.invoices}},
+            // {new: true}
             
         );
         res.json(invoice);
