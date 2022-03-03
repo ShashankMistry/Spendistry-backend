@@ -245,16 +245,48 @@ router.post('/addEle/:userid', async (req, res) => {
 //adding inside specific businessName
 
 router.post('/addEle/:userid/:vendorid', async (req, res) => {
-    try {
-        const invoice = await Invoice.update(
-            {_id: req.params.userid, "businessName._id": req.params.vendorid},
-            {$push: {'businessName.$.invoices': req.body.invoices}},
-            
-        );
-        res.json(invoice);
-    } catch (error) {
-        res.status(500).json({message: error.message});
+
+    const countEle = await Invoice.aggregate(
+        [
+            {$match: {"_id": req.params.userid, "businessName._id": req.params.vendorid}},
+            {$unwind: '$businessName'},
+            {$group: {_id: req.params.userid , 'sum': { $sum: 1}}}
+        ]
+        
+      )
+     if(countEle.length > 0){
+        try {
+            const invoice = await Invoice.findOneAndUpdate(
+                {_id: req.params.userid, "businessName._id": req.params.vendorid},
+                {$push: {'businessName.$.invoices': req.body.invoices}},
+            );
+            res.json(invoice );
+        } catch (error) {
+            res.status(500).json({message: error.message + " error"});
+        }
+    } else {
+        try {
+            const invoice = await Invoice.findOneAndUpdate(
+                {_id: req.params.userid},
+
+                {$push: {businessName:{_id: req.params.vendorid, invoices: req.body.invoices}}},
+            );
+            res.json(invoice+" created");
+        } catch (error) {
+            res.status(500).json({message: error.message + " error1"});
+        }
     }
+
+    // try {
+    //     const invoice = await Invoice.update(
+    //         {_id: req.params.userid, "businessName._id": req.params.vendorid},
+    //         {$push: {'businessName.$.invoices': req.body.invoices}},
+            
+    //     );
+    //     res.json(invoice);
+    // } catch (error) {
+    //     res.status(500).json({message: error.message});
+    // }
 })
 
 // patching inside invoice of specific vendor by user ID
