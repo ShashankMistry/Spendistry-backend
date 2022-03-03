@@ -252,7 +252,6 @@ router.post('/addEle/:userid/:vendorid', async (req, res) => {
             {$unwind: '$businessName'},
             {$group: {_id: req.params.userid , 'sum': { $sum: 1}}}
         ]
-        
       )
      if(countEle.length > 0){
         try {
@@ -268,7 +267,6 @@ router.post('/addEle/:userid/:vendorid', async (req, res) => {
         try {
             const invoice = await Invoice.findOneAndUpdate(
                 {_id: req.params.userid},
-
                 {$push: {businessName:{_id: req.params.vendorid, invoices: req.body.invoices}}},
             );
             res.json(invoice+" created");
