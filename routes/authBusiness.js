@@ -62,7 +62,10 @@ router.post('/vendorLogin', async (req, res) => {
 
         //create and assign a token
         const token = jwt.sign({_id: vendor._id}, process.env.TOKEN_SECRET_VENDOR);
-        res.header('Access-Control-Allow-Origin', 'https://kcdocd.csb.app/');
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Credentials', 'true');
+        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+        res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
         // res.header('auth-token-vendor', token).send(token);
         
         // res.json(vendor);
