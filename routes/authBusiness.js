@@ -3,8 +3,7 @@ const router = express.Router();
 const AuthBusiness = require('../models/authBusiness');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const app = express();
-const cors = require('cors');
+
 
 // getting all
 // app.use((req, res, next) => {
@@ -60,7 +59,7 @@ router.post('/', async (req, res) => {
 })
 
 //vendor login
-router.post('/vendorLogin',cors(corsOptions), async (req, res) => {
+router.post('/vendorLogin', async (req, res) => {
     try {
         const vendor = await AuthBusiness.findOne({_id: req.body._id});
         if (!vendor) {
