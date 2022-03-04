@@ -15,8 +15,12 @@ db.once('open', function() {console.log('Connected to MongoDB')});
 
 
 app.use(express.json());
-app.use(cors());
-app.options('*', cors());
+// app.use(cors());
+app.use(cors({
+  methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH'],
+origin: '*'
+}));
+// app.options('*', cors());
 // app.use(express.urlencoded({ extended: true }));
 
 const userRouter = require('./routes/user');
