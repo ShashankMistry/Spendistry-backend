@@ -5,16 +5,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 
-// getting all
-// app.use((req, res, next) => {
-//     res.header('Access-Control-Allow-Origin', '*');
-//     next();
-//   })
 
-var corsOptions = {
-    origin: '*',
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-  }
 
 router.get('/', async (req, res) => {
     // res.send('getting all users');
@@ -70,13 +61,10 @@ router.post('/vendorLogin', async (req, res) => {
         if (!passwordIsValid) {
             return res.status(401).json({message: 'Invalid Password'});
         }
-
-        //create and assign a token
         const token = jwt.sign({_id: vendor._id}, process.env.TOKEN_SECRET_VENDOR);
         res.header('auth-token-vendor', token).send(token);
         console.log(vendor);
-        // res.json(vendor);
-        // res.status(200).json({message: 'Successfully logged in'});
+
 
 
     } catch (err) {
