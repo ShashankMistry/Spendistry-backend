@@ -298,7 +298,10 @@ router.patch('/patchEle/:userid/:vendorid/:invoiceid', async (req, res) => {
                   "businessName.$[d].invoices.$[o].invoiceTitle": req.body.invoices.invoiceTitle,
                     "businessName.$[d].invoices.$[o].invoiceDescription": req.body.invoices.invoiceDescription,
                     "businessName.$[d].invoices.$[o].invoiceAmount": req.body.invoices.invoiceAmount,
-                    "businessName.$[d].invoices.$[o].invoiceDate": req.body.invoices.invoiceDate
+                    "businessName.$[d].invoices.$[o].invoiceDate": req.body.invoices.invoiceDate,
+                    "businessName.$[d].invoice.invoiceSentTo": req.body.invoices.invoiceSentTo,
+                    "businessName.$[d].invoice.invoiceSentBy": req.body.invoices.invoiceSentBy,
+                    "businessName.$[d].invoice.invoiceNumber": req.body.invoices.invoiceNumber
                 },
                 }, { 
                   arrayFilters: [

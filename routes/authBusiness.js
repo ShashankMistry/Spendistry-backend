@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
     try {
     const auth = await AuthBusiness.find();
     // enable cors
-    res.header('Access-Control-Allow-Origin', '*');
+    // res.header('Access-Control-Allow-Origin', '*');
 
     res.json(auth);
     } catch (err) {
@@ -52,7 +52,7 @@ router.post('/', async (req, res) => {
 //vendor login
 router.post('/vendorLogin', async (req, res) => {
     try {
-        console.log(req.body);
+        // console.log(req.body);
         const vendor = await AuthBusiness.findOne({_id: req.body._id});
         if (!vendor) {
             return res.status(404).json({message: 'Cannot find vendor email'});
@@ -63,7 +63,7 @@ router.post('/vendorLogin', async (req, res) => {
         }
         const token = jwt.sign({_id: vendor._id}, process.env.TOKEN_SECRET_VENDOR);
         res.header('auth-token-vendor', token).send(token);
-        console.log(vendor);
+        // console.log(vendor);
 
 
 
