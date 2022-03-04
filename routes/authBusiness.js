@@ -61,6 +61,7 @@ router.post('/', async (req, res) => {
 //vendor login
 router.post('/vendorLogin', async (req, res) => {
     try {
+        console.log(req.body);
         const vendor = await AuthBusiness.findOne({_id: req.body._id});
         if (!vendor) {
             return res.status(404).json({message: 'Cannot find vendor email'});
@@ -77,7 +78,7 @@ router.post('/vendorLogin', async (req, res) => {
         res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
         res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
         // res.header('auth-token-vendor', token).send(token);
-        
+        console.log(vendor);
         // res.json(vendor);
         // res.status(200).json({message: 'Successfully logged in'});
 
