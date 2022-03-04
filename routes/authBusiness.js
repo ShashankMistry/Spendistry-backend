@@ -4,19 +4,20 @@ const AuthBusiness = require('../models/authBusiness');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const app = express();
+const cors = require('cors');
 
 // getting all
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    next();
-  })
+// app.use((req, res, next) => {
+//     res.header('Access-Control-Allow-Origin', '*');
+//     next();
+//   })
 
 router.get('/', async (req, res) => {
     // res.send('getting all users');
     try {
     const auth = await AuthBusiness.find();
     // enable cors
-    // res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Origin', '*');
 
     res.json(auth);
     } catch (err) {
@@ -26,7 +27,7 @@ router.get('/', async (req, res) => {
 
 // getting one
 
-router.get('/:id', getAuth, (req, res) => {
+router.get('/:id',  getAuth, (req, res) => {
     // res.send(`getting user ${req.params.id}`);
     res.json(res.auth);
 })
@@ -54,7 +55,7 @@ router.post('/', async (req, res) => {
 })
 
 //vendor login
-router.post('/vendorLogin', async (req, res) => {
+router.post('/vendorLogin',cors(), async (req, res) => {
     try {
         const vendor = await AuthBusiness.findOne({_id: req.body._id});
         if (!vendor) {
