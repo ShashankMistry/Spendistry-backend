@@ -2,6 +2,11 @@ const express = require('express');
 const router = express.Router();
 const Vendor = require('../models/vendor');
 
+
+// app.use((req, res, next) => {
+//     res.header('Access-Control-Allow-Origin', '*');
+//   })
+
 //getting all
 router.get('/', async (req, res) => {
     // res.send('getting all users');
