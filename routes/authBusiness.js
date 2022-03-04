@@ -10,6 +10,9 @@ router.get('/', async (req, res) => {
     // res.send('getting all users');
     try {
     const auth = await AuthBusiness.find();
+    // enable cors
+    res.header('Access-Control-Allow-Origin', 'http://cdbd-18-212-22-122.ngrok.io/');
+    
     res.json(auth);
     } catch (err) {
         res.status(500).json({message: err.message});
