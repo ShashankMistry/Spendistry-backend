@@ -12,6 +12,11 @@ const cors = require('cors');
 //     next();
 //   })
 
+var corsOptions = {
+    origin: '*',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  }
+
 router.get('/', async (req, res) => {
     // res.send('getting all users');
     try {
@@ -55,7 +60,7 @@ router.post('/', async (req, res) => {
 })
 
 //vendor login
-router.post('/vendorLogin',cors(), async (req, res) => {
+router.post('/vendorLogin',cors(corsOptions), async (req, res) => {
     try {
         const vendor = await AuthBusiness.findOne({_id: req.body._id});
         if (!vendor) {
