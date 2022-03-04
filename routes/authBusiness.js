@@ -3,6 +3,7 @@ const router = express.Router();
 const AuthBusiness = require('../models/authBusiness');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const app = express();
 
 // getting all
 app.use((req, res, next) => {
