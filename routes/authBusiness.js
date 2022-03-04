@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
     try {
     const auth = await AuthBusiness.find();
     // enable cors
-    res.header('Access-Control-Allow-Origin', 'http://cdbd-18-212-22-122.ngrok.io/authBusiness');
+    res.header('Access-Control-Allow-Origin', '*');
 
     res.json(auth);
     } catch (err) {
