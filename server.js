@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const PORT = process.env.PORT || 3000;
 
@@ -12,6 +13,7 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {console.log('Connected to MongoDB')});
 
 app.use(express.json());
+app.use(cors());
 // app.use(express.urlencoded({ extended: true }));
 
 const userRouter = require('./routes/user');
