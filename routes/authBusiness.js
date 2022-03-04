@@ -62,8 +62,10 @@ router.post('/vendorLogin', async (req, res) => {
 
         //create and assign a token
         const token = jwt.sign({_id: vendor._id}, process.env.TOKEN_SECRET_VENDOR);
+        res.header('Access-Control-Allow-Origin', '*');
         res.header('auth-token-vendor', token).send(token);
-
+        
+        // res.json(vendor);
         // res.status(200).json({message: 'Successfully logged in'});
 
 
