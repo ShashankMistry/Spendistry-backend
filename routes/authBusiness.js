@@ -5,6 +5,10 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 // getting all
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+  })
 
 router.get('/', async (req, res) => {
     // res.send('getting all users');
@@ -62,7 +66,7 @@ router.post('/vendorLogin', async (req, res) => {
 
         //create and assign a token
         const token = jwt.sign({_id: vendor._id}, process.env.TOKEN_SECRET_VENDOR);
-        res.header('Access-Control-Allow-Origin', '*');
+        // res.header('Access-Control-Allow-Origin', '*');
         res.header('Access-Control-Allow-Credentials', 'true');
         res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
         res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
