@@ -15,12 +15,10 @@ const invoiceSchema = new mongoose.Schema({
                     //     type: String,
                     // },
                         invoiceNumber: {
-                            type: Number
-                           
+                            type: Number   
                         },
                         invoiceDate: {
                             type: String
-                        
                         },
                         invoiceAmount: {
                             type: String
@@ -83,13 +81,15 @@ const invoiceSchema = new mongoose.Schema({
                         },
                         invoiceTime : {
                             type: Date,
-                            default: Date.now
+                            default: new Date(
+                               Date.now() 
+                            )
                         },
                         discount : {
                             type: String
                         },
                         roundoff : {
-                            type: String
+                            type: String  //cahnge this to number
                         },
                         city : {
                             type: String

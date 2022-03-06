@@ -19,6 +19,58 @@ router.get('/:id', getInvoice, (req, res) => {
     res.json(res.invoice);
 })
 
+
+//change this get method for roundoff value
+router.get('/totalExpense/:id/', async(req, res) => {
+    try{
+    const total = await Invoice.aggregate([
+        {$match: { _id: req.params.id}
+        },
+        {$unwind: '$businessName'},
+        {$unwind: '$businessName.invoices'},
+        {$group: {
+                 _id: '$businessName._id',
+                total: {
+                   $sum : {
+                          $cond: {
+                            if: {
+                                $gte: [
+                                    '$businessName.invoices.invoiceTime',
+                                    new Date(Date.now() - (1000 * 60 * 60 * 24 * 30))
+                                ],  
+                            },
+                            then: parseInt('$businessName.invoices.roundoff'),
+                            else: 0
+                        }
+                    }
+                },
+                totalAll:{
+                    $sum: parseInt('$businessName.invoices.roundoff')
+                },
+                // date: { 
+                //     $push: {
+                //         $cond: {
+                //             if: {
+                //                 $gte: [
+                //                     '$businessName.invoices.invoiceTime',
+                //                     new Date(Date.now() - (1000 * 60 * 60 * 24 * 30))
+                //                 ],
+                //             },
+                //             then: '$businessName.invoices.invoiceTime',
+                //             else: "No Invoices"
+                //         }
+                //     }
+                // }
+            }
+        }
+    ]);
+    res.json(total);           
+} catch (err) {
+    return res.status(500).json({message: err.message});
+}
+    
+})
+
 //creating one
 router.post('/', async (req, res) => {
     // res.send(`creating user ${req.body.name}`);
@@ -295,13 +347,13 @@ router.patch('/patchEle/:userid/:vendorid/:invoiceid', async (req, res) => {
             {_id: req.params.userid, "businessName._id": req.params.vendorid, "businessName.invoices._id": mongoose.Types.ObjectId(req.params.invoiceid)},
             {
                 $set: {
+                    "businessName.$[d].invoice.$[o].invoiceNumber": req.body.invoices.invoiceNumber,
                   "businessName.$[d].invoices.$[o].invoiceTitle": req.body.invoices.invoiceTitle,
                     "businessName.$[d].invoices.$[o].invoiceDescription": req.body.invoices.invoiceDescription,
                     "businessName.$[d].invoices.$[o].invoiceAmount": req.body.invoices.invoiceAmount,
                     "businessName.$[d].invoices.$[o].invoiceDate": req.body.invoices.invoiceDate,
-                    "businessName.$[d].invoice.invoiceSentTo": req.body.invoices.invoiceSentTo,
-                    "businessName.$[d].invoice.invoiceSentBy": req.body.invoices.invoiceSentBy,
-                    "businessName.$[d].invoice.invoiceNumber": req.body.invoices.invoiceNumber
+                    "businessName.$[d].invoice.$[o].invoiceSentTo": req.body.invoices.invoiceSentTo,
+                    "businessName.$[d].invoice.$[o].invoiceSentBy": req.body.invoices.invoiceSentBy,
                 },
                 }, { 
                   arrayFilters: [
