@@ -39,13 +39,13 @@ router.get('/totalExpense/:id/', async(req, res) => {
                                     new Date(Date.now() - (1000 * 60 * 60 * 24 * 30))
                                 ],  
                             },
-                            then: parseInt('$businessName.invoices.roundoff'),
+                            then: '$businessName.invoices.roundoff',
                             else: 0
                         }
                     }
                 },
                 totalAll:{
-                    $sum: parseInt('$businessName.invoices.roundoff')
+                    $sum: '$businessName.invoices.roundoff'
                 },
                 // date: { 
                 //     $push: {
