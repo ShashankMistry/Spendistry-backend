@@ -60,13 +60,13 @@ router.post('/', async (req, res) => {
 
 //storage engine
 const storage = multer.diskStorage({
-    destination: "./uploads/images",
-    filename: function(cb) {
-        cb(null, Vendor.email)
+    destination: "./upload/images",
+    filename: (req, file, cb) => {
+        cb(null, file.fieldname + "-" + Date.now() + path.extname(file.originalname));
     }
 });
 
-const upload = multer({storage: storage, limits: {fileSize: 10}});
+const upload = multer({storage: storage, limits: {fileSize: 10000}});
 
 router.post('/upload', upload.single('vendorProfile'), (req, res) => {
     // res.send(req.file);
