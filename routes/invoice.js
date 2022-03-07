@@ -47,21 +47,7 @@ router.get('/totalExpense/:id/', async(req, res) => {
                 },
                 totalAll:{
                     $sum:'$businessName.invoices.invoiceNumber'
-                },
-                // date: { 
-                //     $push: {
-                //         $cond: {
-                //             if: {
-                //                 $gte: [
-                //                     '$businessName.invoices.invoiceTime',
-                //                     new Date(Date.now() - (1000 * 60 * 60 * 24 * 30))
-                //                 ],
-                //             },
-                //             then: '$businessName.invoices.invoiceTime',
-                //             else: "No Invoices"
-                //         }
-                //     }
-                // }
+                }
             }
         }
     ]);
