@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Vendor = require('../models/vendor');
-
-
+const multer = require('multer');
+// const { append } = require('express/lib/response');
 
 
 //getting all
@@ -57,6 +57,27 @@ router.post('/', async (req, res) => {
     }
 
 })
+
+//storage engine
+const storage = multer.diskStorage({
+    destination: "./uploads/images",
+    filename: function(cb) {
+        cb(null, Vendor.email)
+    }
+});
+
+const upload = multer({storage: storage, limits: {fileSize: 10}});
+
+app.post('/upload', upload.single('vendorProfile'), (req, res) => {
+    // res.send(req.file);
+    try {
+        res.send(req.file);
+        
+    } catch (error) {
+        console.log(error);
+    }
+
+});
 
 // updating one
 router.patch('/:id',getVendor, async (req, res) => {
