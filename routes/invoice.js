@@ -374,6 +374,21 @@ router.patch('/patchEle/:userid/:vendorid/:invoiceid', async (req, res) => {
     }
 })
 
+//delete specific invoice with id
+router.delete('/deleteEle/:userid/:vendorid/:invoiceid', async (req, res) => {
+    try {
+        const invoice = await Invoice.findOneAndUpdate(
+            {_id: req.params.userid, "businessName._id": req.params.vendorid},
+            {$pull: {'businessName.$.invoices': {_id: mongoose.Types.ObjectId(req.params.invoiceid)}}},
+            {new: true}
+        );
+        res.json(invoice);
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+})
+
+
 
 
 // old getting by invoiceSentBy
