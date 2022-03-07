@@ -68,7 +68,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage: storage, limits: {fileSize: 10}});
 
-app.post('/upload', upload.single('vendorProfile'), (req, res) => {
+router.post('/upload', upload.single('vendorProfile'), (req, res) => {
     // res.send(req.file);
     try {
         res.send(req.file);
