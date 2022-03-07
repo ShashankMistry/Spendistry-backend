@@ -30,6 +30,7 @@ router.get('/totalExpense/:id/', async(req, res) => {
         {$unwind: '$businessName.invoices'},
         {$group: {
                  _id: '$businessName._id',
+                 date: {$last: '$businessName.invoices.invoiceTime'},
                 total: {
                    $sum : {
                           $cond: {
@@ -45,7 +46,7 @@ router.get('/totalExpense/:id/', async(req, res) => {
                     }
                 },
                 totalAll:{
-                    $sum: '$businessName.invoices.invoiceNumber'
+                    $sum:'$businessName.invoices.invoiceNumber'
                 },
                 // date: { 
                 //     $push: {

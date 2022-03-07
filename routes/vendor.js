@@ -62,7 +62,7 @@ router.post('/', async (req, res) => {
 const storage = multer.diskStorage({
     destination: "./upload/images",
     filename: (req, file, cb) => {
-        cb(null, file.fieldname + "-" + Date.now() );
+        cb(null, file.fieldname + "-" + Date.now() +".jpeg");
     }
 });
 
