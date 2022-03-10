@@ -47,7 +47,7 @@ app.use('/authBusiness', authBusinessRouter);
 const itemsPricesRouter = require('./routes/ItemPricesList');
 app.use('/itemsPrices', itemsPricesRouter);
 
-app.use('/vendorProfile', express.static("/upload/images"));
+app.use('/vendorProfile', express.static('upload/images'));
 
 app.listen (PORT, () => {
   console.log('listening on port', PORT);
