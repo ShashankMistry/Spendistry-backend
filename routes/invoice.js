@@ -26,7 +26,7 @@ router.get('/totalExpense/:id/', async(req, res) => {
     const total = await Invoice.aggregate([
         {$match: { _id: req.params.id}
         },
-        {$unwind: '$businessName'},
+        {$unwind: '$businessName'},    
         {$unwind: '$businessName.invoices'},
         {$group: {
                  _id: '$businessName._id',
@@ -50,6 +50,114 @@ router.get('/totalExpense/:id/', async(req, res) => {
                 }
             }
         }
+    ]);
+    res.json(total);           
+} catch (err) {
+    return res.status(500).json({message: err.message});
+}
+    
+})
+
+
+//show total of all invoiceNumbers and then show total for individual businessNAme ids
+router.get('/total/:id/', async(req, res) => {
+    try{
+    const total = await Invoice.aggregate([
+        {$match: { _id: req.params.id}
+        },
+        {$unwind: '$businessName'},    
+        {$unwind: '$businessName.invoices'},
+        {$group: {
+            _id: req.params.id,
+            MonthlyTotalAll: {
+                $sum : {
+                       $cond: {
+                         if: {
+                             $gte: [
+                                 '$businessName.invoices.invoiceTime',
+                                 new Date(Date.now() - (1000 * 60 * 60 * 24 * 30))
+                             ],  
+                         },
+                         then: '$businessName.invoices.invoiceNumber',
+                         else: 0
+                     }
+                 }
+             },
+             AllTimeTotal:{
+                 $sum:'$businessName.invoices.invoiceNumber'
+             },
+             business:{
+                $push:{
+                _id: '$businessName._id',
+                // date: {$last: '$businessName.invoices.invoiceTime'},
+                MonthlyTotal: {
+                    $sum : {
+                        $cond: {
+                          if: {
+                              $gte: [
+                                  '$businessName.invoices.invoiceTime',
+                                  new Date(Date.now() - (1000 * 60 * 60 * 24 * 30))
+                              ],  
+                          },
+                          then: '$businessName.invoices.invoiceNumber',
+                          else: 0
+                      }
+                  }
+                },
+                AllTotal: {$sum: '$businessName.invoices.invoiceNumber'}
+            }
+        }
+        }},
+        // {$project: {
+        //     _id: req.params.id,
+        //     MonthlyTotalAll: '$MonthlyTotalAll',
+        //     AllTotal: '$AllTimeTotal',
+        //     business: [{
+        //         $push:{
+        //         _id: '$businessName._id',
+        //         date: {$last: '$businessName.invoices.invoiceTime'},
+        //         MonthlyTotal: {
+        //             $sum : {
+        //                 $cond: {
+        //                   if: {
+        //                       $gte: [
+        //                           '$businessName.invoices.invoiceTime',
+        //                           new Date(Date.now() - (1000 * 60 * 60 * 24 * 30))
+        //                       ],  
+        //                   },
+        //                   then: '$businessName.invoices.invoiceNumber',
+        //                   else: 0
+        //               }
+        //           }
+        //         },
+        //         AllTotal: {$sum: '$businessName.invoices.invoiceNumber'}
+        //     }
+        // }]
+        // }},
+        // {$group: {
+        //          _id: '$businessName._id',
+        //          date: {$last: '$businessName.invoices.invoiceTime'},
+        //         MonthlyTotal: {
+                //    $sum : {
+                //           $cond: {
+                //             if: {
+                //                 $gte: [
+                //                     '$businessName.invoices.invoiceTime',
+                //                     new Date(Date.now() - (1000 * 60 * 60 * 24 * 30))
+                //                 ],  
+                //             },
+                //             then: '$businessName.invoices.invoiceNumber',
+                //             else: 0
+                //         }
+                //     }
+                // },
+        //         AllTotal:{
+        //             $sum:'$businessName.invoices.invoiceNumber'
+        //         }
+        //     }
+        // }
+        
+
     ]);
     res.json(total);           
 } catch (err) {

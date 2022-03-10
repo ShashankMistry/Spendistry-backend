@@ -100,8 +100,11 @@ router.patch('/:id',getVendor, async (req, res) => {
     if(req.body.address){
         res.vendor.address = req.body.address;
     }
-    if(req.body.latlong){
-        res.vendor.latlong = req.body.latlong;
+    if(req.body.lat){
+        res.vendor.lat = req.body.lat;
+    }
+    if(req.body.lng){
+        res.vendor.lng = req.body.lng;
     }
     if(req.body.vendorName){
         res.vendor.vendorName = req.body.vendorName;
