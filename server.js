@@ -48,6 +48,9 @@ app.use('/itemsPrices', itemsPricesRouter);
 
 app.use('/vendorProfile', express.static('upload/images'));
 
+const mvd = require('./routes/mvd');
+app.use('/mvd', mvd);
+
 app.listen (PORT, () => {
   console.log('listening on port', PORT);
 }
