@@ -11,6 +11,7 @@ router.get('/:id', async (req, res) => {
     {$match: {"businessName._id": req.params.id}},
         {$unwind: '$businessName'},    
         {$unwind: '$businessName.invoices'},
+        //this group is for monthly and yearly income
         {$group: {
                  "$businessName._id": req.params.id,
                 monthly: {
