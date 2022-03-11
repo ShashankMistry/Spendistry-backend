@@ -30,6 +30,7 @@ router.get('/totalExpense/:id/', async(req, res) => {
         {$unwind: '$businessName.invoices'},
         {$group: {
                  _id: '$businessName._id',
+                
                  date: {$last: '$businessName.invoices.invoiceTime'},
                 total: {
                    $sum : {
@@ -108,54 +109,42 @@ router.get('/total/:id/', async(req, res) => {
             }
         }
         }},
-        // {$project: {
-        //     _id: req.params.id,
-        //     MonthlyTotalAll: '$MonthlyTotalAll',
-        //     AllTotal: '$AllTimeTotal',
-        //     business: [{
-        //         $push:{
-        //         _id: '$businessName._id',
-        //         date: {$last: '$businessName.invoices.invoiceTime'},
-        //         MonthlyTotal: {
-        //             $sum : {
-        //                 $cond: {
-        //                   if: {
-        //                       $gte: [
-        //                           '$businessName.invoices.invoiceTime',
-        //                           new Date(Date.now() - (1000 * 60 * 60 * 24 * 30))
-        //                       ],  
-        //                   },
-        //                   then: '$businessName.invoices.invoiceNumber',
-        //                   else: 0
-        //               }
-        //           }
-        //         },
-        //         AllTotal: {$sum: '$businessName.invoices.invoiceNumber'}
-        //     }
-        // }]
-        // }},
-        // {$group: {
-        //          _id: '$businessName._id',
-        //          date: {$last: '$businessName.invoices.invoiceTime'},
-        //         MonthlyTotal: {
-                //    $sum : {
-                //           $cond: {
-                //             if: {
-                //                 $gte: [
-                //                     '$businessName.invoices.invoiceTime',
-                //                     new Date(Date.now() - (1000 * 60 * 60 * 24 * 30))
-                //                 ],  
-                //             },
-                //             then: '$businessName.invoices.invoiceNumber',
-                //             else: 0
-                //         }
-                //     }
-                // },
-        //         AllTotal:{
-        //             $sum:'$businessName.invoices.invoiceNumber'
-        //         }
-        //     }
-        // }
+        {$unwind: '$business'},
+        {$group: {      
+            _id:req.params.id,
+            MonthlyTotalAll: {$last: '$MonthlyTotalAll'},
+            AllTimeTotal:{$last: '$AllTimeTotal'},
+            businessWise:{
+            _id: '$business._id',
+           
+            businessTotal:{
+                $sum: '$business.MonthlyTotal'
+            },
+            businessAllTimeTotal: {$sum: '$business.AllTotal'}
+        }
+        }
+    },
+        
+    
+    //     {$project: {
+    //         _id: req.params.id,
+    //         MonthlyTotalAll: '$MonthlyTotalAll',
+    //         AllTotal: '$AllTimeTotal',
+    //         businessWise: {
+    //             _id: '$_id',
+    //             MonthlyTotal: '$businessTotal',
+    //             AllTotal: '$businessAllTimeTotal'
+    //         },
+            
+    //     }
+    // },
+       
+        // {$group:{
+        //     _id:'$businessWise._id',
+        //     MonthlyTotalAll: {$last: '$MonthlyTotalAll'},
+        //     AllTimeTotal:{$last: '$AllTotal'},
+
+        // }}
         
 
     ]);
