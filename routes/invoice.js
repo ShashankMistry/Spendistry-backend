@@ -113,7 +113,7 @@ router.get('/total/:id/', async(req, res) => {
         }},
         {$unwind: '$business'},
         {$group: {      
-            _id:req.params.id,
+            _id:'$business._id',
             MonthlyTotalAll: {$last: '$MonthlyTotalAll'},
             AllTimeTotal:{$last: '$AllTimeTotal'},
            
@@ -126,18 +126,18 @@ router.get('/total/:id/', async(req, res) => {
     },
         
     
-    //     {$project: {
-    //         _id: req.params.id,
-    //         MonthlyTotalAll: '$MonthlyTotalAll',
-    //         AllTotal: '$AllTimeTotal',
-    //         businessWise: {
-    //             _id: '$_id',
-    //             MonthlyTotal: '$businessTotal',
-    //             AllTotal: '$businessAllTimeTotal'
-    //         },
+        {$project: {
+            _id: '$_id',
+            MonthlyTotalAll: '$MonthlyTotalAll',
+            AllTotal: '$AllTimeTotal',
+            // businessWise: {
+                // _id: '$_id',
+                MonthlyTotal: '$businessTotal',
+                AllTimeTotal: '$businessAllTimeTotal'
+            // },
             
-    //     }
-    // },
+        }
+    },
        
         // {$group:{
         //     _id:'$businessWise._id',
