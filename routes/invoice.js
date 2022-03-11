@@ -21,7 +21,7 @@ router.get('/:id', getInvoice, (req, res) => {
 
 
 //change this get method for roundoff value
-router.get('/totalExpense/:id/', async(req, res) => {
+router.get('/totalExpense/:id', async(req, res) => {
     try{
     const total = await Invoice.aggregate([
         {$match: { _id: req.params.id}
@@ -58,6 +58,8 @@ router.get('/totalExpense/:id/', async(req, res) => {
 }
     
 })
+
+//
 
 
 //show total of all invoiceNumbers and then show total for individual businessNAme ids
