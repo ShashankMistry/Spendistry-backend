@@ -116,14 +116,12 @@ router.get('/total/:id/', async(req, res) => {
             _id:req.params.id,
             MonthlyTotalAll: {$last: '$MonthlyTotalAll'},
             AllTimeTotal:{$last: '$AllTimeTotal'},
-            businessWise:{
-            _id: '$business._id',
            
             businessTotal:{
                 $sum: '$business.MonthlyTotal'
             },
             businessAllTimeTotal: {$sum: '$business.AllTotal'}
-        }
+        
         }
     },
         
