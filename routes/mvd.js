@@ -66,7 +66,7 @@ router.get('/:id', async (req, res) => {
         //get the vendor name
 
         {$lookup: {
-            from: 'invoice',
+            from: 'Invoice',
             localField: 'businessName._id',
             foreignField: '_id',
             as: 'vendor'
