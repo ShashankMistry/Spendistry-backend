@@ -46,16 +46,6 @@ router.get('/:id', async (req, res) => {
                 },
                 invoice:{
                     $push: '$businessName.invoices'
-                },
-                $lookup: {
-                    from: 'Invoice',
-                    localField: '_id',
-                    foreignField: 'businessName._id',
-                    as: 'invoice11'
-                },
-                $unwind: '$invoice11',
-                vendor:{
-                    $push: '$invoice11'
                 }
 
             }
@@ -71,8 +61,7 @@ router.get('/:id', async (req, res) => {
             totalIncome: '$totalAll',
             issuedInvoices: {
                 $size: '$invoice'
-            },
-            vendor: '$vendor'
+            }
         }},
 
         //get the vendor name
