@@ -49,7 +49,9 @@ router.get('/:id', async (req, res) => {
         // count of all invoices
         {$group: {
             _id: req.params.id,
-           count: {$count: '$businessName._id'}
+           count: {
+                $sum: 1
+           }
         }},
         // get vendor
         {$lookup: {
