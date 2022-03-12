@@ -47,7 +47,7 @@ router.get('/:id', async (req, res) => {
                 count: {
                     // $size: '$businessName.invoices'
                     $sum: {
-                        
+                        $size: '$businessName.invoices'
                     }
                 }
             }
