@@ -47,21 +47,24 @@ router.get('/:id', async (req, res) => {
             }
         },
         // count of all invoices
-        {$group: {
-            _id: req.params.id,
-           count: {
-                $sum: 1
-           }
-        }},
-        // get vendor
-        {$lookup: {
-            from: "invoice",
-            localField: '$businessName._id',
-            foreignField: '_id',
-            as: 'vendor'
-        }
-    },
-    {$unwind: '$vendor'},
+    //     {$group: {
+    //         _id: req.params.id,
+    //        count: {
+    //             $sum: 1
+    //        }
+    //     }},
+    //     // get vendor
+    //     {$lookup: {
+    //         from: "invoice",
+    //         localField: '$businessName._id',
+    //         foreignField: '_id',
+    //         as: 'vendor'
+    //     }
+    // },
+    // {$unwind: '$vendor'},
+
+
+
     // {$unwind: '$vendor.businessName'},
     // {$unwind: '$vendor.businessName.invoices'},
     // {$match: {'vendor.businessName._id': req.params.id}},
