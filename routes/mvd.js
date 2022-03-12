@@ -73,9 +73,7 @@ router.get('/:id', async (req, res) => {
         }},
         {$unwind: '$vendor'},
         {$project: {
-            vendorName: {
-            $push: '$vendor.fname'
-            }
+            vendorName: '$vendor.fname'
         }},
 
 
