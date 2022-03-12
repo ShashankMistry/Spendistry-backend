@@ -118,7 +118,8 @@ router.get('/:id', async (req, res) => {
     //     }
     // }},
     ]);
-    res.send(mvd, vendorDetails);
+    res.send(mvd);
+    res.send(vendorDetails);
 });
 
 module.exports = router;
