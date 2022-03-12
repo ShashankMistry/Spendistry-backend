@@ -51,11 +51,11 @@ router.get('/:id', async (req, res) => {
                     from: 'Invoice',
                     localField: '_id',
                     foreignField: 'businessName._id',
-                    as: 'invoice'
+                    as: 'invoice11'
                 },
-                $unwind: '$invoice',
+                $unwind: '$invoice11',
                 vendor:{
-                    $push: '$invoice'
+                    $push: '$invoice11'
                 }
 
             }
