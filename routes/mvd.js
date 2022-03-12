@@ -47,6 +47,45 @@ router.get('/:id', async (req, res) => {
                 }
             }
         },
+        // count of all invoices
+        {$group: {
+            "$businessName._id": req.params.id,
+           count: {$count: '$businessName._id'}
+        }},
+        // get all vendors
+        {$lookup: {
+            from: invoice,
+            localField: '$businessName._id',
+            foreignField: '_id',
+            as: 'vendor'
+        }
+    },
+    {$unwind: '$vendor'},
+    // {$unwind: '$vendor.businessName'},
+    // {$unwind: '$vendor.businessName.invoices'},
+    // {$match: {'vendor.businessName._id': req.params.id}},
+    {$project: {
+        vendorDetails:{
+            "vendor._id": 0,
+            "vendor.fname": 0,
+            "vendor.lname": 0,
+            "vendor.email": 0,
+            "vendor.mobileNumber": 0,
+            "vendor.address": 0,
+            "vendor.city": 0,
+            "vendor.state": 0,
+            "vendor.lat": 0,
+            "vendor.lng": 0,
+            "vendor.vendorName": 0,
+            "vendor.tollFreeNumber": 0,
+            "vendor.website": 0,
+            "vendor.currentInvoiceNumber": 0,
+            "vendor.panNumber": 0,
+            "vendor.gstNumber": 0,
+            "vendor.extra1": 0
+
+        }
+    }},
 
 
 
