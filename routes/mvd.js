@@ -67,7 +67,6 @@ router.get('/:id', async (req, res) => {
             // invoice details
     
             {$project: {
-                // _id: 0,
                 monthlyIncome: '$monthly',
                 yearlyIncome: '$yearly',
                 totalIncome: '$totalAll',
@@ -77,8 +76,9 @@ router.get('/:id', async (req, res) => {
                 roundoff: '$roundoff'
             }},
         ]);
+        
         res.send({
-            mvd: mvd, vendorDetails: vendorDetails, reportCount: reportCount
+            invoiceDetails: mvd, vendorDetails: vendorDetails, reportCount: reportCount
         });
     } catch (err) {
         res.status(500).json({message: err.message});
