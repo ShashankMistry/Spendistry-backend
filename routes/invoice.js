@@ -69,7 +69,7 @@ router.get('/vendor/:id', async (req, res) => {
        {$group: {
                 _id: req.params.id,
                 invoices: {
-                    $push: '$businessName.invoices'
+                    $push: "om"
                 }
 
        }}       
