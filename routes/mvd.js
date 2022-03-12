@@ -6,7 +6,6 @@ const report = require('../models/report');
 const vendor = require('../models/vendor');
 
 router.get('/:id', async (req, res) => {
-    res.send('MVD');
     const mvd  = await invoice.aggregate([
     {$match: {"businessName._id": req.params.id}},
         {$unwind: '$businessName'},    
@@ -86,11 +85,6 @@ router.get('/:id', async (req, res) => {
 
         }
     }},
-
-
-
-
-
     ]);
     res.send(mvd);
 });
