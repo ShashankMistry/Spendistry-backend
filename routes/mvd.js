@@ -55,15 +55,12 @@ router.get('/:id', async (req, res) => {
 
         {$project: {
             // _id: 0,
-            Count: {
-                $size: '$invoice'
-
-            },
             monthly: '$monthly',
             yearly: '$yearly',
             totalAll: '$totalAll',
-            
-
+            Count: {
+                $size: '$invoice'
+            }
         }}
 
         
