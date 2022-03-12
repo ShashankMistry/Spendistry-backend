@@ -6,7 +6,7 @@ const report = require('../models/report');
 const vendor = require('../models/vendor');
 
 router.get('/:id', async (req, res) => {
-    vendor.find();
+    const vendorDetails = await vendor.findById(req.params.id);
     const mvd  = await invoice.aggregate([
     {$match: {"businessName._id": req.params.id}},
         {$unwind: '$businessName'},    
@@ -67,16 +67,16 @@ router.get('/:id', async (req, res) => {
 
         //get the vendor name
 
-        {$lookup: {
-            from: 'vendor',
-            localField: 'businessName._id',
-            foreignField: '_id',
-            as: 'vendor'
-        }},
-        // {$unwind: '$vendor'},
-        {$project: {
-            vendorName: '$vendor',
-        }},
+        // {$lookup: {
+        //     from: 'vendor',
+        //     localField: 'businessName._id',
+        //     foreignField: '_id',
+        //     as: 'vendor'
+        // }},
+        // // {$unwind: '$vendor'},
+        // {$project: {
+        //     vendorName: '$vendor',
+        // }},
 
 
     //     // get vendor
