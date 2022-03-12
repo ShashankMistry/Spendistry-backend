@@ -62,16 +62,25 @@ router.get('/:id', async (req, res) => {
                 $size: '$invoice'
             },
         }},
-        
 
-        
-        // count of all invoices
-    //     {$group: {
-    //         _id: req.params.id,
-    //        count: {
-    //             $sum: 1
-    //        }
-    //     }},
+        //get the vendor name
+        {$lookup: {
+            from: 'Vendor',
+            localField: '_id',
+            foreignField: '_id',
+            as: 'vendor'
+        }},
+        {$unwind: '$vendor'},
+        {$project: {
+            vendorName: '$vendor.vendorName'
+        }},
+
+
+
+
+    
+
+
     //     // get vendor
     //     {$lookup: {
     //         from: "invoice",
