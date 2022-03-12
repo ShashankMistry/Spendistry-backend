@@ -60,8 +60,9 @@ router.get('/:id', async (req, res) => {
             totalIncome: '$totalAll',
             issuedInvoices: {
                 $size: '$invoice'
-            }
-        }}
+            },
+        }},
+        
 
         
         // count of all invoices
