@@ -118,7 +118,6 @@ router.get('/:id', async (req, res) => {
     //     }
     // }},
     ]);
-    res.send(mvd);
     res.send(vendorDetails);
 });
 
