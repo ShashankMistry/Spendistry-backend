@@ -15,7 +15,7 @@ router.get('/:id', async (req, res) => {
     //getting number of reports 
     const reportCount = await report.countDocuments({reportTo: req.params.id});
 
-    const mvd  = await invoice.aggregate(
+    const mvd  = await invoice.aggregate([
         {$match: {"businessName._id": req.params.id}},
             {$unwind: '$businessName'},    
             {$unwind: '$businessName.invoices'},
@@ -75,8 +75,8 @@ router.get('/:id', async (req, res) => {
                 },
                 roundoff: '$roundoff'
             }},
-        );
-
+        ]);
+        
         res.send({
             invoiceDetails: mvd, vendorDetails: vendorDetails, reportCount: reportCount
         });
