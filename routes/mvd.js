@@ -8,7 +8,13 @@ const vendor = require('../models/vendor');
 router.get('/:id', async (req, res) => {
     
     try {
+
+    //getting vendor details
     const vendorDetails = await vendor.findById(req.params.id);
+
+    //getting number of reports 
+    const reportCount = await report.countDocuments({vendorId: req.params.id});
+
     const mvd  = await invoice.aggregate([
         {$match: {"businessName._id": req.params.id}},
             {$unwind: '$businessName'},    
@@ -68,7 +74,7 @@ router.get('/:id', async (req, res) => {
             }},
         ]);
         res.send({
-            mvd: mvd, vendorDetails: vendorDetails
+            mvd: mvd, vendorDetails: vendorDetails, reportCount: reportCount
         });
     } catch (err) {
         res.status(500).json({message: err.message});
