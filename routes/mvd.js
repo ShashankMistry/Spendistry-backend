@@ -7,7 +7,7 @@ const vendor = require('../models/vendor');
 
 router.get('/:id', async (req, res) => {
     const mvd  = await invoice.aggregate([
-    {$match: {"businessName._id": req.params.id}},
+    {$match: {"$businessName._id": req.params.id}},
         {$unwind: '$businessName'},    
         {$unwind: '$businessName.invoices'},
         //this group is for monthly and yearly income
