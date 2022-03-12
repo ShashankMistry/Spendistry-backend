@@ -457,6 +457,7 @@ router.patch('/patchEle/:userid/:vendorid/:invoiceid', async (req, res) => {
                     "businessName.$[d].invoices.$[o].invoiceDate": req.body.invoices.invoiceDate,
                     "businessName.$[d].invoice.$[o].invoiceSentTo": req.body.invoices.invoiceSentTo,
                     "businessName.$[d].invoice.$[o].invoiceSentBy": req.body.invoices.invoiceSentBy,
+                    "businessName.$[d].invoice.$[o].roundoff": req.body.invoices.roundoff,
                 },
                 }, { 
                   arrayFilters: [
