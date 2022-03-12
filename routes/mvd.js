@@ -55,13 +55,16 @@ router.get('/:id', async (req, res) => {
                     },
                     invoice:{
                         $push: '$businessName.invoices'
+                    },
+                    roundoff:{
+                        $sum:'$businessName.invoices.roundoff'
                     }
     
                 }
             },
             
     
-            // count of all invoices
+            // invoice details
     
             {$project: {
                 // _id: 0,
@@ -71,6 +74,7 @@ router.get('/:id', async (req, res) => {
                 issuedInvoices: {
                     $size: '$invoice'
                 },
+                roundoff: '$roundoff'
             }},
         ]);
         res.send({
