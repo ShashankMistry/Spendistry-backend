@@ -52,7 +52,7 @@ router.get('/:id', async (req, res) => {
             "$businessName._id": req.params.id,
            count: {$count: '$businessName._id'}
         }},
-        // get all vendors
+        // get vendor
         {$lookup: {
             from: invoice,
             localField: '$businessName._id',
