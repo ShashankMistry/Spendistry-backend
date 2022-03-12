@@ -44,10 +44,13 @@ router.get('/:id', async (req, res) => {
                 totalAll:{
                     $sum:'$businessName.invoices.invoiceNumber'
                 },
+                invoice:{
+                    $push: '$businessName.invoices'
+                },
                 count: {
                     // $size: '$businessName.invoices'
                     $sum: {
-                        $size: '$businessName.invoices'
+                        $size: '$invoices'
                     }
                 }
             }
