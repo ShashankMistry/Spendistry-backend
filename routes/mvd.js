@@ -46,6 +46,16 @@ router.get('/:id', async (req, res) => {
                 }
             }
         },
+
+        // count of all invoices
+
+        {$group: {
+            _id: req.params.id,
+            count: {
+                $sum: 1
+            }
+
+        }}
         // count of all invoices
     //     {$group: {
     //         _id: req.params.id,
