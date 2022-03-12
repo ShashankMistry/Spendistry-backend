@@ -68,7 +68,7 @@ router.get('/:id', async (req, res) => {
         {$lookup: {
             from: 'Invoice',
             localField: '_id',
-            foreignField: '_id',
+            foreignField: 'businessName._id',
             as: 'vendor'
         }},
         {$unwind: '$vendor'},
