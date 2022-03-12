@@ -72,7 +72,7 @@ router.get('/:id', async (req, res) => {
             foreignField: '_id',
             as: 'vendor'
         }},
-        {$unwind: '$vendor'},
+        // {$unwind: '$vendor'},
         {$project: {
             vendorName: '$vendor',
         }},
