@@ -25,6 +25,7 @@ router.post('/', async (req, res) => {
         reportNumber: req.body.reportNumber,
         reportDate: req.body.reportDate,
         reportBy: req.body.reportBy,
+        reportTo: req.body.reportTo,
         reportTitle: req.body.reportTitle,
         reportTime: req.body.reportTime,
         reportCustomerNumber : req.body.reportCustomerNumber,
@@ -55,6 +56,9 @@ router.patch('/:id', getReport, async (req, res) => {
     }
     if (req.body.reportBy != null) {
         res.report.reportBy = req.body.reportBy;
+    }
+    if (req.body.reportTo != null) {
+        res.report.reportTo = req.body.reportTo;
     }
     if (req.body.reportTitle != null) {
         res.report.reportTitle = req.body.reportTitle;

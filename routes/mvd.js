@@ -13,7 +13,7 @@ router.get('/:id', async (req, res) => {
     const vendorDetails = await vendor.findById(req.params.id);
 
     //getting number of reports 
-    const reportCount = await report.countDocuments({vendorId: req.params.id});
+    const reportCount = await report.countDocuments({reportTo: req.params.id});
 
     const mvd  = await invoice.aggregate([
         {$match: {"businessName._id": req.params.id}},

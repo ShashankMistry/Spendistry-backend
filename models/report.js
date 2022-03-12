@@ -10,6 +10,9 @@ const reportSchema = new mongoose.Schema({
     reportBy: {
         type: String
     },
+    reportTo: {
+        type: String
+    },
     reportTitle: {
         type: String
     },
