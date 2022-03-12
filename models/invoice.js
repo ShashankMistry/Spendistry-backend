@@ -89,7 +89,7 @@ const invoiceSchema = new mongoose.Schema({
                             type: String
                         },
                         roundoff : {
-                            type: String  //cahnge this to number
+                            type: Number
                         },
                         city : {
                             type: String
