@@ -59,8 +59,18 @@ router.get('/totalExpense/:id', async(req, res) => {
     
 })
 
-//
-
+//getting vendor by vendor id
+router.get('/vendor/:id', async (req, res) => {
+    try {
+    const invoice = await Invoice.aggregate([
+       {$match: {"businessName._id": req.params.id}},           
+      
+    ]);
+    res.json(invoice);           
+} catch (error) {
+        res.status(500).json({message: error.message});
+    }
+})
 
 //show total of all invoiceNumbers and then show total for individual businessNAme ids
 router.get('/total/:id/', async(req, res) => {
