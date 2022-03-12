@@ -46,24 +46,25 @@ router.get('/:id', async (req, res) => {
                 },
                 invoice:{
                     $push: '$businessName.invoices'
-                },
-                count: {
-                    // $size: '$businessName.invoices'
-                    $sum: {
-                        $size: '$invoices'
-                    }
                 }
             }
         },
+        
 
         // count of all invoices
 
-        // {$project: {
-        //     // _id: 0,
-        //     Count: {
-        //         $size: '$businessName.invoices'
-        //     }
-        // }}
+        {$project: {
+            // _id: 0,
+            Count: {
+                $size: '$invoice'
+
+            },
+            monthly: '$monthly',
+            yearly: '$yearly',
+            totalAll: '$totalAll',
+            
+
+        }}
 
         
         // count of all invoices
