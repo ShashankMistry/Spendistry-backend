@@ -57,7 +57,7 @@ router.get('/:id', async (req, res) => {
                         $push: '$businessName.invoices'
                     },
                     roundoff:{
-                        $sum:'$businessName.invoices.roundoff'
+                        $push:'$businessName.invoices.roundoff'
                     }
     
                 }
