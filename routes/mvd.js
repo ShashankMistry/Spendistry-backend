@@ -63,7 +63,7 @@ router.get('/:id', async (req, res) => {
             issuedInvoices: {
                 $size: '$invoice'
             },
-            vendorDetails: vendorDetails
+            // vendorDetails: vendorDetails
             // vendorDetails: vendorDetails
         }},
 
