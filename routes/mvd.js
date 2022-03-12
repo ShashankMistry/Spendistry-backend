@@ -43,19 +43,14 @@ router.get('/:id', async (req, res) => {
                 },
                 totalAll:{
                     $sum:'$businessName.invoices.invoiceNumber'
+                },
+                count: {
+                    $size: '$businessName.invoices'
                 }
             }
         },
 
         // count of all invoices
-
-        {$group: {
-            _id: req.params.id,
-            count: {
-                $sum: 1
-            }
-        }
-    }
 
         // {$project: {
         //     // _id: 0,
@@ -63,6 +58,8 @@ router.get('/:id', async (req, res) => {
         //         $size: '$businessName.invoices'
         //     }
         // }}
+
+        
         // count of all invoices
     //     {$group: {
     //         _id: req.params.id,
