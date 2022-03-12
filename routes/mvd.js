@@ -6,7 +6,7 @@ const report = require('../models/report');
 const vendor = require('../models/vendor');
 
 router.get('/:id', async (req, res) => {
-    db.vendor.find();
+    vendor.find();
     const mvd  = await invoice.aggregate([
     {$match: {"businessName._id": req.params.id}},
         {$unwind: '$businessName'},    
