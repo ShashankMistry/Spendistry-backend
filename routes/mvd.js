@@ -74,8 +74,8 @@ router.get('/:id', async (req, res) => {
                     $size: '$invoice'
                 },
                 roundoff: '$roundoff',
-                vendorDetails: vendorDetails,
-                reportCount: reportCount
+                vendorDetails: '$vendorDetails',
+                reportCount: '$reportCount'
             }},
 
         ]);
