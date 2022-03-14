@@ -74,15 +74,17 @@ router.get('/:id', async (req, res) => {
                     $size: '$invoice'
                 },
                 roundoff: '$roundoff',
-                vendorDetails: '$vendorDetails',
-                reportCount: '$reportCount'
+
             }},
 
         ]);
         
-        res.send({
-            invoiceDetails: mvd, vendorDetails: vendorDetails, reportCount: reportCount
-        });
+        var send = Object.assign({}, mvd[0], {vendorDetails: vendorDetails, reportCount: reportCount});
+
+        // res.send({
+        //     invoiceDetails: mvd, vendorDetails: vendorDetails, reportCount: reportCount
+        // });
+        res.send(send);
     } catch (err) {
         res.status(500).json({message: err.message});
     }
