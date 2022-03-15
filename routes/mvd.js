@@ -83,7 +83,9 @@ router.get('/:id', async (req, res) => {
             var send = Object.assign({}, mvd[0], {vendorDetails: vendorDetails, reportCount: reportCount});
 
         }else {
-            var send = Object.assign({},{monthlyIncome: 0,
+            var send = Object.assign({},{
+                _id:req.params.id,
+                monthlyIncome: 0,
             yearlyIncome: 0,
             totalIncome: 0,
             issuedInvoices: 0,
