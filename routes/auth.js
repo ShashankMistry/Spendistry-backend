@@ -54,8 +54,8 @@ router.post('/userLogin', async (req, res) => {
         const passwordIsValid = await bcrypt.compare(req.body.password, user.password);
         if (!user || !passwordIsValid){
             if (!user) {
-                // return res.status(404).json({message: 'Cannot find user email'});
-               return res.send({message: 'Cannot find user email'});
+                return res.status(404).json({message: 'Cannot find user email'});
+            //    return res.send({message: 'Cannot find user email'});
             }
            
             if (!passwordIsValid) {
