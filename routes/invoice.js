@@ -408,7 +408,7 @@ router.post('/addEle/:userid', async (req, res) => {
 })
 
 //adding inside specific businessName
-
+//only send invoices array in body
 router.post('/addEle/:userid/:vendorid', async (req, res) => {
 
     const countEle = await Invoice.aggregate(
@@ -424,7 +424,7 @@ router.post('/addEle/:userid/:vendorid', async (req, res) => {
                 {_id: req.params.userid, "businessName._id": req.params.vendorid},
                 {$push: {'businessName.$.invoices': req.body.invoices}},
             );
-            res.json(invoice );
+            res.json(invoice);
         } catch (error) {
             res.status(500).json({message: error.message + " error"});
         }
