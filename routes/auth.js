@@ -52,7 +52,7 @@ router.post('/userLogin', async (req, res) => {
     try {
         const user = await Auth.findOne({_id: req.body._id});
         if (!user) {
-            return res.status(404).json({message: 'Cannot find user email'});
+            return res.json({message: 'Cannot find user email'});
             // res.send({message: 'Cannot find user email'});
         }
         const passwordIsValid = await bcrypt.compare(req.body.password, user.password);
