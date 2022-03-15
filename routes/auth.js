@@ -55,13 +55,13 @@ router.post('/userLogin', async (req, res) => {
         if (!user || !passwordIsValid){
             if (!user) {
                 // return res.status(404).json({message: 'Cannot find user email'});
-                res.send({message: 'Cannot find user email'});
+               return res.send({message: 'Cannot find user email'});
             }
            
             if (!passwordIsValid) {
                 // return res.status(401).json({message: 'Invalid Password'});
                 // return res.send({message: 'Invalid Password'});
-                res.send({message: 'Invalid Password'});
+               return res.send({message: 'Invalid Password'});
             } 
     
         } else{
