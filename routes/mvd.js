@@ -87,7 +87,7 @@ router.get('/:id', async (req, res) => {
             yearlyIncome: 0,
             totalIncome: 0,
             issuedInvoices: 0,
-            roundoff: [0]},{vendorDetails: vendorDetails, reportCount: reportCount});
+            roundoff: [""]},{vendorDetails: vendorDetails, reportCount: 0});
         }
         
 
