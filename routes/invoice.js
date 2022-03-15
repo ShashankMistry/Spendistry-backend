@@ -169,12 +169,12 @@ router.get('/total/:id/', async(req, res) => {
     ]);
     
     if(total.length === 0){
-        res.json({_id:"No data found",
+        res.json([{_id:"No data found",
         MonthlyTotalAll: 0,
         AllTotal: 0,
         MonthlyTotal: 0,
         AllTimeTotal: 0
-    });
+    }]);
     } else {
     res.json(total);           
     }         
