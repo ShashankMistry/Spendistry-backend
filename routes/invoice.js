@@ -390,19 +390,19 @@ router.get('/findEle/:vendorId', async (req, res) => {
                 }
             },
             {$unwind: "$bussinessName"},
-            {$group: {
-                _id: "$businessName._id",
-                invoices: {
-                    $push: {
-                        'invoices':'$bussinessName.invoices'
-                    }
+            // {$group: {
+            //     _id: "$businessName._id",
+            //     invoices: {
+            //         $push: {
+            //             'invoices':'$bussinessName.invoices'
+            //         }
 
-                }
-            }
-            },
+            //     }
+            // }
+            // },
             {$project: {
                 _id: 0,
-                invoices: '$invoices.invoices'
+                invoices: '$businessName.invoices'
             }}
          
         ])
