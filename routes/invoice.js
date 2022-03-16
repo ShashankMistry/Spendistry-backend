@@ -357,10 +357,10 @@ router.get('/findELe/:userid/:vendorid', async (req, res) => {
         const invoice = await Invoice.aggregate([
             {$match: {"_id":req.params.userid}},
             {$project: {
-                "bussinessName": {
+                "invoices": {
                     $filter: {
-                        input: "$businessName",
-                        as: "businessName",
+                        input: "$businessName.invoices",
+                        as: "invoices",
                         cond: {$eq: ["$$businessName._id", req.params.vendorid]}
 
                     }
