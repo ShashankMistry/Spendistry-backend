@@ -401,7 +401,7 @@ router.get('/findEle/:vendorId', async (req, res) => {
             // }
             // },
             {$project: {
-                _id: 0,
+                _id: req.params.vendorId,
                 invoices: '$businessName.invoices'
             }}
          
