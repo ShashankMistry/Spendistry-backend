@@ -389,7 +389,7 @@ router.get('/findEle/:vendorId', async (req, res) => {
                     }
                 }
             },
-            // {$unwind: "$bussinessName"},
+            {$unwind: "$bussinessName"},
             {$group: {
                 _id: "$businessName._id",
                 invoices: {
@@ -401,7 +401,7 @@ router.get('/findEle/:vendorId', async (req, res) => {
             }
             },
             {$project: {
-                _id: req.params.vendorId,
+                _id: 0,
                 invoices: '$businessName.invoices'
             }}
          
