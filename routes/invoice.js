@@ -378,7 +378,7 @@ router.get('/findEle/:vendorId', async (req, res) => {
     try {
         const invoice = await Invoice.aggregate([
             {$unwind:"$Invoice.businessName.invoices"},
-            {$match: {"businessName._id": req.params.vendorId}}
+            {$match: {"$Invoice.businessName._id": req.params.vendorId}}
         ])
         res.json(invoice);
     } catch (error) {
