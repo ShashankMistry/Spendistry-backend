@@ -402,7 +402,7 @@ router.get('/findEle/:vendorId', async (req, res) => {
             },
             {$project: {
                 _id: 0,
-                invoices: '$invoices'
+                invoices: '$invoices.invoices'
             }}
          
         ])
