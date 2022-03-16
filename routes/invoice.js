@@ -382,7 +382,7 @@ router.get('/findEle/:vendorId', async (req, res) => {
             {$project: {
                 "bussinessName": {
                     $filter: {
-                        input: "$businessName.invoices",
+                        input: "$businessName",
                         as: "businessName",
                         cond: {$eq: ["$$businessName._id", req.params.vendorId]}
                     }
