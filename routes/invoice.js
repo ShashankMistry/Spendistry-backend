@@ -361,7 +361,7 @@ router.get('/findELe/:userid/:vendorid', async (req, res) => {
                     $filter: {
                         input: "$businessName.invoices",
                         as: "invoices",
-                        cond: {$eq: ["$$businessName._id", req.params.vendorid]}
+                        cond: {$eq: ["$businessName._id", req.params.vendorid]}
 
                     }
                 }
