@@ -389,9 +389,9 @@ router.get('/findEle/:vendorId', async (req, res) => {
                     }
                 }
             },
-            {$project: {
-                "bussinessName":'$businessName.invoices'
-            }}
+            // {$project: {
+            //     "bussinessName":'$businessName.invoices'
+            // }}
          
         ])
         res.json(invoice);
