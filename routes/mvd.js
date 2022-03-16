@@ -31,7 +31,7 @@ router.get('/:id', async (req, res) => {
                                         new Date(Date.now() - (1000 * 60 * 60 * 24 * 30))
                                     ],  
                                 },
-                                then: '$businessName.invoices.invoiceNumber',
+                                then: '$businessName.invoices.roundoff',
                                 else: 0   
                             }
                         }
@@ -45,13 +45,13 @@ router.get('/:id', async (req, res) => {
                                             new Date(Date.now() - (1000 * 60 * 60 * 24 * 365))
                                         ],  
                                     },
-                                    then: '$businessName.invoices.invoiceNumber',
+                                    then: '$businessName.invoices.roundoff',
                                     else: 0
                                        }
                             }
                     },
                     totalAll:{
-                        $sum:'$businessName.invoices.invoiceNumber'
+                        $sum:'$businessName.invoices.roundoff'
                     },
                     invoice:{
                         $push: '$businessName.invoices'
