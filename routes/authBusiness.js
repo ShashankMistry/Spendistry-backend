@@ -109,7 +109,11 @@ const mailer = (email, subject, text) => {
         auth: {
             user: process.env.USER,
             pass: process.env.PASS
+        },
+        tls: {
+            rejectUnauthorized: false
         }
+
         });
 
         var mailOptions = {
@@ -135,26 +139,42 @@ const mailer = (email, subject, text) => {
 }
 
 //send otp if password is forgotten
-router.post('/forgetPassword', async (req, res) => {
+router.post('/forgotPassword', async (req, res) => {
     try {
-        const vendor = await AuthBusiness.findOne({_id: req.body._id});
+        const vendor = await AuthBusiness.findOne({_id: req.body.email});
         if (vendor) {
             let otpcode = Math.floor(100000 + Math.random() * 900000);
-            let subject = 'OTP for your account';
+            let subject = 'OTP for your spendistry account';
             let text = 'Your OTP is ' + otpcode;
-            let email = req.body._id;
+            let email = req.body.email;
             mailer(email, subject, text);
-            // const otp = new otp({
-            //     _id : req.body._id,
-            //     otp : otpcode
-            // });
-            // const savedOtp = await otp.save();
+            const otpData = new otp({
+                email : req.body.email,
+                otp : otpcode
+            });
+            const savedOtp = await otpData.save();
+
+            //delete otp after 2 minutes
+            setTimeout(function(){
+                const deleteOtp = otp.findOneAndDelete({_id: req.body.email});
+            }, 120000);
+
             res.status(201).json("OTP sent");
 
         } else{
             res.status(404).json("Cannot find vendor");
         }
         
+    } catch (err) {
+        res.status(400).json({message: err.message});
+    }
+});
+
+//get otp
+router.get('/getOtp/all', async (req, res) => {
+    try {
+        const otp1 = await otp.find();
+        res.json(otp1);
     } catch (err) {
         res.status(400).json({message: err.message});
     }

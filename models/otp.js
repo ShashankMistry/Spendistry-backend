@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 const otpSchema = new mongoose.Schema({
-    _id : {
+    email : {
         type: String
     },
     otp : {
-        type: String
+        type: Number
     },
 });
 
