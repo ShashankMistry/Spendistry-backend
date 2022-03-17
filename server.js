@@ -51,6 +51,9 @@ app.use('/vendorProfile', express.static('upload/images'));
 const mvd = require('./routes/mvd');
 app.use('/mvd', mvd);
 
+const otpRouter = require('./routes/otp');
+app.use('/otp', otpRouter);
+
 app.listen (PORT, () => {
   console.log('listening on port', PORT);
 }
