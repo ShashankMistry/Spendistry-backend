@@ -16,9 +16,10 @@ router.get('/:id', async (req, res) => {
     const reportCount = await report.countDocuments({reportTo: req.params.id});
 
    const mvd  = await invoice.aggregate([
-        {$match: {"businessName._id": req.params.id}},
+        
             {$unwind: '$businessName'},    
             {$unwind: '$businessName.invoices'},
+            {$match: {"businessName._id": req.params.id}},
             //this group is for monthly and yearly income
             {$group: {
                      _id: req.params.id,
