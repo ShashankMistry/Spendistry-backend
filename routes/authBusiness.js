@@ -99,7 +99,7 @@ router.patch('/:id', getAuth, async (req, res) => {
 })
 
 //mailer 
-const mailer = async (email, subject, text) => {
+const mailer = (email, subject, text) => {
     try {
     var transporter = nodeMailer.createTransport({
         host: process.env.HOST,
@@ -119,7 +119,7 @@ const mailer = async (email, subject, text) => {
             text: text
         };
 
-      await  transporter.sendMail(mailOptions, function(error, info){
+        transporter.sendMail(mailOptions, function(error, info){
             if (error) {
                 console.log(error);
             } else {
@@ -142,12 +142,13 @@ router.post('/forgetPassword', async (req, res) => {
             let otpcode = Math.floor(100000 + Math.random() * 900000);
             let subject = 'OTP for your account';
             let text = 'Your OTP is ' + otpcode;
-            await mailer(req.body.email, subject, text);
-            const otp = new otp({
-                _id : req.body._id,
-                otp : otpcode
-            });
-            const savedOtp = await otp.save();
+            let email = req.body._id;
+            mailer(email, subject, text);
+            // const otp = new otp({
+            //     _id : req.body._id,
+            //     otp : otpcode
+            // });
+            // const savedOtp = await otp.save();
             res.status(201).json("OTP sent");
 
         } else{
