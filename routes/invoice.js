@@ -63,7 +63,7 @@ router.get('/totalExpense/:id', async(req, res) => {
 router.get('/vendor/:id', async (req, res) => {
     try {
     const invoice = await Invoice.aggregate([
-       {$match: {"businessName._id": req.params.id}}, 
+       {$match: {"$businessName._id": req.params.id}}, 
        {$unwind: '$businessName'},
        {$unwind: '$businessName.invoices'},
        {$group: {
