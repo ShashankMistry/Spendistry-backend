@@ -20,15 +20,16 @@ const reportSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    reportCustomerNumber : {
+    customerNumber : {
         type: String
     },
-    reportCustomerName : {
+    customerName : {
         type: String
     },
     InvoiceID : {
         type: String
     },
+
     extra1 : {
         type: String
     },

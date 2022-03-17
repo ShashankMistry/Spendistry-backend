@@ -28,8 +28,8 @@ router.post('/', async (req, res) => {
         reportTo: req.body.reportTo,
         reportTitle: req.body.reportTitle,
         reportTime: req.body.reportTime,
-        reportCustomerNumber : req.body.reportCustomerNumber,
-        reportCustomerName : req.body.reportCustomerName,
+        customerNumber : req.body.customerNumber,
+        customerName : req.body.customerName,
         InvoiceID : req.body.InvoiceID,
         extra1 : req.body.extra1,
         extra2 : req.body.extra2,
@@ -66,11 +66,11 @@ router.patch('/:id', getReport, async (req, res) => {
     if (req.body.reportTime != null) {
         res.report.reportTime = req.body.reportTime;
     }
-    if (req.body.reportCustomerNumber != null) {
-        res.report.reportCustomerNumber = req.body.reportCustomerNumber;
+    if (req.body.customerNumber != null) {
+        res.report.customerNumber = req.body.customerNumber;
     }
-    if (req.body.reportCustomerName != null) {
-        res.report.reportCustomerName = req.body.reportCustomerName;
+    if (req.body.customerName != null) {
+        res.report.customerName = req.body.customerName;
     }
     if (req.body.InvoiceID != null) {
         res.report.InvoiceID = req.body.InvoiceID;
