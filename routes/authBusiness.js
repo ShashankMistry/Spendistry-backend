@@ -154,10 +154,8 @@ router.post('/forgotPassword', async (req, res) => {
             });
             const savedOtp = await otpData.save();
 
-            //delete otp after 2 minutes
-            setTimeout(function(){
-                const deleteOtp = otp.findOneAndDelete({_id: req.body.email});
-            }, 120000);
+            //delete otp
+            // const deleteOtp = await otp.findOneAndDelete({email: req.body.email});
 
             res.status(201).json("OTP sent");
 
@@ -165,6 +163,33 @@ router.post('/forgotPassword', async (req, res) => {
             res.status(404).json("Cannot find vendor");
         }
         
+    } catch (err) {
+        res.status(400).json({message: err.message});
+    }
+});
+
+//verify otp
+router.post('/verifyOtp/:otp', async (req, res) => {
+    try {
+        const otpData = await otp.findOne({otp: req.params.otp});
+        if (otpData) {
+            const deleteOtp = await otp.findOneAndDelete({otp: req.params.otp});
+            res.status(201).json("OTP verified");
+        } else{
+            res.status(404).json("OTP not found");
+        }
+        
+    } catch (error) {
+        res.status(400).json({message: error.message});
+        
+    }
+});
+
+//delete by email in otp
+router.delete('/deleteOtp/:email', async (req, res) => {
+    try {
+        const deleteOtp = await otp.findOneAndDelete({email: req.params.email});
+        res.json(deleteOtp);
     } catch (err) {
         res.status(400).json({message: err.message});
     }
