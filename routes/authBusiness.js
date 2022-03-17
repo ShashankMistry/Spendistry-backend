@@ -3,8 +3,8 @@ const router = express.Router();
 const AuthBusiness = require('../models/authBusiness');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-
-
+const nodeMailer = require('nodemailer');
+const otp = require('../models/otp');
 
 
 router.get('/', async (req, res) => {
@@ -97,6 +97,67 @@ router.patch('/:id', getAuth, async (req, res) => {
         res.status(400).json({message: err.message});
     }
 })
+
+//mailer 
+const mailer = async (email, subject, text) => {
+    try {
+    var transporter = nodeMailer.createTransport({
+        host: process.env.HOST,
+        service: process.env.SERVICE,
+        port: 465,
+        secure: true,
+        auth: {
+            user: process.env.USER,
+            pass: process.env.PASS
+        }
+        });
+
+        var mailOptions = {
+            from: process.env.USER,
+            to: email,
+            subject: subject,
+            text: text
+        };
+
+      await  transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Email sent: ' + info.response);
+            }
+        });
+        
+    } catch (error) {
+        console.log(error);
+        
+    }
+
+}
+
+//send otp if password is forgotten
+router.post('/forgetPassword', async (req, res) => {
+    try {
+        const vendor = await AuthBusiness.findOne({_id: req.body._id});
+        if (vendor) {
+            let otpcode = Math.floor(100000 + Math.random() * 900000);
+            let subject = 'OTP for your account';
+            let text = 'Your OTP is ' + otpcode;
+            await mailer(req.body.email, subject, text);
+            const otp = new otp({
+                _id : req.body._id,
+                otp : otpcode
+            });
+            const savedOtp = await otp.save();
+            res.status(201).json("OTP sent");
+
+        } else{
+            res.status(404).json("Cannot find vendor");
+        }
+        
+    } catch (err) {
+        res.status(400).json({message: err.message});
+    }
+});
 
 // deleting one
 router.delete('/:id', getAuth, async (req, res) => {
