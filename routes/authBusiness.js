@@ -148,6 +148,11 @@ router.post('/forgotPassword', async (req, res) => {
             let text = 'Your OTP is ' + otpcode;
             let email = req.body.email;
             mailer(email, subject, text);
+
+            //hash the otp
+            // const salt = await bcrypt.genSalt(10);
+            // const hashedOtp = await bcrypt.hash(otpcode, salt);
+
             const otpData = new otp({
                 email : req.body.email,
                 otp : otpcode
@@ -169,14 +174,19 @@ router.post('/forgotPassword', async (req, res) => {
 });
 
 //verify otp
-router.post('/verifyOtp/:otp', async (req, res) => {
+router.post('/verifyOtp', async (req, res) => {
     try {
-        const otpData = await otp.findOne({otp: req.params.otp});
-        if (otpData) {
-            const deleteOtp = await otp.findOneAndDelete({otp: req.params.otp});
-            res.status(201).json("OTP verified");
-        } else{
-            res.status(404).json("OTP not found");
+        const email = await otp.findOne({email: req.body.email});
+        if (!email) {
+            return res.status(401).json({message: 'Cannot find email'});
+        }
+        const otpData = await otp.findOne({otp: req.body.otp});
+        if (!otpData) {
+            return res.status(401).json({message: 'Incorrect otp'});
+        }
+        if(email && otpData){
+        const deleteOtp = await otp.findOneAndDelete({otp: req.body.otp});
+        res.json("OTP verified");
         }
         
     } catch (error) {
