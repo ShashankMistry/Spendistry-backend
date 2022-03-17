@@ -7,7 +7,7 @@ const auth = require('../models/auth');
 
 
 //get otp
-router.get('/getOtp/all', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const otp1 = await otp.find();
         res.json(otp1);
@@ -62,7 +62,7 @@ router.post('/forgotPassword', async (req, res) => {
         const vendor = await AuthBusiness.findOne({_id: req.body.email});
         const user = await auth.findOne({_id: req.body.email});
         if (vendor || user) {
-            let otpcode = Math.floor( (Math.random() * 10000) + 1);
+            let otpcode = Math.floor(Math.random() * (999999 - 100000) + 100000);
             let subject = 'OTP for your spendistry account';
             let text = 'Your OTP is ' + otpcode;
             let email = req.body.email;
@@ -97,7 +97,6 @@ router.post('/forgotPassword', async (req, res) => {
 router.post('/verifyOtp', async (req, res) => {
     try {
         const email = await otp.findOne({email: req.body.email});
-        console.log("om", email);
         if (!email) {
             return res.status(401).json({message: 'Cannot find email'});
         
@@ -106,11 +105,10 @@ router.post('/verifyOtp', async (req, res) => {
         if (!otpData) {
             return res.status(401).json({message: 'Incorrect otp'});
         }
-        if(email && otpData){
-        const deleteOtp = await otp.findOneAndDelete({otp: req.body.otp});
+  
+        const deleteOtp = await otp.deleteMany({email: req.body.email});
         res.json("OTP verified");
-        console.log(email);
-        }
+   
         
     } catch (error) {
         res.status(400).json({message: error.message});
