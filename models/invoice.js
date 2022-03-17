@@ -47,6 +47,9 @@ const invoiceSchema = new mongoose.Schema({
                             type: String
                           
                         },
+                        gstNumber: {
+                            type: String
+                        },
                         invoiceCGST: {
                             type: String
                            
