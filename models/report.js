@@ -26,10 +26,18 @@ const reportSchema = new mongoose.Schema({
     customerName : {
         type: String
     },
+    businessName : {
+        type: String
+    },
+    businessNumber : {
+        type: String
+    },
+    reportReason : {
+        type: String
+    },
     InvoiceID : {
         type: String
     },
-
     extra1 : {
         type: String
     },

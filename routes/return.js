@@ -41,6 +41,7 @@ router.post('/', async (req, res) => {
         invoiceTime : req.body.invoiceTime,
         discount : req.body.discount,
         roundoff : req.body.roundoff,
+        reportReason : req.body.reportReason,
         extra1 : req.body.extra1,
         extra2 : req.body.extra2,
         extra3 : req.body.extra3,
@@ -112,6 +113,9 @@ router.patch('/:id', getReturn, async (req, res) => {
     }
     if(req.body.roundoff != null){
         res.invoice.roundoff = req.body.roundoff;
+    }
+    if(req.body.reportReason != null){
+        res.invoice.reportReason = req.body.reportReason;
     }
     if(req.body.extra1 != null){
         res.invoice.extra1 = req.body.extra1;

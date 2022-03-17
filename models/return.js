@@ -71,6 +71,9 @@ const ReturnSchema = new mongoose.Schema({
     roundoff : {
         type: String
     },
+    reportReason : {
+        type: String
+    },
     extra1: {
         type: String
     },

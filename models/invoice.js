@@ -79,6 +79,12 @@ const invoiceSchema = new mongoose.Schema({
                             type: String
                        
                         },
+                        invoiceDescription: {
+                            type: String
+                        },
+                        reportReason: {
+                            type: String
+                        },
                         invoiceTime : {
                             type: Date,
                             default: new Date(
