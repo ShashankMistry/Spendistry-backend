@@ -66,7 +66,7 @@ router.get('/vendor/:id', async (req, res) => {
        
        {$unwind: '$businessName'},
        {$unwind: '$businessName.invoices'},
-       {$match: {"$businessName._id": req.params.id}}, 
+       {$match: {"businessName._id": req.params.id}}, 
        {$group: {
                 _id: req.params.id,
                 invoices: {
