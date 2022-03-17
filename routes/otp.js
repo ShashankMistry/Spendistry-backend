@@ -60,8 +60,9 @@ const mailer = (email, subject, text) => {
 router.post('/forgotPassword', async (req, res) => {
     try {
         const vendor = await AuthBusiness.findOne({_id: req.body.email});
-        if (vendor) {
-            let otpcode = Math.floor(100000 + Math.random() * 900000);
+        const user = await auth.findOne({_id: req.body.email});
+        if (vendor || user) {
+            let otpcode = Math.floor( (Math.random() * 10000) + 1);
             let subject = 'OTP for your spendistry account';
             let text = 'Your OTP is ' + otpcode;
             let email = req.body.email;
@@ -83,7 +84,7 @@ router.post('/forgotPassword', async (req, res) => {
             res.status(201).json("OTP sent");
 
         } else{
-            res.status(404).json("Cannot find vendor");
+            res.status(404).json("Cannot find this email");
         }
         
     } catch (err) {
@@ -128,15 +129,16 @@ router.delete('/deleteOtp/:email', async (req, res) => {
     }
 });
 
-//delte all email in otp
-router.delete('/deleteAllOtp', async (req, res) => {
+//delete all email by email in otp
+router.delete('/deleteAllOtp/:email', async (req, res) => {
     try {
-        const deleteAllOtp = await otp.deleteMany();
-        res.json(deleteAllOtp);
+        const deleteOtp = await otp.deleteMany({email: req.params.email});
+        res.json(deleteOtp);
     } catch (err) {
         res.status(400).json({message: err.message});
     }
 });
+
 
 
 module.exports = router;
