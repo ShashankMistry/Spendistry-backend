@@ -32,9 +32,11 @@ const vendorSchema = new mongoose.Schema({
     },
     lat: {
         type: String,
+        default:""
     },
     lng: {
         type: String,
+        default:""
     },
     vendorName: {
         type: String,

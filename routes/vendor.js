@@ -97,55 +97,55 @@ router.patch('/:id',getVendor, async (req, res) => {
     if(req.body.mobileNumber != null){
         res.vendor.mobileNumber = req.body.mobileNumber;
     }
-    if(req.body.address){
+    if(req.body.address!= null){
         res.vendor.address = req.body.address;
     }
-    if(req.body.lat){
+    if(req.body.lat!= null){
         res.vendor.lat = req.body.lat;
     }
-    if(req.body.lng){
+    if(req.body.lng!= null){
         res.vendor.lng = req.body.lng;
     }
-    if(req.body.vendorName){
+    if(req.body.vendorName!= null){
         res.vendor.vendorName = req.body.vendorName;
     }
     if(req.body.tollFreeNumber != null){
         res.vendor.tollFreeNumber = req.body.tollFreeNumber;
     }
-    if(req.body.vendorDescription){
+    if(req.body.vendorDescription!= null){
         res.vendor.vendorDescription = req.body.vendorDescription;
     }
-    if(req.body.website){
+    if(req.body.website!= null){
         res.vendor.website = req.body.website;
     }
-    if(req.body.currentInvoicenumber){
+    if(req.body.currentInvoicenumber!= null){
         res.vendor.currentInvoicenumber = req.body.currentInvoicenumber;
     }
-    if(req.body.panNumber){
+    if(req.body.panNumber!= null){
         res.vendor.panNumber = req.body.panNumber;
     }
-    if(req.body.gstNumber){
+    if(req.body.gstNumber!= null){
         res.vendor.gstNumber = req.body.gstNumber;
     }
-    if(req.body.city){
+    if(req.body.city!= null){
         res.vendor.city = req.body.city;
     }
-    if(req.body.state){
+    if(req.body.state!= null){
         res.vendor.state = req.body.state;
     }
-    if(req.body.extra1){
+    if(req.body.extra1!= null){
         res.vendor.extra1 = req.body.extra1;
     }
-    if(req.body.extra2){
+    if(req.body.extra2!= null){
         res.vendor.extra2 = req.body.extra2;
     }
-    if(req.body.extra3){
+    if(req.body.extra3!= null){
         res.vendor.extra3 = req.body.extra3;
     }
-    if(req.body.extra4){
+    if(req.body.extra4!= null){
         res.vendor.extra4 = req.body.extra4;
     }
-    if(req.body.extra5){
+    if(req.body.extra5!= null){
         res.vendor.extra5 = req.body.extra5;
     }
     try{
