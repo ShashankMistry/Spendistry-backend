@@ -23,7 +23,7 @@ const mailer = (email, subject, text) => {
         host: process.env.HOST,
         service: process.env.SERVICE,
         port: 465,
-        secure: true,
+        secure: false,
         auth: {
             user: process.env.USER,
             pass: process.env.PASS
