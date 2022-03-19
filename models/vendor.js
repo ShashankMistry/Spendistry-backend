@@ -58,6 +58,9 @@ const vendorSchema = new mongoose.Schema({
         type: String,
     //    required: true
     }, 
+    vendorDescription: {
+        type: String,
+    },
     extra1: {
         type: String,
     },
