@@ -81,14 +81,14 @@ router.post('/forgotPassword', async (req, res) => {
             //delete otp
             // const deleteOtp = await otp.findOneAndDelete({email: req.body.email});
 
-            res.status(201).json("OTP sent");
+            res.status(201).json("OTP sent").send();
 
         } else{
-            res.status(404).json("Cannot find this email");
+            res.status(404).json("Cannot find this email").send();
         }
         
     } catch (err) {
-        res.status(400).json({message: err.message});
+        res.status(400).json({message: err.message}).send();
     }
 });
 
