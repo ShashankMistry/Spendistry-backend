@@ -112,6 +112,9 @@ router.patch('/:id',getVendor, async (req, res) => {
     if(req.body.tollFreeNumber){
         res.vendor.tollFreeNumber = req.body.tollFreeNumber;
     }
+    if(req.body.vendorDescription){
+        res.vendor.vendorDescription = req.body.vendorDescription;
+    }
     if(req.body.website){
         res.vendor.website = req.body.website;
     }
