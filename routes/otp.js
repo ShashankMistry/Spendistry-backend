@@ -138,6 +138,15 @@ router.delete('/deleteAllOtp/:email', async (req, res) => {
     }
 });
 
+router.delete('/deleteAllOtp', async (req, res) => {
+    try {
+        const deleteOtp = await otp.deleteMany({email: ""});
+        res.json(deleteOtp);
+    } catch (err) {
+        res.status(400).json({message: err.message});
+    }
+});
+
 
 
 module.exports = router;
