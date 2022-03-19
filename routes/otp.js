@@ -106,7 +106,8 @@ router.post('/verifyOtp', async (req, res) => {
             return res.status(401).json({message: 'Incorrect otp'});
         }
   
-        const deleteOtp = await otp.deleteMany({email: req.body.email});
+        //delete all documents with this email
+        const deleteOtp = await otp.delete({email: req.body.email});
         res.status(201).json("OTP verified");
    
         
