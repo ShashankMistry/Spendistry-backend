@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+const date = dateFromDb.ToLocalTime();
 const invoiceSchema = new mongoose.Schema({
     _id: {
         type: String //user email
@@ -90,7 +91,7 @@ const invoiceSchema = new mongoose.Schema({
                         },
                         invoiceTime : {
                             type: Date,
-                            default: Date.now
+                            default: date
                         },
                         discount : {
                             type: String
