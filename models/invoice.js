@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+console.log(Date.now()+(5*60*60*1000)+(30*60*1000));
 const invoiceSchema = new mongoose.Schema({
     _id: {
         type: String //user email
@@ -89,9 +90,10 @@ const invoiceSchema = new mongoose.Schema({
                             type: String
                         },
                         invoiceTime : {
-                            type: String,
+                            type: Date,
                             //add 5 hour and 30 mins to current date
-                            default: Date.now + (5 * 60 * 60 * 1000) + (30 * 60 * 1000)
+                            default: Date.now 
+                            // + (5 * 60 * 60 * 1000) + (30 * 60 * 1000)
                         },
                         discount : {
                             type: String
