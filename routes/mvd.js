@@ -67,10 +67,10 @@ router.get('/:id', async (req, res) => {
                                     Date.now - (1000 * 60 * 60 * 24 * 30)
                                 ],
                             },
-                                // then: '$businessName.invoices.roundoff',
-                                then: {
-                                    $push: '$businessName.invoices.roundoff'
-                                },
+                                then: '$businessName.invoices.roundoff',
+                                // then: {
+                                //     $push: '$businessName.invoices.roundoff'
+                                // },
                                 else: 0
                              }
 
