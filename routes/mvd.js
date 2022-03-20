@@ -43,7 +43,7 @@ router.get('/:id', async (req, res) => {
                                     if: {
                                         $gte: [
                                             '$businessName.invoices.invoiceTime',
-                                            Date.now() - (1000 * 60 * 60 * 24 * 365)
+                                          Date.now - (1000 * 60 * 60 * 24 * 365)
                                         ],  
                                     },
                                     then: '$businessName.invoices.roundoff',

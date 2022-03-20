@@ -98,7 +98,7 @@ router.get('/total/:id/', async(req, res) => {
                          if: {
                              $gte: [
                                  '$businessName.invoices.invoiceTime',
-                                 Date.now() - (1000 * 60 * 60 * 24 * 30)
+                                 Date.now - (1000 * 60 * 60 * 24 * 30)
                              ],  
                          },
                          then: '$businessName.invoices.invoiceNumber',
