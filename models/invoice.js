@@ -101,6 +101,12 @@ const invoiceSchema = new mongoose.Schema({
                         city : {
                             type: String
                         },
+                        businessAddress : {
+                            type: String
+                        },
+                        businessContactNo : {
+                            type: String
+                        },
                         extra1: {
                             type: String
                         },
