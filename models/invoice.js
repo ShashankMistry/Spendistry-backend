@@ -90,9 +90,8 @@ const invoiceSchema = new mongoose.Schema({
                         },
                         invoiceTime : {
                             type: Date,
-                            //add 5 hour and 30 mins to current date
+                            //current time of the invoice
                             default: Date.now 
-                            // + (5 * 60 * 60 * 1000) + (30 * 60 * 1000)
                         },
                         discount : {
                             type: String
