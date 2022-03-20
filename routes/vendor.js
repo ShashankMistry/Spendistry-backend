@@ -118,8 +118,8 @@ router.patch('/:id',getVendor, async (req, res) => {
     if(req.body.website!= null){
         res.vendor.website = req.body.website;
     }
-    if(req.body.currentInvoicenumber!= null){
-        res.vendor.currentInvoicenumber = req.body.currentInvoicenumber;
+    if(req.body.currentInvoiceNumber!= null){
+        res.vendor.currentInvoiceNumber = req.body.currentInvoiceNumber;
     }
     if(req.body.panNumber!= null){
         res.vendor.panNumber = req.body.panNumber;
