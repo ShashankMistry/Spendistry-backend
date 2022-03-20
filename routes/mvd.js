@@ -58,8 +58,22 @@ router.get('/:id', async (req, res) => {
                         $push: '$businessName.invoices'
                     },
                     roundoff:{
-                        $push:'$businessName.invoices.roundoff'
-                    }
+                        // $push:'$businessName.invoices.roundoff'
+                        $cond: {
+                            if: {
+                                $gte: [
+                                    '$businessName.invoices.invoiceTime',
+                                    Date.now - (1000 * 60 * 60 * 24 * 30)
+                                ],
+                            },
+                                // then: '$businessName.invoices.roundoff',
+                                then: {
+                                    $push: '$businessName.invoices.roundoff'
+                                },
+                                else: 0
+                             }
+
+                         }
     
                 }
             },
