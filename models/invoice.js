@@ -91,7 +91,7 @@ const invoiceSchema = new mongoose.Schema({
                         invoiceTime : {
                             type: Date,
                             default: new Date(
-                               Date.now() 
+                               Date.now
                             )
                         },
                         discount : {
