@@ -58,7 +58,6 @@ router.get('/:id', async (req, res) => {
                         $push: '$businessName.invoices'
                     },
                     roundoff:{
-                        // get all the roundoff values of last 30 days in an array
                         $push: {
                             $cond: {
                                 if: {
