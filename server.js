@@ -54,6 +54,9 @@ app.use('/mvd', mvd);
 const otpRouter = require('./routes/otp');
 app.use('/otp', otpRouter);
 
+const loggedInVerifyRouter = require('./routes/loggedInVerify');
+app.use('/loggedInVerify', loggedInVerifyRouter);
+
 app.listen (PORT, () => {
   console.log('listening on port', PORT);
 }
