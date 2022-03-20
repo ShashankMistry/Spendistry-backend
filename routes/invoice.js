@@ -101,13 +101,13 @@ router.get('/total/:id/', async(req, res) => {
                                  Date.now - (1000 * 60 * 60 * 24 * 30)
                              ],  
                          },
-                         then: '$businessName.invoices.invoiceNumber',
+                         then: '$businessName.invoices.roundoff',
                          else: 0
                      }
                  }
              },
              AllTimeTotal:{
-                 $sum:'$businessName.invoices.invoiceNumber'
+                 $sum:'$businessName.invoices.roundoff'
              },
              business:{
                 $push:{
@@ -122,12 +122,12 @@ router.get('/total/:id/', async(req, res) => {
                                   new Date(Date.now() - (1000 * 60 * 60 * 24 * 30))
                               ],  
                           },
-                          then: '$businessName.invoices.invoiceNumber',
+                          then: '$businessName.invoices.roundoff',
                           else: 0
                       }
                   }
                 },
-                AllTotal: {$sum: '$businessName.invoices.invoiceNumber'}
+                AllTotal: {$sum: '$businessName.invoices.roundoff'}
             }
         }
         }},
@@ -149,11 +149,11 @@ router.get('/total/:id/', async(req, res) => {
         {$project: {
             _id: '$_id',
             MonthlyTotalAll: '$MonthlyTotalAll',
-            AllTotal: '$AllTimeTotal',
+            AllTotal: '$businessAllTimeTotal',
             // businessWise: {
                 // _id: '$_id',
                 MonthlyTotal: '$businessTotal',
-                AllTimeTotal: '$businessAllTimeTotal'
+                AllTimeTotal:  '$AllTimeTotal'
             // },
             
         }
