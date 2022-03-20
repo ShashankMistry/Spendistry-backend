@@ -59,6 +59,7 @@ router.get('/:id', async (req, res) => {
                     },
                     roundoff:{
                         // $push:'$businessName.invoices.roundoff'
+                        $sun: {
                         $cond: {
                             if: {
                                 $gte: [
@@ -74,6 +75,7 @@ router.get('/:id', async (req, res) => {
                              }
 
                          }
+                        }
     
                 }
             },
