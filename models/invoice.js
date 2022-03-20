@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-console.log(Date.now()+(5*60*60*1000)+(30*60*1000));
+console.log(Date.now+(5*60*60*1000)+(30*60*1000));
 const invoiceSchema = new mongoose.Schema({
     _id: {
         type: String //user email
