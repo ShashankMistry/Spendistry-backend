@@ -55,14 +55,18 @@ router.post('/', async (req, res) => {
                 "invoice": "$businessName.invoices",
             }}
 
-        ]);
-
-        const doc = new PDFDocument();
+        ]).then(invoice => {
+              const doc = new PDFDocument();
         res.setHeader('Content-disposition', 'attachment; filename='+req.body.vendorId+Date.now+'.pdf');
         doc.pipe(res);
         doc.text('Hello Om');
         doc.text('Invoice Number: '+invoice[0].invoice.invoiceNumber);
-        
+        doc.end();
+
+        });
+
+      
+
         // doc.text(invoice[0].businessName.invoices.invoiceNumber);
         // // doc.text(invoice[0].businessName.invoices.invoiceDate);
         // doc.text(invoice[0].businessName.invoices.invoiceSentBy);
@@ -80,7 +84,7 @@ router.post('/', async (req, res) => {
         // doc.text(invoice[0].businessName.invoices.invoiceCGST);
         // doc.text(invoice[0].businessName.invoices.invoiceSGST);
         // doc.text(invoice[0].businessName.invoices.invoiceTotalitems);
-        doc.end();
+      
         
     } catch (error) {
         console.log(error);
