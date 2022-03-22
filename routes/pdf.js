@@ -59,7 +59,7 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
 
         ]).then(invoice => {
         const doc = new PDFDocument();
-        res.setHeader('Content-disposition', 'attachment; filename='+req.params.vendorId+"_"+Date.now+'.pdf');
+        res.setHeader('Content-disposition', 'attachment; filename='+req.params.vendorId+"_"+Date.now()+'.pdf');
         doc.pipe(res);
         doc.text('Hello Om');
         doc.text('Invoice Number: '+invoice[0].invoices.invoiceNumber);
