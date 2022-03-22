@@ -57,6 +57,10 @@ app.use('/otp', otpRouter);
 const loggedInVerifyRouter = require('./routes/loggedInVerify');
 app.use('/loggedInVerify', loggedInVerifyRouter);
 
+const pdf = require('./routes/pdf');
+app.use('/pdf', pdf);
+app.use('/pdfDownload', express.static('upload/pdf'));
+
 app.listen (PORT, () => {
   console.log('listening on port', PORT);
 }
