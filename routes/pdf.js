@@ -43,15 +43,15 @@ router.get('/',  (req, res) => {
 });
 
 //create a pdf for a specific invoice
-router.post('/', async (req, res) => {
+router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
     try {
 
         const invoice = await Invoice.aggregate([
-            {$match: {_id: req.body.userId}},
+            {$match: {_id: req.params.userId}},
             {$unwind: '$businessName'},
-            {$match: {"businessName._id": req.body.vendorId}},
+            {$match: {"businessName._id": req.params.vendorId}},
             {$unwind: "$businessName.invoices"},
-            {$match: {"businessName.invoices._id": mongoose.Types.ObjectId(req.body.invoiceId) }},
+            {$match: {"businessName.invoices._id": mongoose.Types.ObjectId(req.params.invoiceId) }},
             {$project: {
                 "invoices": "$businessName.invoices",
             }}
@@ -59,7 +59,7 @@ router.post('/', async (req, res) => {
 
         ]).then(invoice => {
         const doc = new PDFDocument();
-        res.setHeader('Content-disposition', 'attachment; filename='+req.body.vendorId+Date.now+'.pdf');
+        res.setHeader('Content-disposition', 'attachment; filename='+req.params.vendorId+"_"+Date.now+'.pdf');
         doc.pipe(res);
         doc.text('Hello Om');
         doc.text('Invoice Number: '+invoice[0].invoices.invoiceNumber);
