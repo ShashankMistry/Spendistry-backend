@@ -63,6 +63,8 @@ router.post('/', async (req, res) => {
         doc.pipe(res);
         doc.text('Hello Om');
         doc.text('Invoice Number: '+invoice[0].invoices.invoiceNumber);
+        doc.text('reason'+invoice[0].invoices.reportReason);
+
         // doc.text(invoice[0].businessName.invoices.invoiceDate);
         doc.text(invoice[0].invoices.invoiceSentBy);
         doc.text(invoice[0].invoices.invoiceSentTo);
