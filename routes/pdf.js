@@ -55,9 +55,9 @@ router.post('/', async (req, res) => {
                 "invoice": "$businessName.invoices",
             }}
 
-        ]).then(invoice => {
-            console.log(invoice);
-            res.json(invoice);
+        ]);
+        console.log(invoice);
+        res.json(invoice);
         
         //       const doc = new PDFDocument();
         // res.setHeader('Content-disposition', 'attachment; filename='+req.body.vendorId+Date.now+'.pdf');
@@ -66,7 +66,7 @@ router.post('/', async (req, res) => {
         // doc.text('Invoice Number: '+invoice[0].invoice.invoiceNumber);
         // doc.end();
 
-        });
+       
 
       
 
