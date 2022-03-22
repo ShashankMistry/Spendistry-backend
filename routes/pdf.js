@@ -51,12 +51,18 @@ router.post('/', async (req, res) => {
             {$match: {"businessName._id": req.body.vendorId}},
             {$unwind: "$businessName.invoices"},
             {$match: {"businessName.invoices._id": mongoose.Types.ObjectId(req.body.invoiceId) }},
+            {$project: {
+                "invoice": "$businessName.invoices",
+            }}
 
         ]);
+
         const doc = new PDFDocument();
         res.setHeader('Content-disposition', 'attachment; filename='+req.body.vendorId+Date.now+'.pdf');
         doc.pipe(res);
         doc.text('Hello Om');
+        doc.text('Invoice Number: '+invoice[0].invoice.invoiceNumber);
+        
         // doc.text(invoice[0].businessName.invoices.invoiceNumber);
         // // doc.text(invoice[0].businessName.invoices.invoiceDate);
         // doc.text(invoice[0].businessName.invoices.invoiceSentBy);
