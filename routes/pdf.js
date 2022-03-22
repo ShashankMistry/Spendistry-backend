@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const PDFDocument = require('pdfkit');
 const fs = require('fs');
-
+const Invoice = require('../models/invoice');
 
 
 
@@ -35,6 +35,23 @@ router.get('/',  (req, res) => {
         doc.pipe(res);
         doc.text('Hello Om2');
         doc.end();
+        
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+//create a pdf for a specific invoice
+router.post('/', async (req, res) => {
+    try {
+        const invoice = await Invoice.aggregate([
+            {$match: {_id: req.body.userId}},
+            {$unwind: '$businessName'},
+            {$match: {"businessName._id": req.body.vendorId}},
+            {$unwind: "$businessName.invoices"},
+            {$match: {"businessName.invoices._id": mongoose.Types.ObjectId(req.body.invoiceId) }},
+
+        ]);
         
     } catch (error) {
         console.log(error);
