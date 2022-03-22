@@ -17,7 +17,7 @@ const reportSchema = new mongoose.Schema({
         type: String
     },
     reportTime: {
-        type: Date,
+        type: Number,
         default: Date.now
     },
     customerNumber : {
