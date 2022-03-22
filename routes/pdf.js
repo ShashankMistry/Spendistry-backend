@@ -18,10 +18,18 @@ router.get('/',  (req, res) => {
     doc.text('Hello Om');
     doc.end();
     // delete pdf file after download
-    fs.unlink('upload/pdf/invoice.pdf', (err) => {
-        if (err) throw err;
-        console.log('successfully deleted');
-    })
+    try {
+        fs.unlink('upload/pdf/invoice.pdf', (err) => {
+            // if (err) throw err;
+            console.log('successfully deleted');
+        })
+        
+    } catch (error) {
+        console.log(error);
+    }
+        
+    
+    
 });
 
 
