@@ -56,12 +56,15 @@ router.post('/', async (req, res) => {
             }}
 
         ]).then(invoice => {
-              const doc = new PDFDocument();
-        res.setHeader('Content-disposition', 'attachment; filename='+req.body.vendorId+Date.now+'.pdf');
-        doc.pipe(res);
-        doc.text('Hello Om');
-        doc.text('Invoice Number: '+invoice[0].invoice.invoiceNumber);
-        doc.end();
+            console.log(invoice);
+            res.json(invoice);
+        
+        //       const doc = new PDFDocument();
+        // res.setHeader('Content-disposition', 'attachment; filename='+req.body.vendorId+Date.now+'.pdf');
+        // doc.pipe(res);
+        // doc.text('Hello Om');
+        // doc.text('Invoice Number: '+invoice[0].invoice.invoiceNumber);
+        // doc.end();
 
         });
 
