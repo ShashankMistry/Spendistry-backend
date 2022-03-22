@@ -53,7 +53,7 @@ router.post('/', async (req, res) => {
             {$unwind: "$businessName.invoices"},
             {$match: {"businessName.invoices._id": mongoose.Types.ObjectId(req.body.invoiceId) }},
             {$project: {
-                "invoice": "$businessName.invoices",
+                "invoices": "$businessName.invoices",
             }}
            
 
@@ -62,7 +62,24 @@ router.post('/', async (req, res) => {
         res.setHeader('Content-disposition', 'attachment; filename='+req.body.vendorId+Date.now+'.pdf');
         doc.pipe(res);
         doc.text('Hello Om');
-        doc.text('Invoice Number: '+invoice[0].invoice.invoiceNumber);
+        doc.text('Invoice Number: '+invoice[0].invoices.invoiceNumber);
+        // doc.text(invoice[0].businessName.invoices.invoiceDate);
+        doc.text(invoice[0].invoices.invoiceSentBy);
+        doc.text(invoice[0].invoices.invoiceSentTo);
+        doc.text(invoice[0].invoices.invoiceTitle);
+        doc.text(invoice[0].invoices.invoiceTime);
+        // doc.text(invoice[0].businessName.invoices.customerNumber);
+        // doc.text(invoice[0].businessName.invoices.customerName);
+        // doc.text(invoice[0].businessName.invoices.businessName);
+        doc.text(invoice[0].invoices.businessContactNo);
+        // doc.text(invoice[0].businessName.invoices.reportReason);
+        // doc.text(invoice[0].businessName.invoices.InvoiceID);
+        doc.text(invoice[0].invoices.invoiceAmount);
+        doc.text(invoice[0].invoices.invoiceIGST);
+        doc.text(invoice[0].invoices.invoiceCGST);
+        doc.text(invoice[0].invoices.invoiceSGST);
+        doc.text(invoice[0].invoices.invoiceTotalitems);
+
         doc.end();
 
         });
@@ -74,23 +91,7 @@ router.post('/', async (req, res) => {
 
       
 
-        // doc.text(invoice[0].businessName.invoices.invoiceNumber);
-        // // doc.text(invoice[0].businessName.invoices.invoiceDate);
-        // doc.text(invoice[0].businessName.invoices.invoiceSentBy);
-        // doc.text(invoice[0].businessName.invoices.invoiceSentTo);
-        // doc.text(invoice[0].businessName.invoices.invoiceTitle);
-        // doc.text(invoice[0].businessName.invoices.invoiceTime);
-        // // doc.text(invoice[0].businessName.invoices.customerNumber);
-        // // doc.text(invoice[0].businessName.invoices.customerName);
-        // // doc.text(invoice[0].businessName.invoices.businessName);
-        // doc.text(invoice[0].businessName.invoices.businessContactNo);
-        // // doc.text(invoice[0].businessName.invoices.reportReason);
-        // // doc.text(invoice[0].businessName.invoices.InvoiceID);
-        // doc.text(invoice[0].businessName.invoices.invoiceAmount);
-        // doc.text(invoice[0].businessName.invoices.invoiceIGST);
-        // doc.text(invoice[0].businessName.invoices.invoiceCGST);
-        // doc.text(invoice[0].businessName.invoices.invoiceSGST);
-        // doc.text(invoice[0].businessName.invoices.invoiceTotalitems);
+       
       
         
     } catch (error) {
