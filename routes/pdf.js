@@ -31,6 +31,7 @@ const fs = require('fs');
 router.get('/',  (req, res) => {
     try {
         const doc = new PDFDocument();
+        res.setHeader('Content-disposition', 'attachment; filename=invoice.pdf');
         doc.pipe(res);
         doc.text('Hello Om2');
         doc.end();
