@@ -45,6 +45,10 @@ router.get('/',  (req, res) => {
 //create a pdf for a specific invoice
 router.post('/', async (req, res) => {
     try {
+        console.log(req.body.invoiceId);
+        console.log(req.body.userId);
+        console.log(req.body.vendorId);
+
         const invoice = await Invoice.aggregate([
             {$match: {_id: req.body.userId}},
             {$unwind: '$businessName'},
@@ -54,6 +58,7 @@ router.post('/', async (req, res) => {
             {$project: {
                 "invoice": "$businessName.invoices",
             }}
+           
 
         ]);
         console.log(invoice);
