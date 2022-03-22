@@ -81,10 +81,10 @@ router.post('/', async (req, res) => {
         doc.text(invoice[0].invoices.invoiceCGST);
         doc.text(invoice[0].invoices.invoiceSGST);
         invoice[0].invoices.invoiceTotalitems.map(item => {
-            doc.text(item.itemName);
-            doc.text(item.itemQuantity);
-            doc.text(item.itemPrice);
-            doc.text(item.itemTotal);
+            doc.text("name: "+item.itemName);
+            doc.text("qnt"+item.itemQuantity);
+            doc.text("price"+item.itemPrice);
+            doc.text("total"+item.itemTotal);
 
         });
         doc.text(invoice[0].invoices.invoiceTotalitems);
