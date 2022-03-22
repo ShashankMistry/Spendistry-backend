@@ -12,12 +12,11 @@ const doc = new PDFDocument();
 // });
 
 //create a new PDF file inside upload/pdf folder
-router.get('/', async (req, res) => {
+router.get('/',  (req, res) => {
     doc.pipe(fs.createWriteStream('upload/pdf/invoice.pdf'));
     doc.pipe(res);
     doc.text('Hello Om');
     doc.end();
-    res.download('upload/pdf/invoice.pdf');
     // delete pdf file after download
     fs.unlink('upload/pdf/invoice.pdf', (err) => {
         if (err) throw err;
