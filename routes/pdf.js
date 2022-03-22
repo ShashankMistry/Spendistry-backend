@@ -45,9 +45,6 @@ router.get('/',  (req, res) => {
 //create a pdf for a specific invoice
 router.post('/', async (req, res) => {
     try {
-        console.log(req.body.invoiceId);
-        console.log(req.body.userId);
-        console.log(req.body.vendorId);
 
         const invoice = await Invoice.aggregate([
             {$match: {_id: req.body.userId}},
@@ -60,16 +57,18 @@ router.post('/', async (req, res) => {
             }}
            
 
-        ]);
-        console.log(invoice);
-        res.json(invoice);
+        ]).then(invoice => {
+        const doc = new PDFDocument();
+        res.setHeader('Content-disposition', 'attachment; filename='+req.body.vendorId+Date.now+'.pdf');
+        doc.pipe(res);
+        doc.text('Hello Om');
+        doc.text('Invoice Number: '+invoice[0].invoice.invoiceNumber);
+        doc.end();
+
+        });
+       
         
-        //       const doc = new PDFDocument();
-        // res.setHeader('Content-disposition', 'attachment; filename='+req.body.vendorId+Date.now+'.pdf');
-        // doc.pipe(res);
-        // doc.text('Hello Om');
-        // doc.text('Invoice Number: '+invoice[0].invoice.invoiceNumber);
-        // doc.end();
+       
 
        
 
