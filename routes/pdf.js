@@ -52,6 +52,28 @@ router.post('/', async (req, res) => {
             {$match: {"businessName.invoices._id": mongoose.Types.ObjectId(req.body.invoiceId) }},
 
         ]);
+        const doc = new PDFDocument();
+        res.setHeader('Content-disposition', 'attachment; filename='+req.body.vendorId+Date.now+'.pdf');
+        doc.pipe(res);
+        doc.text('Hello Om');
+        doc.text(invoice[0].businessName.invoices.invoiceNumber);
+        doc.text(invoice[0].businessName.invoices.invoiceDate);
+        doc.text(invoice[0].businessName.invoices.invoiceBy);
+        doc.text(invoice[0].businessName.invoices.invoiceTo);
+        doc.text(invoice[0].businessName.invoices.invoiceTitle);
+        doc.text(invoice[0].businessName.invoices.invoiceTime);
+        doc.text(invoice[0].businessName.invoices.customerNumber);
+        doc.text(invoice[0].businessName.invoices.customerName);
+        doc.text(invoice[0].businessName.invoices.businessName);
+        doc.text(invoice[0].businessName.invoices.businessNumber);
+        doc.text(invoice[0].businessName.invoices.reportReason);
+        doc.text(invoice[0].businessName.invoices.InvoiceID);
+        doc.text(invoice[0].businessName.invoices.invoiceAmount);
+        doc.text(invoice[0].businessName.invoices.invoiceIGST);
+        doc.text(invoice[0].businessName.invoices.invoiceCGST);
+        doc.text(invoice[0].businessName.invoices.invoiceSGST);
+        doc.text(invoice[0].businessName.invoices.invoiceTotalitems);
+        doc.end();
         
     } catch (error) {
         console.log(error);
