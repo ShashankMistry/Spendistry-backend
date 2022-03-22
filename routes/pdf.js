@@ -3,7 +3,7 @@ const router = express.Router();
 const PDFDocument = require('pdfkit');
 const fs = require('fs');
 
-const doc = new PDFDocument();
+
 
 
 //get a new PDF file
@@ -12,24 +12,32 @@ const doc = new PDFDocument();
 // });
 
 //create a new PDF file inside upload/pdf folder
+// router.get('/',  (req, res) => {
+//     doc.pipe(fs.createWriteStream('upload/pdf/invoice.pdf'));
+//     doc.pipe(res);
+//     doc.text('Hello Om');
+//     doc.end();
+//     // delete pdf file after download
+    
+//     // fs.unlink('upload/pdf/invoice.pdf', (err) => {
+//     //     // if (err) throw err;
+//     //     console.log('successfully deleted');
+//     // })
+    
+    
+// });
+
+//creat a new PDF file inside upload/pdf folder
 router.get('/',  (req, res) => {
-    doc.pipe(fs.createWriteStream('upload/pdf/invoice.pdf'));
-    doc.pipe(res);
-    doc.text('Hello Om');
-    doc.end();
-    // delete pdf file after download
     try {
-        fs.unlink('upload/pdf/invoice.pdf', (err) => {
-            // if (err) throw err;
-            console.log('successfully deleted');
-        })
+        const doc = new PDFDocument();
+        doc.pipe(res);
+        doc.text('Hello Om2');
+        doc.end();
         
     } catch (error) {
         console.log(error);
     }
-        
-    
-    
 });
 
 
