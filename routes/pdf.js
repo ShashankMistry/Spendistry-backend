@@ -194,13 +194,20 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         // doc.text('reason'+invoice[0].invoices.reportReason);
 
     
-        invoice[0].invoices.invoiceTotalitems.map(item => {
-            doc.text("name: "+item.itemName);
-            doc.text("qnt"+item.quantity);
-            doc.text("price"+item.price);
-            doc.text("total"+item.total);
+      const om =   invoice[0].invoices.invoiceTotalitems.map(item => {
+            // doc.text("name: "+item.itemName);
+            // doc.text("qnt"+item.quantity);
+            // doc.text("price"+item.price);
+            // doc.text("total"+item.total);
+
+            item.itemName,
+            item.quantity,
+            item.price,
+            item.total
 
         });
+
+        console.log(om);
 
         doc.end();
 
