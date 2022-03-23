@@ -534,7 +534,7 @@ router.patch('/patchEle/:userid/:vendorid/:invoiceid', async (req, res) => {
             {_id: req.params.userid, "businessName._id": req.params.vendorid, "businessName.invoices._id": mongoose.Types.ObjectId(req.params.invoiceid)},
             {
                 $set: {
-                    "businessName.$[d].invoices.$[o].invoiceAmount":  req.body.invoices.invoiceAmount+"",
+                    "businessName.$[d].invoices.$[o].invoiceAmount":  req.body.invoices.invoiceAmount,
                     "businessName.$[d].invoices.$[o].invoiceTime": Date.now(),
                     "businessName.$[d].invoice.$[o].roundoff": parseInt(req.body.invoices.roundoff),
                     "businessName.$[d].invoices.$[o].discount": req.body.invoices.discount,
