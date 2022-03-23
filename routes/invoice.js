@@ -454,7 +454,7 @@ router.get('/findEle/:userid/:vendorid/:invoiceid', async (req, res) => {
                 "_id": req.params.vendorid,
                 "invoices": {
                     $push: {
-                        'invoices':'$invoice'
+                        'invoices':'$businessName.invoices'
                     }
                 }
             }},
