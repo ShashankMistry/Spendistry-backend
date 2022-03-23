@@ -191,6 +191,8 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
 
         doc.table(table);
 
+        console.log(invoice[0].invoices.invoiceTotalItems);
+
 
         
 
