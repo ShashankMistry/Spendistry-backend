@@ -459,7 +459,7 @@ router.get('/findEle/:userid/:vendorid/:invoiceid', async (req, res) => {
                 }
             }},
         ])
-        res.json(invoice[0].invoices[0]);
+        res.json(invoice[0].invoices[0].invoices);
         
     } catch (error) {
         res.status(500).json({message: error.message});
