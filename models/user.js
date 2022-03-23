@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     Date : {
-        type: Date,
+        type: String,
         default: Date.now
     },
     loggedIn: {
