@@ -111,17 +111,17 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         doc.fontSize(12).text('INVOICE NO:'+invoice[0].invoices.invoiceNumber);
 
         //create a table of invoiceTotalItems
-        doc.fontSize(12).table().unstyled().body([
-            ['ITEM', 'QUANTITY', 'UNIT PRICE', 'AMOUNT']
-        ])
+        // doc.fontSize(12).table().unstyled().body([
+        //     ['ITEM', 'QUANTITY', 'UNIT PRICE', 'AMOUNT']
+        // ])
 
-        //create a table of invoiceTotalItems
-        doc.fontSize(12).table().unstyled().body(invoice[0].invoices.invoiceTotalItems.map(item => [
-            item.itemName,
-            item.quantity,
-            item.price,
-            item.total
-        ]));
+        // //create a table of invoiceTotalItems
+        // doc.fontSize(12).table().unstyled().body(invoice[0].invoices.invoiceTotalItems.map(item => [
+        //     item.itemName,
+        //     item.quantity,
+        //     item.price,
+        //     item.total
+        // ]));
 
         //total amount
         doc.fontSize(12).text('TOTAL AMOUNT:'+invoice[0].invoices.invoiceAmount);
