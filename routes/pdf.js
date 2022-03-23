@@ -58,9 +58,19 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
            
 
         ]).then(invoice => {
+        
+        // calling the function to create a pdf file
         const doc = new PDFDocument();
         res.setHeader('Content-disposition', 'attachment; filename='+req.params.vendorId+"_"+Date.now()+'.pdf');
         doc.pipe(res);
+
+        //setting meta data of the pdf file
+        doc.info['Title'] = 'Invoice';
+        doc.info['Author'] = req.params.vendorId;
+        doc.info['Subject'] = 'Invoice';
+        
+
+
         doc.text('Hello Om');
         doc.text('Invoice Number: '+invoice[0].invoices.invoiceNumber);
         doc.text('reason'+invoice[0].invoices.reportReason);
