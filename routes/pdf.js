@@ -61,7 +61,7 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         
         // calling the function to create a pdf file
         const doc = new PDFDocument({
-            size: 'A10',
+            size: 'A4',
             // margin: 50
         });
         res.setHeader('Content-disposition', 'attachment; filename='+req.params.vendorId+"_"+Date.now()+'.pdf');
