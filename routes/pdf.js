@@ -159,20 +159,20 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
 
         // console.log(invoiceTotalItems);
 
-        
-      const invoiceItems =   invoice[0].invoices.invoiceTotalitems.map(item => {
-        // doc.text("name: "+item.itemName);
-        // doc.text("qnt"+item.quantity);
-        // doc.text("price"+item.price);
-        // doc.text("total"+item.total);
+        // invoiceTotalitems:
+    //   const invoiceItems =   invoice[0].invoices.invoiceTotalitems.map(item => {
+    //     // doc.text("name: "+item.itemName);
+    //     // doc.text("qnt"+item.quantity);
+    //     // doc.text("price"+item.price);
+    //     // doc.text("total"+item.total);
 
-        item.itemName,
-        item.quantity,
-        item.price,
-        item.total
+    //     item.itemName,
+    //     item.quantity,
+    //     item.price,
+    //     item.total
 
-    });
-    console.log(invoiceItems);
+    // });
+    // console.log(invoiceItems);
     
         const table = {
             // headers: ['itemName', 'quantity', 'price', 'total'],
@@ -182,12 +182,7 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
                 {label: 'price', width: 100, property: 'price'},
                 {label: 'total', width: 100, property: 'total'}
             ],
-            datas:[
-                {itemName: 'itemName', quantity: 'quantity', price: 'price', total: 'total', id: "om"},
-                {itemName: 'itemName', quantity: 'quantity', price: 'price', total: 'total'},
-                {itemName: 'itemName', quantity: 'quantity', price: 'price', total: 'total'},
-                {itemName: 'itemName', quantity: 'quantity', price: 'price', total: 'total'},
-            ]
+            datas:invoice[0].invoices.invoiceTotalitems
         }
 
         doc.table(table);
@@ -202,7 +197,7 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
 
         // console.log(items);
 
-        console.log("eklu invoices",invoice[0].invoices);
+        // console.log("eklu invoices",invoice[0].invoices);
 
 
         
