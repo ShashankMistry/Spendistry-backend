@@ -78,13 +78,7 @@ router.post('/userLogin', async (req, res) => {
 
 // updating one
 router.patch('/:id', getAuth, async (req, res) => {
-    // hash the password
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(req.body.password, salt);
-
-    if(req.body.password != null){
-        res.auth.password = hashedPassword;
-    }
+    
     // if(req.body.LoggedIn != null){
     //     res.auth.LoggedIn = req.body.LoggedIn;
     // }
@@ -92,6 +86,13 @@ router.patch('/:id', getAuth, async (req, res) => {
     //     res.auth.isVerified = req.body.isVerified;
     // }
     try{
+        // hash the password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
+    if(req.body.password != null){
+        res.auth.password = hashedPassword;
+    }
         const updatedAuth = await res.auth.save();
         res.json(updatedAuth);
         
