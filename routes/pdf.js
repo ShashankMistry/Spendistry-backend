@@ -172,10 +172,21 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
     //     item.total
 
     // });
-
+    
         const table = {
-            headers: ['itemName', 'quantity', 'price', 'total'],
-            datas: invoice[0].invoices.invoiceTotalItems
+            // headers: ['itemName', 'quantity', 'price', 'total'],
+            headers: [
+                {label: 'itemName', width: 100, property: 'itemName'},
+                {label: 'quantity', width: 100, property: 'quantity'},
+                {label: 'price', width: 100, property: 'price'},
+                {label: 'total', width: 100, property: 'total'}
+            ],
+            datas:[
+                {itemName: 'itemName', quantity: 'quantity', price: 'price', total: 'total'},
+                {itemName: 'itemName', quantity: 'quantity', price: 'price', total: 'total'},
+                {itemName: 'itemName', quantity: 'quantity', price: 'price', total: 'total'},
+                {itemName: 'itemName', quantity: 'quantity', price: 'price', total: 'total'},
+            ]
         }
 
         doc.table(table);
