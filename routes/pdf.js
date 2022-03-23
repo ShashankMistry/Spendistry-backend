@@ -140,7 +140,7 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         // ]));
 
         //an array of item, quantity, unit price and amount
-        // const invoiceTotalItems = invoice[0].invoices.invoiceTotalItems;
+        const invoiceTotalItems = invoice[0].invoices.invoiceTotalItems;
 
         // [[item, quantity, price, amount],[item, ....],[],[]]
         const invoiceTotalItemsArray = invoiceTotalItems.map(item => [
