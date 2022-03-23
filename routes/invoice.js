@@ -577,8 +577,6 @@ router.delete('/deleteEle/:userid/:vendorid/:invoiceid', async (req, res) => {
 })
 
 
-
-
 // old getting by invoiceSentBy
 
 // router.get('/vendoremail/:invoiceSentBy', async (req, res) => {
