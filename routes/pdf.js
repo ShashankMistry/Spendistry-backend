@@ -191,7 +191,16 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
 
         doc.table(table);
 
-        console.log(invoice[0].invoices.invoiceTotalItems);
+        const items = invoice[0].invoices.invoiceTotalItems.map(item => {
+            return [
+                item.itemName,
+                item.quantity,
+                item.price,
+                item.total
+            ]
+        });
+
+        console.log(items);
 
 
         
