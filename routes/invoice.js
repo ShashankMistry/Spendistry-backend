@@ -529,8 +529,6 @@ router.post('/addEle/:userid/:vendorid', async (req, res) => {
 // patching inside invoice of specific vendor by user ID
 
 router.patch('/patchEle/:userid/:vendorid/:invoiceid', async (req, res) => {
-    console.log(req.body);
-    console.log(req.params.invoiceid);
     try {
         const invoice = await Invoice.findOneAndUpdate(
             {_id: req.params.userid, "businessName._id": req.params.vendorid, "businessName.invoices._id": mongoose.Types.ObjectId(req.params.invoiceid)},
