@@ -29,18 +29,18 @@ const mongoose = require('mongoose');
 // });
 
 //creat a new PDF file inside upload/pdf folder
-router.get('/',  (req, res) => {
-    try {
-        const doc = new PDFDocument();
-        res.setHeader('Content-disposition', 'attachment; filename=invoice.pdf');
-        doc.pipe(res);
-        doc.text('Hello Om2');
-        doc.end();
+// router.get('/',  (req, res) => {
+//     try {
+//         const doc = new PDFDocument();
+//         res.setHeader('Content-disposition', 'attachment; filename=invoice.pdf');
+//         doc.pipe(res);
+//         doc.text('Hello Om2');
+//         doc.end();
         
-    } catch (error) {
-        console.log(error);
-    }
-});
+//     } catch (error) {
+//         console.log(error);
+//     }
+// });
 
 //create a pdf for a specific invoice
 router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
@@ -114,15 +114,6 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
 
         });
        
-        
-       
-
-       
-
-      
-
-       
-      
         
     } catch (error) {
         console.log(error);
