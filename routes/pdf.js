@@ -129,15 +129,15 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         // ]));
 
         // create a tabel of invoiceTotalItems
-        doc.table({
-             headers: ['ITEM', 'QUANTITY', 'UNIT PRICE', 'AMOUNT']
+        // doc.table({
+        //      headers: ['ITEM', 'QUANTITY', 'UNIT PRICE', 'AMOUNT']
 
-        }).body(invoice[0].invoices.invoiceTotalItems.map(item => [
-            item.itemName,
-            item.quantity,
-            item.price,
-            item.total
-        ]));
+        // }).body(invoice[0].invoices.invoiceTotalItems.map(item => [
+        //     item.itemName,
+        //     item.quantity,
+        //     item.price,
+        //     item.total
+        // ]));
 
 
         
