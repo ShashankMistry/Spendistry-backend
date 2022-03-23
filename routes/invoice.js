@@ -537,9 +537,10 @@ router.patch('/patchEle/:userid/:vendorid/:invoiceid', async (req, res) => {
                 $set: {
                     "businessName.$[d].invoices.$[o].invoiceAmount":  req.body.invoiceAmount,
                     "businessName.$[d].invoices.$[o].invoiceTime": Date.now(),
-                    "businessName.$[d].invoice.$[o].roundoff": parseInt(req.body.roundoff),
+                    "businessName.$[d].invoice.$[o].roundoff": req.body.roundoff,
                     "businessName.$[d].invoices.$[o].discount": req.body.discount,
                     "businessName.$[d].invoices.$[o].invoiceTotalitems": req.body.invoiceTotalitems,
+                    "businessName.$[d].invoices.$[o].invoicePaymentMode": req.body.invoicePaymentMode,
                     "businessName.$[d].invoices.$[o].invoiceIGST": req.body.invoiceIGST,
                     "businessName.$[d].invoices.$[o].invoiceCGST": req.body.invoiceCGST,
                     "businessName.$[d].invoices.$[o].invoiceSGST": req.body.invoiceSGST,
