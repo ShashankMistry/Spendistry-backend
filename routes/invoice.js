@@ -534,14 +534,10 @@ router.patch('/patchEle/:userid/:vendorid/:invoiceid', async (req, res) => {
             {_id: req.params.userid, "businessName._id": req.params.vendorid, "businessName.invoices._id": mongoose.Types.ObjectId(req.params.invoiceid)},
             {
                 $set: {
-                    "businessName.$[d].invoice.$[o].invoiceNumber": req.body.invoices.invoiceNumber,
-                  "businessName.$[d].invoices.$[o].invoiceTitle": req.body.invoices.invoiceTitle,
-                    "businessName.$[d].invoices.$[o].invoiceDescription": req.body.invoices.invoiceDescription,
                     "businessName.$[d].invoices.$[o].invoiceAmount": req.body.invoices.invoiceAmount,
-                    "businessName.$[d].invoices.$[o].invoiceDate": req.body.invoices.invoiceDate,
-                    "businessName.$[d].invoice.$[o].invoiceSentTo": req.body.invoices.invoiceSentTo,
-                    "businessName.$[d].invoice.$[o].invoiceSentBy": req.body.invoices.invoiceSentBy,
+                    "businessName.$[d].invoices.$[o].invoiceDate": Date.now,
                     "businessName.$[d].invoice.$[o].roundoff": req.body.invoices.roundoff,
+                    "businessName.$[d].invoices.$[o].invoiceTotalitems": req.body.invoices.invoiceTotalitems,
                 },
                 }, { 
                   arrayFilters: [
