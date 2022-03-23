@@ -448,7 +448,7 @@ router.get('/findEle/:userid/:vendorid/:invoiceid', async (req, res) => {
             {$match: {"businessName.invoices._id": mongoose.Types.ObjectId(req.params.invoiceid) }},
             {$project: {
                 "invoice":{
-                    $push:{"$businessName.invoices"}}
+                    $push:"$businessName.invoices"}
             }
         }
         ])
