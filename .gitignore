@@ -2,5 +2,5 @@
 ./upload
 node_modules
 route.rest
-package-lock.json
+
 
