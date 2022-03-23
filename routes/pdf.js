@@ -174,7 +174,7 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
     // });
 
         const table = {
-            headers: ['ITEM', 'QUANTITY', 'UNIT PRICE', 'AMOUNT'],
+            headers: ['itemName', 'quantity', 'price', 'total'],
             datas: invoice[0].invoices.invoiceTotalItems
         }
 
