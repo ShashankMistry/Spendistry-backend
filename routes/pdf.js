@@ -61,8 +61,7 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         
         // calling the function to create a pdf file
         const doc = new PDFDocument({
-            size: 'A5',
-            // margin: 50
+            size: 'A5'
         });
 
         // setting the header and sending the pdf file
@@ -159,7 +158,7 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
 
         // console.log(invoiceTotalItems);
 
-        
+        // invoiceTotalitems:
     //   const invoiceItems =   invoice[0].invoices.invoiceTotalitems.map(item => {
     //     // doc.text("name: "+item.itemName);
     //     // doc.text("qnt"+item.quantity);
@@ -172,6 +171,7 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
     //     item.total
 
     // });
+    // console.log(invoiceItems);
     
         const table = {
             // headers: ['itemName', 'quantity', 'price', 'total'],
@@ -181,15 +181,22 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
                 {label: 'price', width: 100, property: 'price'},
                 {label: 'total', width: 100, property: 'total'}
             ],
-            datas:[
-                {itemName: 'itemName', quantity: 'quantity', price: 'price', total: 'total'},
-                {itemName: 'itemName', quantity: 'quantity', price: 'price', total: 'total'},
-                {itemName: 'itemName', quantity: 'quantity', price: 'price', total: 'total'},
-                {itemName: 'itemName', quantity: 'quantity', price: 'price', total: 'total'},
-            ]
+            datas:invoice[0].invoices.invoiceTotalitems
         }
 
         doc.table(table);
+
+        // const items = invoice[0].invoices.invoiceTotalItems.map(item => {
+            
+        //         item.itemName,
+        //         item.quantity,
+        //         item.price,
+        //         item.total
+        // });
+
+        // console.log(items);
+
+        // console.log("eklu invoices",invoice[0].invoices);
 
 
         
