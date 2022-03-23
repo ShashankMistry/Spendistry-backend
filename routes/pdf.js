@@ -201,6 +201,8 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
 
         console.log(items);
 
+        console.log("eklu invoices",invoice[0].invoices);
+
 
         
 
