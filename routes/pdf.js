@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const PDFDocument = require('pdfkit');
+const PDFDocument = require('pdfkit', 'pdfkit-table');
 const fs = require('fs');
 const Invoice = require('../models/invoice');
 const mongoose = require('mongoose');
@@ -64,6 +64,8 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
             size: 'A5',
             // margin: 50
         });
+
+        // setting the header and sending the pdf file
         res.setHeader('Content-disposition', 'attachment; filename='+req.params.vendorId+"_"+Date.now()+'.pdf');
         doc.pipe(res);
 
@@ -129,13 +131,16 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         // create a tabel of invoiceTotalItems
         doc.table({
              headers: ['ITEM', 'QUANTITY', 'UNIT PRICE', 'AMOUNT']
-             
+
         }).body(invoice[0].invoices.invoiceTotalItems.map(item => [
             item.itemName,
             item.quantity,
             item.price,
             item.total
         ]));
+
+
+        
 
         //total amount
         doc.fontSize(12).text('TOTAL AMOUNT:'+invoice[0].invoices.invoiceAmount);
