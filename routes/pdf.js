@@ -157,7 +157,7 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         //     item.total
         // ]);
 
-        console.log(invoiceTotalItems);
+        // console.log(invoiceTotalItems);
 
         const table = {
             headers: ['ITEM', 'QUANTITY', 'UNIT PRICE', 'AMOUNT'],
