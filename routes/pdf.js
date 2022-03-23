@@ -160,18 +160,19 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         // console.log(invoiceTotalItems);
 
         
-    //   const invoiceItems =   invoice[0].invoices.invoiceTotalitems.map(item => {
-    //     // doc.text("name: "+item.itemName);
-    //     // doc.text("qnt"+item.quantity);
-    //     // doc.text("price"+item.price);
-    //     // doc.text("total"+item.total);
+      const invoiceItems =   invoice[0].invoices.invoiceTotalitems.map(item => {
+        // doc.text("name: "+item.itemName);
+        // doc.text("qnt"+item.quantity);
+        // doc.text("price"+item.price);
+        // doc.text("total"+item.total);
 
-    //     item.itemName,
-    //     item.quantity,
-    //     item.price,
-    //     item.total
+        item.itemName,
+        item.quantity,
+        item.price,
+        item.total
 
-    // });
+    });
+    console.log(invoiceItems);
     
         const table = {
             // headers: ['itemName', 'quantity', 'price', 'total'],
@@ -191,15 +192,15 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
 
         doc.table(table);
 
-        const items = invoice[0].invoices.invoiceTotalItems.map(item => {
+        // const items = invoice[0].invoices.invoiceTotalItems.map(item => {
             
-                item.itemName,
-                item.quantity,
-                item.price,
-                item.total
-        });
+        //         item.itemName,
+        //         item.quantity,
+        //         item.price,
+        //         item.total
+        // });
 
-        console.log(items);
+        // console.log(items);
 
         console.log("eklu invoices",invoice[0].invoices);
 
