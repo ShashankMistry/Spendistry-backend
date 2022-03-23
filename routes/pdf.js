@@ -97,8 +97,11 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         doc.fontSize(12).text('CONTACT NO:'+invoice[0].invoices.businessContactNo);
 
         //convert unix time to date
-        const date = new Date(invoice[0].invoices.invoiceTime);
-        const dateString = date.toDateString();
+        const uxixDate = new Date(invoice[0].invoices.invoiceTime);
+        const date = new Date(uxixDate * 1000);
+
+
+        const dateString = date.toLocaleDateString();
 
 
         //invoice date and time
@@ -122,6 +125,17 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         //     item.price,
         //     item.total
         // ]));
+
+        // create a tabel of invoiceTotalItems
+        doc.table({
+             headers: ['ITEM', 'QUANTITY', 'UNIT PRICE', 'AMOUNT']
+             
+        }).body(invoice[0].invoices.invoiceTotalItems.map(item => [
+            item.itemName,
+            item.quantity,
+            item.price,
+            item.total
+        ]));
 
         //total amount
         doc.fontSize(12).text('TOTAL AMOUNT:'+invoice[0].invoices.invoiceAmount);
