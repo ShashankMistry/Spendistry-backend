@@ -73,7 +73,7 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         doc.info['Subject'] = 'Invoice';
 
         //title of the pdf file
-        doc.fontSize(25).text(invoice[0].invoices.invoiceTitle, {
+        doc.fontSize(25).text(invoice[0].invoices.invoiceTitle.toUpperCase(), {
             underline: true
         });
 
@@ -85,7 +85,7 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
       const city = invoice[0].invoices.city.toUpperCase();
 
         //subject to jurisdiction
-        doc.fontSize(12).text('SUBJECT TO'+city+'JURISDICTION ONLY');
+        doc.fontSize(12).text('SUBJECT TO '+city+' JURISDICTION ONLY');
 
         //GST number
         doc.fontSize(12).text('GST NO:'+invoice[0].invoices.gstNumber);
