@@ -1,6 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
+const multer = require('multer');
+const req = require('express/lib/request');
+const fs = require('fs');
+
 
 //getting all
 router.get('/', async (req, res) => {
@@ -45,6 +49,42 @@ router.post('/', async (req, res) => {
         res.status(400).json({message: err.message});
     }
 })
+
+
+//storage engine
+const storage = multer.diskStorage({
+    destination: "./upload/userImages",
+    filename: (req, file, cb) => {
+        cb(null, req.params.id+".jpeg");
+    }
+});
+
+const upload = multer({storage: storage});
+
+//upload image
+router.post('/uploadImage/:id',upload.single('userProfile') ,(req, res) => {
+    // res.send(req.file);
+    try {
+        // console.log(req.file);
+        res.send({message: 'uploaded'});
+    } catch (error) {
+        res.send(505).json({message: error.message});
+        console.log(error);
+    }
+
+});
+
+//delete stored image in upload/image folder
+router.delete('/deleteImage/:id', async (req, res) => {
+    try {
+        fs.unlinkSync('./upload/userImages/'+req.params.id+'.jpeg');
+        res.send({message: 'deleted'});
+    } catch (error) {
+        res.send(505).json({message: error.message});
+        console.log(error);
+    }
+});
+
 
 // updating one
 router.patch('/:id',getUser, async (req, res) => {

@@ -48,6 +48,8 @@ app.use('/itemsPrices', itemsPricesRouter);
 
 app.use('/vendorProfile', express.static('upload/images'));
 
+app.use('/userProfile', express.static('upload/userImages'));
+
 const mvd = require('./routes/mvd');
 app.use('/mvd', mvd);
 
