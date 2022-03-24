@@ -66,7 +66,7 @@ const storage = multer.diskStorage({
     }
 });
 
-const upload = multer({storage: storage, limits: {fileSize: 1 * 1024 * 1024}});
+const upload = multer({storage: storage});
 
 router.post('/upload/:id', upload.single('vendorProfile'), (req, res) => {
     // res.send(req.file);
