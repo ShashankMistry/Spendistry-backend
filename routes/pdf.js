@@ -82,7 +82,7 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         });
 
         //empty line
-        doc.moveDown(0.5);
+        doc.moveDown(0.4);
 
         //business address
         doc.fontSize(12).font('Helvetica').text("Address: "+invoice[0].invoices.businessAddress, {
@@ -90,7 +90,7 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         });
 
         //empty line
-        doc.moveDown(0.5);
+        doc.moveDown(0.4);
 
         
       //city in upper case
@@ -98,11 +98,11 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
 
         //subject to jurisdiction
         doc.fontSize(13).font('Helvetica').text('SUBJECT TO '+city+' JURISDICTION ONLY',{
-            align: 'center'
+            align: 'left'
         });
 
         //empty line
-        doc.moveDown(0.5);
+        doc.moveDown(0.4);
 
         //GST number
         doc.fontSize(12).font('Helvetica').text('GST No.: '+invoice[0].invoices.gstNumber, {
@@ -110,7 +110,7 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         });
 
         //empty line
-        doc.moveDown(0.5);
+        doc.moveDown(0.4);
 
         //vendor id
         doc.fontSize(12).font('Helvetica').text('Business ID: '+req.params.vendorId, {
@@ -118,12 +118,15 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         });
 
         //empty line
-        doc.moveDown(0.5);
+        doc.moveDown(0.4);
 
         //business contact number
         doc.fontSize(12).text('Contact No.: '+invoice[0].invoices.businessContactNo,{
             align: 'left'
         });
+
+        //empty line
+        doc.moveDown(0.4);
 
         //convert unix time to date
         const uxixDate = new Date(invoice[0].invoices.invoiceTime);
@@ -138,11 +141,20 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
             align: 'left'
         });
 
+        //empty line
+        doc.moveDown(0.4);
+
         //user ID 
         doc.fontSize(12).text('User ID: '+req.params.userId);
 
+        //empty line
+        doc.moveDown(0.4);
+
         //Invoice number
         doc.fontSize(12).text('Invoice No.: '+invoice[0].invoices.invoiceNumber);
+
+        //empty line
+        doc.moveDown(0.4);
 
         
     
@@ -158,34 +170,50 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
 
         doc.table(table, {
             headerColor: '#000',
-            prepareHeader: () => doc.fontSize(14).font('Helvetica'),
+            prepareHeader: () => doc.fontSize(13).font('Helvetica'),
             prepareRow: () => doc.fontSize(12).font('Helvetica'),
 
         });
 
+        //empty line
+        doc.moveDown(0.4);
+
 
         //total amount
-        doc.fontSize(12).font('Helvetica').text('Total: ₹'+invoice[0].invoices.invoiceAmount, {
+        doc.fontSize(12).font('Helvetica').text('Total: \u20AC'+`₹`+'\u20AC'+'₹'+invoice[0].invoices.invoiceAmount, {
             align: 'right'
         });
 
+        //empty line
+        doc.moveDown(0.4);
+
         //all kind of gst 
-        doc.fontSize(12).font('Helvetica').text('IGST: '+invoice[0].invoices.invoiceIGST+'%', {
+        doc.fontSize(12).font('Helvetica').text('IGST: '+invoice[0].invoices.invoiceIGST+'%'+'         '+'CGST: '+invoice[0].invoices.invoiceCGST+'%', {
             align: 'left'
         });
-        doc.fontSize(12).font('Helvetica').text('CGST: '+invoice[0].invoices.invoiceCGST+'%', {
+
+        //empty line
+        doc.moveDown(0.4);
+
+        doc.fontSize(12).font('Helvetica').text('SGST: '+invoice[0].invoices.invoiceSGST+'%'+'         '+'UTGST: '+invoice[0].invoices.invoiceUTGST+'%', {
             align: 'left'
         });
-        doc.fontSize(12).font('Helvetica').text('SGST: '+invoice[0].invoices.invoiceSGST+'%', {
-            align: 'left'
-        });
-        doc.fontSize(12).font('Helvetica').text('UTGST: '+invoice[0].invoices.invoiceUTGST+'%', {
-            align: 'left'
-        });
+
+        //empty line
+        doc.moveDown(0.4);
+    
 
         //discount
         doc.fontSize(12).font('Helvetica').text('Discount: '+invoice[0].invoices.discount+'%', {
             align: 'left'
+        });
+
+        //empty line
+        doc.moveDown(0.4);
+
+        //net total (roundoff)
+        doc.fontSize(12).font('Helvetica').text('Net Total: ₹'+invoice[0].invoices.roundoff, {
+            align: 'right'
         });
 
         //payment method
@@ -193,14 +221,11 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
             align: 'left'
         });
 
-        //net total (roundoff)
-        doc.fontSize(12).font('Helvetica').text('Net Total: ₹'+invoice[0].invoices.roundoff, {
-            align: 'left'
-        });
+        
         
         //invoice description
-        doc.fontSize(12).font('Helvetica').text('Invoice Description: '+invoice[0].invoices.invoiceDescription,{
-            align: 'left'
+        doc.fontSize(12).font('Helvetica').text(invoice[0].invoices.invoiceDescription,{
+            align: 'Center'
         });
 
 
