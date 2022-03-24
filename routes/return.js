@@ -38,9 +38,15 @@ router.post('/', async (req, res) => {
         invoicePaymentMode: req.body.invoicePaymentMode,
         invoicePDF: req.body.invoicePDF,
         invoiceReport: req.body.invoiceReport,
+        oldInvoiceId: req.body.oldInvoiceId,
+        invoiceDescription: req.body.invoiceDescription,
         invoiceTime : req.body.invoiceTime,
         discount : req.body.discount,
         roundoff : req.body.roundoff,
+        city: req.body.city,
+        state: req.body.state,
+        businessAddress: req.body.businessAddress,
+        businessContactNo: req.body.businessContactNo,
         reportReason : req.body.reportReason,
         extra1 : req.body.extra1,
         extra2 : req.body.extra2,
@@ -116,6 +122,21 @@ router.patch('/:id', getReturn, async (req, res) => {
     }
     if(req.body.reportReason != null){
         res.invoice.reportReason = req.body.reportReason;
+    }
+    if(req.body.invoiceDescription != null){
+        res.invoice.invoiceDescription = req.body.invoiceDescription;
+    }
+    if(req.body.city != null){
+        res.invoice.city = req.body.city;
+    }
+    if(req.body.state != null){
+        res.invoice.state = req.body.state;
+    }
+    if(req.body.businessAddress != null){
+        res.invoice.businessAddress = req.body.businessAddress;
+    }
+    if(req.body.businessContactNo != null){
+        res.invoice.businessContactNo = req.body.businessContactNo;
     }
     if(req.body.extra1 != null){
         res.invoice.extra1 = req.body.extra1;
