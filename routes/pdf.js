@@ -180,7 +180,7 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
 
 
         //total amount
-        doc.fontSize(12).font('Helvetica').text(`Total: \U+20B9`+invoice[0].invoices.invoiceAmount, {
+        doc.fontSize(12).font('Helvetica').text(`Total: \U20B9`+invoice[0].invoices.invoiceAmount, {
             align: 'right'
         });
 
@@ -212,7 +212,7 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         doc.moveDown(0.4);
 
         //net total (roundoff)
-        doc.fontSize(12).font('Helvetica').text('Net Total: \U+20B9'+invoice[0].invoices.roundoff, {
+        doc.fontSize(12).font('Helvetica').text('Net Total: \U20B9'+invoice[0].invoices.roundoff, {
             align: 'right'
         });
 
