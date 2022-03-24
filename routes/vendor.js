@@ -66,12 +66,15 @@ const storage = multer.diskStorage({
     }
 });
 
+// const upload = multer({storage: storage});
 
-const upload = multer({storage: storage});
-
-router.post('/upload/:id', upload.single('vendorProfile'), (req, res) => {
+router.post('/upload/:id', (req, res) => {
     // res.send(req.file);
     try {
+
+                const upload = multer({storage: storage});
+                upload.single('vendorProfile');
+          
         res.send(req.file);
     } catch (error) {
         res.send(505).json({message: error.message});
