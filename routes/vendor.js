@@ -3,7 +3,7 @@ const router = express.Router();
 const Vendor = require('../models/vendor');
 const multer = require('multer');
 const req = require('express/lib/request');
-// const { append } = require('express/lib/response');
+const fs = require('fs');
 
 
 //getting all
@@ -82,16 +82,17 @@ router.post('/upload/:id',upload.single('vendorProfile') ,(req, res) => {
 
 });
 
-//delete image from upload folder 
-router.delete('/upload/:id', async (req, res) => {
+//delete stored image in upload/image folder
+router.delete('/delete/:id', async (req, res) => {
     try {
-        await Vendor.findByIdAndDelete(req.params.id);
+        fs.unlinkSync('./upload/images/'+req.params.id+'.jpeg');
         res.send({message: 'deleted'});
     } catch (error) {
         res.send(505).json({message: error.message});
         console.log(error);
     }
 });
+
 
 // updating one
 router.patch('/:id',getVendor, async (req, res) => {
