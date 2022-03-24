@@ -64,7 +64,6 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         // calling the function to create a pdf file
         const doc = new PDFDocument({
             size: 'A5',
-            font: 'Helvetica'
         });
 
 
