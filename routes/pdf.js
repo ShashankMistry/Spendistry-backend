@@ -4,7 +4,7 @@ const PDFDocument = require('pdfkit-table');
 const fs = require('fs');
 const Invoice = require('../models/invoice');
 const mongoose = require('mongoose');
-const { fontSize } = require('pdfkit/js/mixins/fonts');
+// const { fontSize } = require('pdfkit/js/mixins/fonts');
 
 
 
