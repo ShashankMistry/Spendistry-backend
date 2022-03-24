@@ -187,6 +187,14 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         //empty line
         doc.moveDown(0.4);
 
+        //discount
+        doc.fontSize(12).font('Helvetica').text('Discount: '+invoice[0].invoices.discount+'%', {
+            align: 'left'
+        });
+
+        //empty line
+        doc.moveDown(0.4);
+
         //all kind of gst 
         doc.fontSize(12).font('Helvetica').text('IGST: '+invoice[0].invoices.invoiceIGST+'%'+'         '+'CGST: '+invoice[0].invoices.invoiceCGST+'%', {
             align: 'left'
@@ -199,14 +207,10 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
             align: 'left'
         });
 
-        //empty line
-        doc.moveDown(0.4);
+        
     
 
-        //discount
-        doc.fontSize(12).font('Helvetica').text('Discount: '+invoice[0].invoices.discount+'%', {
-            align: 'left'
-        });
+        
 
         //empty line
         doc.moveDown(0.4);
