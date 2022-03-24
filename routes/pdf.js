@@ -82,23 +82,33 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         });
 
         //business address
-        doc.fontSize(12).text(invoice[0].invoices.businessAddress);
+        doc.fontSize(12).font('Helvetica').text("Address: "+invoice[0].invoices.businessAddress, {
+            align: 'left'
+        });
 
         
       //city in upper case
       const city = invoice[0].invoices.city.toUpperCase();
 
         //subject to jurisdiction
-        doc.fontSize(12).text('SUBJECT TO '+city+' JURISDICTION ONLY');
+        doc.fontSize(16).font('Helvetica').text('SUBJECT TO '+city+' JURISDICTION ONLY',{
+            align: 'center'
+        });
 
         //GST number
-        doc.fontSize(12).text('GST NO:'+invoice[0].invoices.gstNumber);
+        doc.fontSize(12).font('Helvetica').text('GST No.: '+invoice[0].invoices.gstNumber, {
+            align: 'left'
+        });
 
         //vendor id
-        doc.fontSize(12).text('VENDOR ID:'+req.params.vendorId);
+        doc.fontSize(12).font('Helvetica').text('Business ID: '+req.params.vendorId, {
+            align: 'left'
+        });
 
         //business contact number
-        doc.fontSize(12).text('CONTACT NO:'+invoice[0].invoices.businessContactNo);
+        doc.fontSize(12).text('Contact No.: '+invoice[0].invoices.businessContactNo,{
+            align: 'left'
+        });
 
         //convert unix time to date
         const uxixDate = new Date(invoice[0].invoices.invoiceTime);
@@ -109,13 +119,15 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
 
 
         //invoice date and time
-        doc.fontSize(12).text('INVOICE DATE:'+dateString);
+        doc.fontSize(12).text('Date: '+dateString, {
+            align: 'left'
+        });
 
         //user ID 
-        doc.fontSize(12).text('USER ID:'+req.params.userId);
+        doc.fontSize(12).text('User ID: '+req.params.userId);
 
         //Invoice number
-        doc.fontSize(12).text('INVOICE NO:'+invoice[0].invoices.invoiceNumber);
+        doc.fontSize(12).text('Invoice No.: '+invoice[0].invoices.invoiceNumber);
 
         
     
@@ -123,35 +135,58 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
             headers: [
                 {label: 'ITEM',  property: 'itemName'},
                 {label: 'QUANTITY',  property: 'quantity'},
-                {label: 'PRICE',  property: 'price'},
+                {label: 'UNIT PRICE',  property: 'price'},
                 {label: 'TOTAL', property: 'total'}
             ],
             datas:invoice[0].invoices.invoiceTotalitems
         }
 
-        doc.table(table);
+        doc.table(table, {
+            headerColor: '#000',
+            prepareHeader: () => doc.fontSize(14).font('Helvetica'),
+            prepareRow: () => doc.fontSize(12).font('Helvetica'),
+
+        });
 
 
         //total amount
-        doc.fontSize(12).text('TOTAL AMOUNT:'+invoice[0].invoices.invoiceAmount);
+        doc.fontSize(12).font('Helvetica').text('Total: ₹'+invoice[0].invoices.invoiceAmount, {
+            align: 'right'
+        });
 
         //all kind of gst 
-        doc.fontSize(12).text('IGST'+invoice[0].invoices.invoiceIGST);
-        doc.fontSize(12).text('CGST'+invoice[0].invoices.invoiceCGST);
-        doc.fontSize(12).text('SGST'+invoice[0].invoices.invoiceSGST);
-        doc.fontSize(12).text('UTGST'+invoice[0].invoices.invoiceUTGST);
+        doc.fontSize(12).font('Helvetica').text('IGST: '+invoice[0].invoices.invoiceIGST+'%', {
+            align: 'left'
+        });
+        doc.fontSize(12).font('Helvetica').text('CGST: '+invoice[0].invoices.invoiceCGST+'%', {
+            align: 'left'
+        });
+        doc.fontSize(12).font('Helvetica').text('SGST: '+invoice[0].invoices.invoiceSGST+'%', {
+            align: 'left'
+        });
+        doc.fontSize(12).font('Helvetica').text('UTGST: '+invoice[0].invoices.invoiceUTGST+'%', {
+            align: 'left'
+        });
 
         //discount
-        doc.fontSize(12).text('DISCOUNT:'+invoice[0].invoices.discount);
+        doc.fontSize(12).font('Helvetica').text('Discount: '+invoice[0].invoices.discount+'%', {
+            align: 'left'
+        });
 
         //payment method
-        doc.fontSize(12).text('PAYMENT METHOD:'+invoice[0].invoices.invoicePaymentMode);
+        doc.fontSize(12).font('Helvetica').text('Payment Method: '+invoice[0].invoices.invoicePaymentMode, {
+            align: 'left'
+        });
 
         //net total (roundoff)
-        doc.fontSize(12).text('NET TOTAL:'+invoice[0].invoices.roundoff);
+        doc.fontSize(12).font('Helvetica').text('Net Total: ₹'+invoice[0].invoices.roundoff, {
+            align: 'left'
+        });
         
         //invoice description
-        doc.fontSize(12).text('INVOICE DESCRIPTION:'+invoice[0].invoices.invoiceDescription);
+        doc.fontSize(12).font('Helvetica').text('Invoice Description: '+invoice[0].invoices.invoiceDescription,{
+            align: 'left'
+        });
 
 
         doc.end();
