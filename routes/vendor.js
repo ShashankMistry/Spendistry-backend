@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Vendor = require('../models/vendor');
 const multer = require('multer');
+const req = require('express/lib/request');
 // const { append } = require('express/lib/response');
 
 
@@ -68,7 +69,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage: storage});
 
-router.post('/upload/:id',upload.single('vendorProfile') ,(req, res) => {
+router.post('/upload/:id',upload.single('vendorProfile'+req.params.id) ,(req, res) => {
     // res.send(req.file);
     try {
         console.log(req.file);
