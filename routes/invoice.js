@@ -159,7 +159,6 @@ router.get('/total/:id/', async(req, res) => {
             MonthlyTotal: '$businessTotal',
         }
     },
-    console.log(hash)
        
         // {$group:{
         //     _id:'$businessWise._id',
