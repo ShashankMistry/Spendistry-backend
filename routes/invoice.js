@@ -530,7 +530,7 @@ router.post('/addEle/:userid/:vendorid', async (req, res) => {
 
 // patching inside invoice of specific vendor by user ID
 
-router.patch('/patchEle/:userid/:vendorid/:invoiceid/reportId', async (req, res) => {
+router.patch('/patchEle/:userid/:vendorid/:invoiceid/:reportId', async (req, res) => {
     try {
         //add invoice to return.js
 
