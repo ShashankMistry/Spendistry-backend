@@ -77,7 +77,7 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         doc.info['Subject'] = 'Invoice';
 
         //title of the pdf file
-        doc.fontSize(25).text(invoice[0].invoices.invoiceTitle.toUpperCase(), {
+        doc.fontSize(25).font('Helvetica').text(invoice[0].invoices.invoiceTitle.toUpperCase(), {
             underline: true
         });
 
