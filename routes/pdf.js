@@ -4,46 +4,7 @@ const PDFDocument = require('pdfkit-table');
 const fs = require('fs');
 const Invoice = require('../models/invoice');
 const mongoose = require('mongoose');
-// const { fontSize } = require('pdfkit/js/mixins/fonts');
-// const arial = require('../arial.ttf');
 
-
-
-//get a new PDF file
-// router.get('/', (req, res) => {
-//     res.download('upload/pdf/invoice.pdf');
-// });
-
-
-//create a new PDF file inside upload/pdf folder
-// router.get('/',  (req, res) => {
-//     doc.pipe(fs.createWriteStream('upload/pdf/invoice.pdf'));
-//     doc.pipe(res);
-//     doc.text('Hello Om');
-//     doc.end();
-//     // delete pdf file after download
-    
-//     // fs.unlink('upload/pdf/invoice.pdf', (err) => {
-//     //     // if (err) throw err;
-//     //     console.log('successfully deleted');
-//     // })
-    
-    
-// });
-
-//creat a new PDF file inside upload/pdf folder
-// router.get('/',  (req, res) => {
-//     try {
-//         const doc = new PDFDocument();
-//         res.setHeader('Content-disposition', 'attachment; filename=invoice.pdf');
-//         doc.pipe(res);
-//         doc.text('Hello Om2');
-//         doc.end();
-        
-//     } catch (error) {
-//         console.log(error);
-//     }
-// });
 
 //create a pdf for a specific invoice
 router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
@@ -179,12 +140,9 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         //empty line
         doc.moveDown(0.4);
 
-        //register font
-        doc.registerFont('arial', arial);
-
 
         //total amount
-        doc.fontSize(12).font('arial').text(`Total: \u20B9`+invoice[0].invoices.invoiceAmount, {
+        doc.fontSize(12).font('Helvetica').text(`Total: `+invoice[0].invoices.invoiceAmount, {
             align: 'right'
         });
 
@@ -236,7 +194,7 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         doc.moveDown(0.4);
 
         //net total (roundoff)
-        doc.fontSize(12).font('Helvetica').text('Net Total: \u20B9'+invoice[0].invoices.roundoff, {
+        doc.fontSize(12).font('Helvetica').text('Net Total: '+invoice[0].invoices.roundoff, {
             align: 'right'
         });
 
