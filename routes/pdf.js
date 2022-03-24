@@ -162,7 +162,7 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
             headers: [
                 {label: 'ITEM',  property: 'itemName'},
                 {label: 'QUANTITY',  property: 'quantity'},
-                {label: 'UNIT PRICE',  property: 'price'},
+                {label: 'PRICE',  property: 'price'},
                 {label: 'TOTAL', property: 'total'}
             ],
             datas:invoice[0].invoices.invoiceTotalitems
