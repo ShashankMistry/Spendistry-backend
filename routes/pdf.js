@@ -196,9 +196,11 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         doc.moveDown(0.4);
 
         //all kind of gst 
-        doc.fontSize(12).font('Helvetica').text('IGST: '+invoice[0].invoices.invoiceIGST+'%'+'         '+'CGST: '+invoice[0].invoices.invoiceCGST+'%', {
+        doc.fontSize(12).font('Helvetica').text('IGST: '+invoice[0].invoices.invoiceIGST+'%', {
             align: 'left'
         });
+
+        doc.fontSize(12).font('Helvetica').text('CGST: '+invoice[0].invoices.invoiceSGST+'%', 100, 100 )
 
         //empty line
         doc.moveDown(0.4);
