@@ -170,7 +170,7 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
 
         doc.table(table, {
             headerColor: '#000',
-            prepareHeader: () => doc.fontSize(13).font('Helvetica'),
+            prepareHeader: () => doc.fontSize(12).font('Helvetica'),
             prepareRow: () => doc.fontSize(12).font('Helvetica'),
 
         });
@@ -180,7 +180,7 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
 
 
         //total amount
-        doc.fontSize(12).font('Helvetica').text('Total: \u20AC'+`₹`+'\u20AC'+'₹'+invoice[0].invoices.invoiceAmount, {
+        doc.fontSize(12).font('Helvetica').text(`Total: \U+20B9`+invoice[0].invoices.invoiceAmount, {
             align: 'right'
         });
 
@@ -212,7 +212,7 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         doc.moveDown(0.4);
 
         //net total (roundoff)
-        doc.fontSize(12).font('Helvetica').text('Net Total: ₹'+invoice[0].invoices.roundoff, {
+        doc.fontSize(12).font('Helvetica').text('Net Total: \U+20B9'+invoice[0].invoices.roundoff, {
             align: 'right'
         });
 
@@ -220,6 +220,9 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         doc.fontSize(12).font('Helvetica').text('Payment Method: '+invoice[0].invoices.invoicePaymentMode, {
             align: 'left'
         });
+
+        //empty line
+        doc.moveDown(0.4);
 
         
         
