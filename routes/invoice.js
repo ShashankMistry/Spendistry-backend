@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Invoice = require('../models/invoice');
+const Report = require('../models/report');
+const Return = require('../models/return');
 const mongoose = require('mongoose');
 
 //getting all
@@ -528,8 +530,59 @@ router.post('/addEle/:userid/:vendorid', async (req, res) => {
 
 // patching inside invoice of specific vendor by user ID
 
-router.patch('/patchEle/:userid/:vendorid/:invoiceid', async (req, res) => {
+router.patch('/patchEle/:userid/:vendorid/:invoiceid/reportId', async (req, res) => {
     try {
+        //add invoice to return.js
+
+        const invoiceOld = await Invoice.aggregate([
+            {$match: {"_id":req.params.userid}},
+            {$unwind: "$businessName"},
+            {$match: {"businessName._id": req.params.vendorid}},
+            {$unwind: "$businessName.invoices"},
+            {$match: {"businessName.invoices._id": mongoose.Types.ObjectId(req.params.invoiceid) }},
+            // {$project: {
+            //     "invoice":{
+            //         $push:"$businessName.invoices"}
+            // },
+            {$group: {
+                "_id": req.params.vendorid,
+                "invoices": {
+                    $push: {
+                        'invoices':'$businessName.invoices'
+                    }
+                }
+            }},
+        ])
+        const oldInvoice = await invoiceOld[0].invoices[0].invoices;
+        const returnData = new Return({
+        invoiceNumber: oldInvoice.invoiceNumber,
+        invoiceDate: oldInvoice.invoiceDate,
+        invoiceAmount: oldInvoice.invoiceAmount,
+        invoiceStatus:  oldInvoice.invoiceStatus,
+        invoiceTitle: oldInvoice.invoiceTitle,
+        invoiceTotalitems: oldInvoice.invoiceTotalitems,
+        invoiceIGST: oldInvoice.invoiceIGST,
+        invoiceCGST: oldInvoice.invoiceCGST,
+        invoiceSGST: oldInvoice.invoiceSGST,
+        invoiceUTGST: oldInvoice.invoiceUTGST,
+        invoiceSentTo: oldInvoice.invoiceSentTo,
+        invoiceSentBy: oldInvoice.invoiceSentBy,
+        invoicePaymentMode: oldInvoice.invoicePaymentMode,
+        oldInvoiceId: oldInvoice._id,
+        invoiceDescription: oldInvoice.invoiceDescription,
+        invoiceTime: oldInvoice.invoiceTime,
+        discount: oldInvoice.discount,
+        roundoff: oldInvoice.roundoff,
+        city: oldInvoice.city,
+        state: oldInvoice.state,
+        businessAddress: oldInvoice.businessAddress,
+        businessContactNo: oldInvoice.businessContactNo,
+        reportReason: oldInvoice.reportReason,
+        })
+        await returnData.save();
+        //find one and delete
+        await Report.findOneAndDelete({_id: req.params.reportId});
+            
         const invoice = await Invoice.findOneAndUpdate(
             {_id: req.params.userid, "businessName._id": req.params.vendorid, "businessName.invoices._id": mongoose.Types.ObjectId(req.params.invoiceid)},
             {
