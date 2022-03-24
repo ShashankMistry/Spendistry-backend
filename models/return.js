@@ -89,6 +89,9 @@ const ReturnSchema = new mongoose.Schema({
     city : {
         type: String
     },
+    oldInvoiceId:{
+        type: String
+    },
     businessAddress : {
         type: String
     },
