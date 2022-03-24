@@ -160,6 +160,7 @@ router.get('/total/:id/', async(req, res) => {
             qrCode: hash
         }
     },
+    console.log(hash)
        
         // {$group:{
         //     _id:'$businessWise._id',
