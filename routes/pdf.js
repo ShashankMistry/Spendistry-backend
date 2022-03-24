@@ -82,7 +82,7 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         });
 
         //empty line
-        doc.moveDown(1);
+        doc.moveDown(0.5);
 
         //business address
         doc.fontSize(12).font('Helvetica').text("Address: "+invoice[0].invoices.businessAddress, {
@@ -90,7 +90,7 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         });
 
         //empty line
-        doc.moveDown(1);
+        doc.moveDown(0.5);
 
         
       //city in upper case
@@ -102,7 +102,7 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         });
 
         //empty line
-        doc.moveDown(1);
+        doc.moveDown(0.5);
 
         //GST number
         doc.fontSize(12).font('Helvetica').text('GST No.: '+invoice[0].invoices.gstNumber, {
@@ -110,7 +110,7 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         });
 
         //empty line
-        doc.moveDown(1);
+        doc.moveDown(0.5);
 
         //vendor id
         doc.fontSize(12).font('Helvetica').text('Business ID: '+req.params.vendorId, {
@@ -118,7 +118,7 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         });
 
         //empty line
-        doc.moveDown(1);
+        doc.moveDown(0.5);
 
         //business contact number
         doc.fontSize(12).text('Contact No.: '+invoice[0].invoices.businessContactNo,{
