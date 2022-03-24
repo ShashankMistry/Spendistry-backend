@@ -58,18 +58,18 @@ router.post('/', async (req, res) => {
 
 })
 
-
-
-router.post('/upload/:id',(req, res) => {
-    // res.send(req.file);
-    try {
-        //storage engine
+//storage engine
 const storage = multer.diskStorage({
     destination: "./upload/images",
     filename: (req, file, cb) => {
         cb(null, req.params.id+".jpeg");
     }
 });
+
+router.post('/upload/:id',(req, res) => {
+    // res.send(req.file);
+    try {
+        
 
 const upload = multer({storage: storage});
 
