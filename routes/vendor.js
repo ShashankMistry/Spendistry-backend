@@ -58,19 +58,23 @@ router.post('/', async (req, res) => {
 
 })
 
-//storage engine
+
+
+router.post('/upload/:id',(req, res) => {
+    // res.send(req.file);
+    try {
+        //storage engine
 const storage = multer.diskStorage({
     destination: "./upload/images",
     filename: (req, file, cb) => {
-        cb(null, req.params._id+".jpeg");
+        cb(null, req.params.id+".jpeg");
     }
 });
 
 const upload = multer({storage: storage});
 
-router.post('/upload/:id',upload.single('vendorProfile') ,(req, res) => {
-    // res.send(req.file);
-    try {
+upload.single('vendorProfile') 
+
         res.send({message: 'uploaded'});
     } catch (error) {
         res.send(505).json({message: error.message});
