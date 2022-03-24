@@ -69,16 +69,28 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage: storage});
 
+//upload image
 router.post('/upload/:id',upload.single('vendorProfile') ,(req, res) => {
     // res.send(req.file);
     try {
-        console.log(req.file);
+        // console.log(req.file);
         res.send({message: 'uploaded'});
     } catch (error) {
         res.send(505).json({message: error.message});
         console.log(error);
     }
 
+});
+
+//delete image from upload folder 
+router.delete('/upload/:id', async (req, res) => {
+    try {
+        await Vendor.findByIdAndDelete(req.params.id);
+        res.send({message: 'deleted'});
+    } catch (error) {
+        res.send(505).json({message: error.message});
+        console.log(error);
+    }
 });
 
 // updating one
