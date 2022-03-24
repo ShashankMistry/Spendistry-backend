@@ -197,28 +197,28 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
 
         //all kind of gst 
         doc.fontSize(12).font('Helvetica').text('IGST: '+invoice[0].invoices.invoiceIGST+'%', {
-            align: 'right'
+            align: 'left'
         });
 
         //empty line
         doc.moveDown(0.4);
 
         doc.fontSize(12).font('Helvetica').text('CGST: '+invoice[0].invoices.invoiceSGST+'%', {
-            align: 'right'
+            align: 'left'
         });
 
         //empty line
         doc.moveDown(0.4);
 
         doc.fontSize(12).font('Helvetica').text('SGST: '+invoice[0].invoices.invoiceSGST+'%', {
-            align: 'right'
+            align: 'left'
         });
 
         //empty line
         doc.moveDown(0.4);
 
         doc.fontSize(12).font('Helvetica').text('UTGST: '+invoice[0].invoices.invoiceUTGST+'%', {
-            align: 'right'
+            align: 'left'
         });
 
         
