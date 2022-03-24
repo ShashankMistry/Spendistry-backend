@@ -200,12 +200,24 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
             align: 'left'
         });
 
-        doc.fontSize(12).font('Helvetica').text('CGST: '+invoice[0].invoices.invoiceSGST+'%', 100, 100 )
+        //empty line
+        doc.moveDown(0.4);
+
+        doc.fontSize(12).font('Helvetica').text('CGST: '+invoice[0].invoices.invoiceSGST+'%', {
+            align: 'left'
+        });
 
         //empty line
         doc.moveDown(0.4);
 
-        doc.fontSize(12).font('Helvetica').text('SGST: '+invoice[0].invoices.invoiceSGST+'%'+'         '+'UTGST: '+invoice[0].invoices.invoiceUTGST+'%', {
+        doc.fontSize(12).font('Helvetica').text('SGST: '+invoice[0].invoices.invoiceSGST+'%', {
+            align: 'left'
+        });
+
+        //empty line
+        doc.moveDown(0.4);
+
+        doc.fontSize(12).font('Helvetica').text('UTGST: '+invoice[0].invoices.invoiceUTGST+'%', {
             align: 'left'
         });
 
