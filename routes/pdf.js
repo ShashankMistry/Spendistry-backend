@@ -129,7 +129,7 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
             datas:invoice[0].invoices.invoiceTotalitems
         }
 
-        doc.fontSize(12).table(table);
+        doc.table(table);
 
 
         //total amount
