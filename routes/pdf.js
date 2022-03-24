@@ -77,7 +77,7 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         doc.info['Subject'] = 'Invoice';
 
         //title of the pdf file
-        doc.fontSize(25).font('Helvetica').text(invoice[0].invoices.invoiceTitle.toUpperCase(), {
+        doc.fontSize(23).font('Helvetica').text(invoice[0].invoices.invoiceTitle.toUpperCase(), {
             underline: true
         });
 
@@ -196,14 +196,30 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         doc.moveDown(0.4);
 
         //all kind of gst 
-        doc.fontSize(12).font('Helvetica').text('IGST: '+invoice[0].invoices.invoiceIGST+'%'+'         '+'CGST: '+invoice[0].invoices.invoiceCGST+'%', {
+        doc.fontSize(12).font('Helvetica').text('IGST: '+invoice[0].invoices.invoiceIGST+'%', {
             align: 'left'
         });
 
         //empty line
         doc.moveDown(0.4);
 
-        doc.fontSize(12).font('Helvetica').text('SGST: '+invoice[0].invoices.invoiceSGST+'%'+'         '+'UTGST: '+invoice[0].invoices.invoiceUTGST+'%', {
+        doc.fontSize(12).font('Helvetica').moveUp().text('CGST: '+invoice[0].invoices.invoiceSGST+'%',{
+            // align: 'left'
+            // x: 100,
+            // y: 500
+        });
+
+        //empty line
+        doc.moveDown(0.4);
+
+        doc.fontSize(12).font('Helvetica').text('SGST: '+invoice[0].invoices.invoiceSGST+'%', {
+            align: 'left'
+        });
+
+        //empty line
+        doc.moveDown(0.4);
+
+        doc.fontSize(12).font('Helvetica').text('UTGST: '+invoice[0].invoices.invoiceUTGST+'%', {
             align: 'left'
         });
 
