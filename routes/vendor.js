@@ -69,7 +69,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage: storage});
 
-router.post('/upload/:id',upload.single('vendorProfile'+req.params.id) ,(req, res) => {
+router.post('/upload/:id',upload.single('vendorProfile') ,(req, res) => {
     // res.send(req.file);
     try {
         console.log(req.file);
