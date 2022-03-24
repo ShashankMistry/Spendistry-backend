@@ -180,7 +180,7 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
 
 
         //total amount
-        doc.fontSize(12).text(`Total: \u20B9`+invoice[0].invoices.invoiceAmount, {
+        doc.fontSize(12).font('Helvetica').text(`Total: \u20B9`+invoice[0].invoices.invoiceAmount, {
             align: 'right'
         });
 
