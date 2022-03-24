@@ -189,7 +189,7 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
 
         //discount
         doc.fontSize(12).font('Helvetica').text('Discount: '+invoice[0].invoices.discount+'%', {
-            align: 'right'
+            align: 'left'
         });
 
         //empty line
