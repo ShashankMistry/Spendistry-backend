@@ -50,7 +50,7 @@ const vendorSchema = new mongoose.Schema({
     },
     currentInvoiceNumber: {
         type: Number,
-        default: 0
+        default: 1
     },
     panNumber: {
         type: String,
