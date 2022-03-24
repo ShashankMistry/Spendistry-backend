@@ -70,7 +70,7 @@ const storage = multer.diskStorage({
 const upload = multer({storage: storage});
 
 //upload image
-router.post('/upload/:id',upload.single('vendorProfile') ,(req, res) => {
+router.post('/uploadImage/:id',upload.single('vendorProfile') ,(req, res) => {
     // res.send(req.file);
     try {
         // console.log(req.file);
@@ -83,7 +83,7 @@ router.post('/upload/:id',upload.single('vendorProfile') ,(req, res) => {
 });
 
 //delete stored image in upload/image folder
-router.delete('/delete/:id', async (req, res) => {
+router.delete('/deleteImage/:id', async (req, res) => {
     try {
         fs.unlinkSync('./upload/images/'+req.params.id+'.jpeg');
         res.send({message: 'deleted'});
