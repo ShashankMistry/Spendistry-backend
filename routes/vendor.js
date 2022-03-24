@@ -66,13 +66,14 @@ const storage = multer.diskStorage({
     }
 });
 
-const upload = multer({storage: storage, limits: {fileSize: 10000}});
+const upload = multer({storage: storage, limits: {fileSize: 1 * 1024 * 1024}});
 
 router.post('/upload/:id', upload.single('vendorProfile'), (req, res) => {
     // res.send(req.file);
     try {
         res.send(req.file);
     } catch (error) {
+        res.send(505).json({message: error.message});
         console.log(error);
     }
 
