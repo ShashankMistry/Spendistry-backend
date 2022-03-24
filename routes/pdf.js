@@ -77,7 +77,7 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         doc.info['Subject'] = 'Invoice';
 
         //title of the pdf file
-        doc.fontSize(25).font('Helvetica').text(invoice[0].invoices.invoiceTitle.toUpperCase(), {
+        doc.fontSize(23).font('Helvetica').text(invoice[0].invoices.invoiceTitle.toUpperCase(), {
             underline: true
         });
 
@@ -180,7 +180,7 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
 
 
         //total amount
-        doc.fontSize(12).font('Helvetica').text(`Total: \u20B9`+invoice[0].invoices.invoiceAmount, {
+        doc.fontSize(12).text(`Total: \u20B9`+invoice[0].invoices.invoiceAmount, {
             align: 'right'
         });
 
