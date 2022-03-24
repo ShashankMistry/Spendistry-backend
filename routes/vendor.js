@@ -72,10 +72,9 @@ router.post('/upload/:id', (req, res) => {
     // res.send(req.file);
     try {
 
-                const upload = multer({storage: storage});
-                upload.single('vendorProfile');
-          
-        res.send(req.file);
+        const upload = multer({storage: storage});
+        upload.single('vendorProfile');
+        res.send({message: 'uploaded'});
     } catch (error) {
         res.send(505).json({message: error.message});
         console.log(error);
