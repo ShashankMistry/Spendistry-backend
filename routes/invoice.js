@@ -4,6 +4,7 @@ const Invoice = require('../models/invoice');
 const Report = require('../models/report');
 const Return = require('../models/return');
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 //getting all
 router.get('/', async (req, res) => {
@@ -87,6 +88,8 @@ router.get('/vendor/:id', async (req, res) => {
 //show total of all invoiceNumbers and then show total for individual businessNAme ids
 router.get('/total/:id/', async(req, res) => {
     try{
+        //hash the id 
+        var hash = bcrypt.hashSync(req.params.id, 10);
     const total = await Invoice.aggregate([
         {$match: { _id: req.params.id}
         },
@@ -153,7 +156,8 @@ router.get('/total/:id/', async(req, res) => {
             MonthlyTotalAll: '$MonthlyTotalAll',
             AllTimeTotal:  '$AllTimeTotal',
             AllTotal: '$businessAllTimeTotal',
-            MonthlyTotal: '$businessTotal'
+            MonthlyTotal: '$businessTotal',
+            qrCode: hash
         }
     },
        
@@ -172,7 +176,8 @@ router.get('/total/:id/', async(req, res) => {
         MonthlyTotalAll: 0,
         AllTotal: 0,
         MonthlyTotal: 0,
-        AllTimeTotal: 0
+        AllTimeTotal: 0,
+        qrCode: hash
     }]);
     } else {
     res.json(total);           
