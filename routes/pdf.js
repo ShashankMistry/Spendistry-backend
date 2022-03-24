@@ -5,6 +5,7 @@ const fs = require('fs');
 const Invoice = require('../models/invoice');
 const mongoose = require('mongoose');
 // const { fontSize } = require('pdfkit/js/mixins/fonts');
+const arial = require('arial.ttf');
 
 
 
@@ -178,9 +179,12 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         //empty line
         doc.moveDown(0.4);
 
+        //register font
+        doc.registerFont('arial', arial);
+
 
         //total amount
-        doc.fontSize(12).font('Helvetica').text(`Total: \u20B9`+invoice[0].invoices.invoiceAmount, {
+        doc.fontSize(12).font('arial').text(`Total: \u20B9`+invoice[0].invoices.invoiceAmount, {
             align: 'right'
         });
 
