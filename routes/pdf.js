@@ -5,7 +5,7 @@ const fs = require('fs');
 const Invoice = require('../models/invoice');
 const mongoose = require('mongoose');
 // const { fontSize } = require('pdfkit/js/mixins/fonts');
-const arial = require('arial.ttf');
+const arial = require('./arial.ttf');
 
 
 
