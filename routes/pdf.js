@@ -203,7 +203,7 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         //empty line
         doc.moveDown(0.4);
 
-        doc.fontSize(12).font('Helvetica').moveUp(0.8).text('                     CGST: '+invoice[0].invoices.invoiceSGST+'%',{
+        doc.fontSize(12).font('Helvetica').text('CGST: '+invoice[0].invoices.invoiceSGST+'%', 100, 100,{
             // align: 'left'
             // x: 100,
             // y: 500
