@@ -81,29 +81,44 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
             underline: true
         });
 
+        //empty line
+        doc.moveDown(1);
+
         //business address
         doc.fontSize(12).font('Helvetica').text("Address: "+invoice[0].invoices.businessAddress, {
             align: 'left'
         });
+
+        //empty line
+        doc.moveDown(1);
 
         
       //city in upper case
       const city = invoice[0].invoices.city.toUpperCase();
 
         //subject to jurisdiction
-        doc.fontSize(16).font('Helvetica').text('SUBJECT TO '+city+' JURISDICTION ONLY',{
+        doc.fontSize(13).font('Helvetica').text('SUBJECT TO '+city+' JURISDICTION ONLY',{
             align: 'center'
         });
+
+        //empty line
+        doc.moveDown(1);
 
         //GST number
         doc.fontSize(12).font('Helvetica').text('GST No.: '+invoice[0].invoices.gstNumber, {
             align: 'left'
         });
 
+        //empty line
+        doc.moveDown(1);
+
         //vendor id
         doc.fontSize(12).font('Helvetica').text('Business ID: '+req.params.vendorId, {
             align: 'left'
         });
+
+        //empty line
+        doc.moveDown(1);
 
         //business contact number
         doc.fontSize(12).text('Contact No.: '+invoice[0].invoices.businessContactNo,{
