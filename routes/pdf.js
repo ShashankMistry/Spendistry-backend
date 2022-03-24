@@ -4,6 +4,7 @@ const PDFDocument = require('pdfkit-table');
 const fs = require('fs');
 const Invoice = require('../models/invoice');
 const mongoose = require('mongoose');
+const { fontSize } = require('pdfkit/js/mixins/fonts');
 
 
 
@@ -11,6 +12,7 @@ const mongoose = require('mongoose');
 // router.get('/', (req, res) => {
 //     res.download('upload/pdf/invoice.pdf');
 // });
+
 
 //create a new PDF file inside upload/pdf folder
 // router.get('/',  (req, res) => {
@@ -61,8 +63,10 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         
         // calling the function to create a pdf file
         const doc = new PDFDocument({
-            size: 'A5'
+            size: 'A5',
+            font: 'Helvetica'
         });
+
 
         // setting the header and sending the pdf file
         res.setHeader('Content-disposition', 'attachment; filename='+req.params.vendorId+"_"+Date.now()+'.pdf');
@@ -126,7 +130,7 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
             datas:invoice[0].invoices.invoiceTotalitems
         }
 
-        doc.table(table);
+        doc.fontSize(12).table(table);
 
 
         //total amount
