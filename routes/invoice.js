@@ -157,7 +157,6 @@ router.get('/total/:id/', async(req, res) => {
             AllTimeTotal:  '$AllTimeTotal',
             AllTotal: '$businessAllTimeTotal',
             MonthlyTotal: '$businessTotal',
-            qrCode: hash
         }
     },
     console.log(hash)
@@ -178,7 +177,6 @@ router.get('/total/:id/', async(req, res) => {
         AllTotal: 0,
         MonthlyTotal: 0,
         AllTimeTotal: 0,
-        qrCode: hash
     }]);
     } else {
     res.json(total);           
