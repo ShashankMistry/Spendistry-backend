@@ -46,25 +46,25 @@ router.post('/', async (req, res) => {
         await new itemPrices({
             _id : req.body._id,
         }).save();
-        await new vendor({
-        _id : req.body._id,
-        fname: req.body.fname,
-        lname: req.body.lname,
-        email: req.body.email,
-        password: req.body.password,
-        mobileNumber: req.body.mobileNumber,
-        address: req.body.address,
-        lat: req.body.lat,
-        lng: req.body.lng,
-        vendorName: req.body.vendorName,
-        tollFreeNumber: req.body.tollFreeNumber,
-        currentInvoicenumber: req.body.currentInvoicenumber,
-        panNumber: req.body.panNumber,
-        gstNumber: req.body.gstNumber,
-        website: req.body.website,
-        city: req.body.city,
-        state: req.body.state,
-        }).save();
+        // await new vendor({
+        // _id : req.body._id,
+        // fname: req.body.fname,
+        // lname: req.body.lname,
+        // email: req.body.email,
+        // password: req.body.password,
+        // mobileNumber: req.body.mobileNumber,
+        // address: req.body.address,
+        // lat: req.body.lat,
+        // lng: req.body.lng,
+        // vendorName: req.body.vendorName,
+        // tollFreeNumber: req.body.tollFreeNumber,
+        // currentInvoicenumber: req.body.currentInvoicenumber,
+        // panNumber: req.body.panNumber,
+        // gstNumber: req.body.gstNumber,
+        // website: req.body.website,
+        // city: req.body.city,
+        // state: req.body.state,
+        // }).save();
         res.status(201).json(savedAuth);
         
     }
