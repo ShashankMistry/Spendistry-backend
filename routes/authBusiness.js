@@ -5,6 +5,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const nodeMailer = require('nodemailer');
 const otp = require('../models/otp');
+const itemsPrices = require('../models/itemPricesList');
+const vendor = require('../models/vendor');
 
 
 router.get('/', async (req, res) => {
@@ -41,6 +43,28 @@ router.post('/', async (req, res) => {
     });
     try{
         const savedAuth = await auth.save();
+        await new itemPrices({
+            _id : req.body._id,
+        }).save();
+        await new vendor({
+        _id : req.body._id,
+        fname: req.body.fname,
+        lname: req.body.lname,
+        email: req.body.email,
+        password: req.body.password,
+        mobileNumber: req.body.mobileNumber,
+        address: req.body.address,
+        lat: req.body.lat,
+        lng: req.body.lng,
+        vendorName: req.body.vendorName,
+        tollFreeNumber: req.body.tollFreeNumber,
+        currentInvoicenumber: req.body.currentInvoicenumber,
+        panNumber: req.body.panNumber,
+        gstNumber: req.body.gstNumber,
+        website: req.body.website,
+        city: req.body.city,
+        state: req.body.state,
+        }).save();
         res.status(201).json(savedAuth);
         
     }
