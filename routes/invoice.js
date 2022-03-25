@@ -92,8 +92,7 @@ router.get('/total/:id/', async(req, res) => {
     //hash the id with cryptoJS
     var encryptedQr = cryptoJS.AES.encrypt(req.params.id, process.env.QR_HASH_KEY).toString();
 
-    // decrypt the id with cryptoJS
-    // const decrypt = cryptoJS.AES.decrypt(encryptedQr, process.env.QR_HASH_KEY).toString(cryptoJS.enc.Utf8);
+    
 
     try{
     const total = await Invoice.aggregate([
@@ -193,6 +192,17 @@ router.get('/total/:id/', async(req, res) => {
 }
     
 })
+
+//decrypt the id with cryptoJS
+router.post('/decrypt', async (req, res) => {
+    try {
+            const decrypt = cryptoJS.AES.decrypt(req.body.qr, process.env.QR_HASH_KEY).toString(cryptoJS.enc.Utf8);
+            res.send(decrypt);
+  
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+});
 
 //creating one
 router.post('/', async (req, res) => {
