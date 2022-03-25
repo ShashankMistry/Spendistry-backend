@@ -92,6 +92,25 @@ router.post('/forgotPassword', async (req, res) => {
     }
 });
 
+//create otp for new user
+router.post('/createAccount', async (req, res) => {
+    try {
+            let otpcode = Math.floor(Math.random() * (999999 - 100000) + 100000);
+            let subject = 'OTP for your spendistry account';
+            let text = 'Your OTP is ' + otpcode;
+            let email = req.body.email;
+            mailer(email, subject, text);
+            const otpData = new otp({
+                email : req.body.email,
+                otp : otpcode
+            });
+            const savedOtp = await otpData.save();
+            res.status(201).json("OTP sent").send();
+    } catch (err) {
+        res.status(400).json({message: err.message}).send();
+    }
+});
+
 
 //verify otp
 router.post('/verifyOtp', async (req, res) => {
