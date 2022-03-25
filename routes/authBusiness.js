@@ -43,7 +43,7 @@ router.post('/', async (req, res) => {
     });
     try{
         const savedAuth = await auth.save();
-        await new itemPrices({
+        await new itemsPrices({
             _id : req.body._id,
         }).save();
         // await new vendor({
