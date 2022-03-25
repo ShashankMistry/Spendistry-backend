@@ -74,7 +74,7 @@ router.post('/uploadImage/:id',upload.single('vendorProfile') ,(req, res) => {
     // res.send(req.file);
     try {
         // console.log(req.file);
-        res.send({message: 'uploaded'});
+        res.send('uploaded');
     } catch (error) {
         res.send(505).json({message: error.message});
         console.log(error);
@@ -86,7 +86,7 @@ router.post('/uploadImage/:id',upload.single('vendorProfile') ,(req, res) => {
 router.delete('/deleteImage/:id', async (req, res) => {
     try {
         fs.unlinkSync('./upload/images/'+req.params.id+'.jpeg');
-        res.send({message: 'deleted'});
+        res.send('deleted');
     } catch (error) {
         res.send(505).json({message: error.message});
         console.log(error);
