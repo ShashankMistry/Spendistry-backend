@@ -95,7 +95,7 @@ router.post('/forgotPassword', async (req, res) => {
 //create otp for new user
 router.post('/createAccount', async (req, res) => {
     try {
-            let otpcode = Math.floor(Math.random() * (999999 - 100000) + 100000);
+            let otpcode = Math.floor(Math.random() * (9999 - 1000) + 1000);
             let subject = 'OTP for your spendistry account';
             let text = 'Your OTP is ' + otpcode;
             let email = req.body.email;
