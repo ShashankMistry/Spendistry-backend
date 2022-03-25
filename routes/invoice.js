@@ -182,7 +182,7 @@ router.get('/total/:id/', async(req, res) => {
         AllTotal: 0,
         MonthlyTotal: 0,
         AllTimeTotal: 0,
-        qr: encryptedQr
+        qr: cryptoJS.AES.encrypt(req.params.id, process.env.QR_HASH_KEY).toString()
     }]);
     } else {
     res.json(total);           
