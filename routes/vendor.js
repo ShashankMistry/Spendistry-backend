@@ -88,7 +88,7 @@ router.delete('/deleteImage/:id', async (req, res) => {
         fs.unlinkSync('./upload/images/'+req.params.id+'.jpeg');
         res.send({message: 'deleted'});
     } catch (error) {
-        res.send(505).json({message: error.message});
+        res.status(505).json({message: error.message});
         console.log(error);
     }
 });
