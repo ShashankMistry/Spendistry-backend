@@ -85,8 +85,14 @@ router.post('/uploadImage/:id',upload.single('vendorProfile') ,(req, res) => {
 //delete stored image in upload/image folder
 router.delete('/deleteImage/:id', async (req, res) => {
     try {
-        fs.unlinkSync('./upload/images/'+req.params.id+'.jpeg');
-        res.send('deleted');
+        //if statement to check if image exists
+        if(fs.existsSync('./upload/images/'+req.params.id+'.jpeg')){
+            fs.unlinkSync('./upload/images/'+req.params.id+'.jpeg');
+            res.send('deleted');
+
+        } else {
+            res.send("no image found");
+        }
     } catch (error) {
         res.status(505).json({message: error.message});
         console.log(error);
