@@ -4,6 +4,7 @@ const Invoice = require('../models/invoice');
 const Report = require('../models/report');
 const Return = require('../models/return');
 const mongoose = require('mongoose');
+const cryptoJS = require('crypto-js');
 
 
 //getting all
@@ -87,6 +88,16 @@ router.get('/vendor/:id', async (req, res) => {
 
 //show total of all invoiceNumbers and then show total for individual businessNAme ids
 router.get('/total/:id/', async(req, res) => {
+
+    //hash the id with cryptoJS
+    const id = cryptoJS.AES.encrypt(req.params.id, process.env.QR_HASH_KEY).toString();
+    console.log("encrypted",id);
+
+    //decrypt the id with cryptoJS
+    const decrypt = cryptoJS.AES.decrypt(id, process.env.QR_HASH_KEY).toString(cryptoJS.enc.Utf8);
+    console.log("decrypted",decrypt);
+
+
     try{
     const total = await Invoice.aggregate([
         {$match: { _id: req.params.id}
