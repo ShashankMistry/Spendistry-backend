@@ -91,7 +91,7 @@ router.delete('/deleteImage/:id', async (req, res) => {
             res.send('deleted');
 
         } else {
-            res.send("no image found");
+            res.status(404).send("no image found");
         }
     } catch (error) {
         res.status(505).json({message: error.message});

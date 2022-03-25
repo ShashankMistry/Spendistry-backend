@@ -66,7 +66,7 @@ router.post('/uploadImage/:id',upload.single('userProfile') ,(req, res) => {
     // res.send(req.file);
     try {
         // console.log(req.file);
-        res.send({message: 'uploaded'});
+        res.send('uploaded');
     } catch (error) {
         res.send(505).json({message: error.message});
         console.log(error);
@@ -77,8 +77,13 @@ router.post('/uploadImage/:id',upload.single('userProfile') ,(req, res) => {
 //delete stored image in upload/image folder
 router.delete('/deleteImage/:id', async (req, res) => {
     try {
+        //if statement to check if the image exists
+        if(fs.existsSync('./upload/userImages/'+req.params.id+'.jpeg')){
         fs.unlinkSync('./upload/userImages/'+req.params.id+'.jpeg');
-        res.send({message: 'deleted'});
+        res.send('deleted');
+        } else {
+            res.status(404).send("no image found");
+        }
     } catch (error) {
         res.send(505).json({message: error.message});
         console.log(error);
