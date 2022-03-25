@@ -90,12 +90,12 @@ router.get('/vendor/:id', async (req, res) => {
 router.get('/total/:id/', async(req, res) => {
 
     //hash the id with cryptoJS
-    const id = cryptoJS.AES.encrypt(req.params.id, process.env.QR_HASH_KEY).toString();
+    const id = cryptoJS.AES.encrypt(req.params.id, 'om').toString();
     console.log("encrypted",id);
 
     //decrypt the id with cryptoJS
-    const decrypt = cryptoJS.AES.decrypt(id, process.env.QR_HASH_KEY).toString(cryptoJS.enc.Utf8);
-    console.log("decrypted",decrypt);
+    // const decrypt = cryptoJS.AES.decrypt(id, process.env.QR_HASH_KEY).toString(cryptoJS.enc.Utf8);
+    // console.log("decrypted",decrypt);
 
 
     try{
