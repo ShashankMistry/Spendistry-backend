@@ -197,7 +197,7 @@ router.get('/total/:id/', async(req, res) => {
 //decrypt the id with cryptoJS
 router.post('/decrypt', async (req, res) => {
     try {
-            var decrypt = cryptoJS.AES.decrypt(req.body.qr, process.env.QR_HASH_KEY).toString(cryptoJS.enc.Utf8);
+            var decrypt = cryptoJS.AES.decrypt(req.body, process.env.QR_HASH_KEY).toString(cryptoJS.enc.Utf8);
             const user = await Invoice.findById(decrypt);
             if(user){
                 res.json(decrypt);
