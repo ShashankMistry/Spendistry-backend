@@ -53,22 +53,15 @@ router.post('/userLogin', async (req, res) => {
         const user = await Auth.findOne({_id: req.body._id});
         if (!user) {
             return res.json({message: 'Cannot find user email'});
-            // res.send({message: 'Cannot find user email'});
         }
         const passwordIsValid = await bcrypt.compare(req.body.password, user.password);
         if (!passwordIsValid) {
             return res.json({message: 'Invalid Password'});
-            // return res.send({message: 'Invalid Password'});
-            // res.send({message: 'Invalid Password'});
         }
 
         //create and assing a token
         const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET_USER);
         res.header('auth-token', token).send(token);
-
-
-        // res.status(200).json({message: 'Successfully logged in'});
-
 
     } catch (err) {
         return res.status(500).json({message: err.message});
