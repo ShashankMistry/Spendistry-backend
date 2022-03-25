@@ -5,6 +5,7 @@ const Report = require('../models/report');
 const Return = require('../models/return');
 const mongoose = require('mongoose');
 const cryptoJS = require('crypto-js');
+const User = require('../models/user');
 
 
 //getting all
@@ -201,6 +202,25 @@ router.post('/decrypt', async (req, res) => {
   
     } catch (error) {
         res.status(500).json({message: error.message});
+    }
+});
+
+//share qr page
+router.get('/share/:id', async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        if(user){
+            const encqr = cryptoJS.AES.encrypt(req.params.id, process.env.QR_HASH_KEY).toString();
+            res.send(encqr);
+
+        } else {
+            res.send('User not found');
+        }
+        
+    } catch (error) {
+        res.status(500).json({message: error.message});
+
+        
     }
 });
 
