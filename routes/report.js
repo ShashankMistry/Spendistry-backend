@@ -4,7 +4,6 @@ const Report = require('../models/report');
 
 //getting all
 router.get('/', async (req, res) => {
-    // res.send('getting all users');
     try {
     const report = await Report.find();
     res.json(report);
@@ -20,7 +19,6 @@ router.get('/:id', getReport, (req, res) => {
 
 //creating one
 router.post('/', async (req, res) => {
-    // res.send(`creating user ${req.body.name}`);
     const report = new Report({
         reportNumber: req.body.reportNumber,
         reportDate: req.body.reportDate,

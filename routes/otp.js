@@ -68,18 +68,11 @@ router.post('/forgotPassword', async (req, res) => {
             let email = req.body.email;
             mailer(email, subject, text);
 
-            //hash the otp
-            // const salt = await bcrypt.genSalt(10);
-            // const hashedOtp = await bcrypt.hash(otpcode, salt);
-
             const otpData = new otp({
                 email : req.body.email,
                 otp : otpcode
             });
             const savedOtp = await otpData.save();
-
-            //delete otp
-            // const deleteOtp = await otp.findOneAndDelete({email: req.body.email});
 
             res.status(201).json("OTP sent").send();
 

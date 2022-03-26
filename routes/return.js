@@ -4,7 +4,6 @@ const Return = require('../models/return');
 
 //getting all
 router.get('/', async (req, res) => {
-    // res.send('getting all users');
     try {
     const returnData = await Return.find();
     res.json(returnData);
@@ -15,13 +14,11 @@ router.get('/', async (req, res) => {
 
 //getting one
 router.get('/:id', getReturn, (req, res) => {
-    // res.send(`getting user ${req.params.id}`);
     res.json(res.return);
 })
 
 //creating one
 router.post('/', async (req, res) => {
-    // res.send('creating a user');
     const returnData = new Return({
         invoiceNumber: req.body.invoiceNumber,
         invoiceDate: req.body.invoiceDate,
@@ -65,7 +62,6 @@ router.post('/', async (req, res) => {
 
 // updating one
 router.patch('/:id', getReturn, async (req, res) => {
-    // res.send(`updating user ${req.params.id}`);
     if(req.body.invoiceNumber != null){
         res.invoice.invoiceNumber = req.body.invoiceNumber;
     }
@@ -163,7 +159,6 @@ router.patch('/:id', getReturn, async (req, res) => {
 
 // deleting one
 router.delete('/:id', getReturn, async (req, res) => {
-    // res.send(`deleting user ${req.params.id}`);
     try{
         await res.return.remove();
         res.json({message: 'Deleted Return'});
@@ -175,7 +170,6 @@ router.delete('/:id', getReturn, async (req, res) => {
 
 //getting by invoiceSentTo
 router.get('/useremail/:invoiceSentTo', async (req, res) => {
-    // res.send(`getting user ${req.params.id}`);
     try{
         const returnData = await Return.find({invoiceSentTo: req.params.invoiceSentTo});
         res.json(returnData);
@@ -186,7 +180,6 @@ router.get('/useremail/:invoiceSentTo', async (req, res) => {
 
 //getting by invoiceSentBy
 router.get('/vendormail/:invoiceSentBy', async (req, res) => {
-    // res.send(`getting user ${req.params.id}`);
     try{
         const returnData = await Return.find({invoiceSentBy: req.params.invoiceSentBy});
         res.json(returnData);

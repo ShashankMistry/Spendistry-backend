@@ -8,7 +8,6 @@ const fs = require('fs');
 
 //getting all
 router.get('/', async (req, res) => {
-    // res.send('getting all users');
     try {
     const user = await User.find();
     res.json(user);
@@ -24,12 +23,10 @@ router.get('/:id', getUser, (req, res) => {
 
 //creating one
 router.post('/', async (req, res) => {
-    // res.send(`creating user ${req.body.name}`);
     const user = new User({ 
         fname: req.body.fname,
         lname: req.body.lname,
         email: req.body.email,
-        // password: req.body.password,
         mobileNumber: req.body.mobileNumber,
         address: req.body.address,
         _id : req.body._id,
@@ -63,9 +60,7 @@ const upload = multer({storage: storage});
 
 //upload image
 router.post('/uploadImage/:id',upload.single('userProfile') ,(req, res) => {
-    // res.send(req.file);
     try {
-        // console.log(req.file);
         res.send('uploaded');
     } catch (error) {
         res.send(505).json({message: error.message});
@@ -77,7 +72,6 @@ router.post('/uploadImage/:id',upload.single('userProfile') ,(req, res) => {
 //delete stored image in upload/image folder
 router.delete('/deleteImage/:id', async (req, res) => {
     try {
-        //if statement to check if the image exists
         if(fs.existsSync('./upload/userImages/'+req.params.id+'.jpeg')){
         fs.unlinkSync('./upload/userImages/'+req.params.id+'.jpeg');
         res.send('deleted');
@@ -93,7 +87,6 @@ router.delete('/deleteImage/:id', async (req, res) => {
 
 // updating one
 router.patch('/:id',getUser, async (req, res) => {
-    // res.send(`updating user ${req.params.id}`);
     if(req.body.fname != null){
         res.user.fname = req.body.fname;
     } 
@@ -103,9 +96,6 @@ router.patch('/:id',getUser, async (req, res) => {
     if(req.body.email != null){
         res.user.email = req.body.email;
     }
-    // if(req.body.password != null){
-    //     res.user.password = req.body.password;
-    // }
     if(req.body.mobileNumber != null){
         res.user.mobileNumber = req.body.mobileNumber;
     }
@@ -127,9 +117,6 @@ router.patch('/:id',getUser, async (req, res) => {
     if(req.body.extra5 != null){
         res.user.extra5 = req.body.extra5;
     }
-    // if(req.body.loggedIn != null){
-    //     res.user.loggedIn = req.body.loggedIn;
-    // }
     if(req.body.Date != null){
         res.user.Date = req.body.Date;
     }
@@ -143,7 +130,6 @@ router.patch('/:id',getUser, async (req, res) => {
 
 // deleting one
 router.delete('/:id', getUser, async (req, res) => {
-    // res.send(`deleting user ${req.params.id}`);
     try {
         await res.user.remove();
         res.json({ message: 'Deleted user' });
@@ -156,7 +142,6 @@ router.delete('/:id', getUser, async (req, res) => {
 
 //getting user by email
 router.get('/email/:email', async (req, res) => {
-    // res.send(`getting user by email ${req.params.email}`);
     try {
         const user = await User.find({email: req.params.email});
         res.json(user);

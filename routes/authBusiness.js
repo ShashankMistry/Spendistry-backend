@@ -10,12 +10,8 @@ const vendor = require('../models/vendor');
 
 
 router.get('/', async (req, res) => {
-    // res.send('getting all users');
     try {
     const auth = await AuthBusiness.find();
-    // enable cors
-    // res.header('Access-Control-Allow-Origin', '*');
-
     res.json(auth);
     } catch (err) {
         res.status(500).json({message: err.message});
@@ -23,48 +19,24 @@ router.get('/', async (req, res) => {
 })
 
 // getting one
-
 router.get('/:id',  getAuth, (req, res) => {
-    // res.send(`getting user ${req.params.id}`);
     res.json(res.auth);
 })
 
 // creating one
 router.post('/', async (req, res) => {
-    // hash the password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
     const auth = new AuthBusiness({
         _id : req.body._id,
         password : hashedPassword,
-        // LoggedIn : req.body.LoggedIn,
-        // isVerified : req.body.isVerified
     });
     try{
         const savedAuth = await auth.save();
         await new itemsPrices({
             _id : req.body._id,
         }).save();
-        // await new vendor({
-        // _id : req.body._id,
-        // fname: req.body.fname,
-        // lname: req.body.lname,
-        // email: req.body.email,
-        // password: req.body.password,
-        // mobileNumber: req.body.mobileNumber,
-        // address: req.body.address,
-        // lat: req.body.lat,
-        // lng: req.body.lng,
-        // vendorName: req.body.vendorName,
-        // tollFreeNumber: req.body.tollFreeNumber,
-        // currentInvoicenumber: req.body.currentInvoicenumber,
-        // panNumber: req.body.panNumber,
-        // gstNumber: req.body.gstNumber,
-        // website: req.body.website,
-        // city: req.body.city,
-        // state: req.body.state,
-        // }).save();
         res.status(201).json(savedAuth);
         
     }
@@ -76,7 +48,6 @@ router.post('/', async (req, res) => {
 //vendor login
 router.post('/vendorLogin', async (req, res) => {
     try {
-        // console.log(req.body);
         const vendor = await AuthBusiness.findOne({_id: req.body._id});
         if (!vendor) {
             return res.status(404).json({message: 'Cannot find vendor email'});
@@ -87,10 +58,6 @@ router.post('/vendorLogin', async (req, res) => {
         }
         const token = jwt.sign({_id: vendor._id}, process.env.TOKEN_SECRET_VENDOR);
         res.header('auth-token-vendor', token).send(token);
-        // console.log(vendor);
-
-
-
     } catch (err) {
         res.status(500).json({message: err.message});
     }
@@ -100,19 +67,12 @@ router.post('/vendorLogin', async (req, res) => {
 // updating one
 router.patch('/:id', getAuth, async (req, res) => {
 
-    //hash the password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
     if(req.body.password != null){
         res.auth.password = hashedPassword;
     }
-    // if(req.body.LoggedIn != null){
-    //     res.auth.LoggedIn = req.body.LoggedIn;
-    // }
-    // if(req.body.isVerified != null){
-    //     res.auth.isVerified = req.body.isVerified;
-    // }
     try{
         const updatedAuth = await res.auth.save();
         res.json(updatedAuth);
@@ -123,14 +83,8 @@ router.patch('/:id', getAuth, async (req, res) => {
 })
 
 
-
-
-
-
-
 // deleting one
 router.delete('/:id', getAuth, async (req, res) => {
-    // res.send(`deleting user ${req.params.id}`);
     try{
         await res.auth.remove();
         res.json({message: 'Deleted This Auth'});

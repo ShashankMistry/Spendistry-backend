@@ -10,7 +10,6 @@ const User = require('../models/user');
 
 //getting all
 router.get('/', async (req, res) => {
-    // res.send('getting all users');
     try {
     const invoice = await Invoice.find();
     res.json(invoice);
@@ -93,8 +92,6 @@ router.get('/total/:id/', async(req, res) => {
     //hash the id with cryptoJS
     var encryptedQr = cryptoJS.AES.encrypt(req.params.id, process.env.QR_HASH_KEY).toString();
 
-    
-
     try{
     const total = await Invoice.aggregate([
         {$match: { _id: req.params.id}
@@ -123,7 +120,6 @@ router.get('/total/:id/', async(req, res) => {
              business:{
                 $push:{
                 _id: '$businessName._id',
-                // date: {$last: '$businessName.invoices.invoiceTime'},
                 MonthlyTotal: {
                     $sum : {
                         $cond: {
@@ -156,7 +152,6 @@ router.get('/total/:id/', async(req, res) => {
         }
     },
         
-    
         {$project: {
             _id: '$_id',
             MonthlyTotalAll: '$MonthlyTotalAll',
@@ -166,14 +161,6 @@ router.get('/total/:id/', async(req, res) => {
             qr: encryptedQr
         }
     },
-       
-        // {$group:{
-        //     _id:'$businessWise._id',
-        //     MonthlyTotalAll: {$last: '$MonthlyTotalAll'},
-        //     AllTimeTotal:{$last: '$AllTotal'},
-
-        // }}
-        
 
     ]);
     
@@ -231,35 +218,9 @@ router.get('/share/:id', async (req, res) => {
 
 //creating one
 router.post('/', async (req, res) => {
-    // res.send(`creating user ${req.body.name}`);
     const invoice = new Invoice({ 
         _id: req.body._id,
         businessName: req.body.businessName,
-        // invoices: req.body.invoices
-        // invoiceNumber: req.body.invoiceNumber,
-        // invoiceDate: req.body.invoiceDate,
-        // invoiceAmount: req.body.invoiceAmount,
-        // invoiceStatus: req.body.invoiceStatus,
-        // invoiceTitle: req.body.invoiceTitle,
-        // invoiceTotalitems: req.body.invoiceTotalitems,
-        // invoiceIGST: req.body.invoiceIGST,
-        // invoiceCGST: req.body.invoiceCGST,
-        // invoiceSGST: req.body.invoiceSGST,
-        // invoiceUTGST: req.body.invoiceUTGST,
-        // invoiceSentTo: req.body.invoiceSentTo,
-        // invoiceSentBy: req.body.invoiceSentBy,
-        // invoicePaymentMode: req.body.invoicePaymentMode,
-        // invoicePDF: req.body.invoicePDF,
-        // invoiceReport: req.body.invoiceReport,
-        // invoiceTime : req.body.invoiceTime,
-        // discount : req.body.discount,
-        // roundoff : req.body.roundoff,
-        // city : req.body.city,
-        // extra1 : req.body.extra1,
-        // extra2 : req.body.extra2,
-        // extra3 : req.body.extra3,
-        // extra4 : req.body.extra4,
-        // extra5 : req.body.extra5
     });
     try{
         const savedInvoice = await invoice.save();
@@ -272,83 +233,9 @@ router.post('/', async (req, res) => {
 
 // updating one
 router.patch('/:id', getInvoice, async (req, res) => {
-    // res.send(`updating user ${req.params.id}`);
     if(req.body.businessName != null){
         res.invoice.invoices = req.body.businessName;
     }
-
-    // if(req.body.invoiceNumber != null){
-    //     res.invoice.invoiceNumber = req.body.invoiceNumber;
-    // }
-    // if(req.body.invoiceDate != null){
-    //     res.invoice.invoiceDate = req.body.invoiceDate;
-    // }
-    // if(req.body.invoiceAmount != null){
-    //     res.invoice.invoiceAmount = req.body.invoiceAmount;
-    // }
-    // if(req.body.invoiceStatus != null){
-    //     res.invoice.invoiceStatus = req.body.invoiceStatus;
-    // }
-    // if(req.body.invoiceTitle != null){
-    //     res.invoice.invoiceTitle = req.body.invoiceTitle;
-    // }
-    // if(req.body.invoiceTotalitems != null){
-    //     res.invoice.invoiceTotalitems = req.body.invoiceTotalitems;
-    // }
-    // if(req.body.invoiceIGST != null){
-    //     res.invoice.invoiceIGST = req.body.invoiceIGST;
-    // }
-    // if(req.body.invoiceCGST != null){
-    //     res.invoice.invoiceCGST = req.body.invoiceCGST;
-    // }
-    // if(req.body.invoiceSGST != null){
-    //     res.invoice.invoiceSGST = req.body.invoiceSGST;
-    // }
-    // if(req.body.invoiceUTGST != null){
-    //     res.invoice.invoiceUTGST = req.body.invoiceUTGST;
-    // }
-    // if(req.body.invoiceSentTo != null){
-    //     res.invoice.invoiceSentTo = req.body.invoiceSentTo;
-    // }
-    // if(req.body.invoiceSentBy != null){
-    //     res.invoice.invoiceSentBy = req.body.invoiceSentBy;
-    // }
-    // if(req.body.invoicePaymentMode != null){
-    //     res.invoice.invoicePaymentMode = req.body.invoicePaymentMode;
-    // }
-    // if(req.body.invoicePDF != null){
-    //     res.invoice.invoicePDF = req.body.invoicePDF;
-    // }
-    // if(req.body.invoiceReport != null){
-    //     res.invoice.invoiceReport = req.body.invoiceReport;
-    // }
-    // if(req.body.invoiceTime != null){
-    //     res.invoice.invoiceTime = req.body.invoiceTime;
-    // }
-    // if(req.body.discount != null){
-    //     res.invoice.discount = req.body.discount;
-    // }
-    // if(req.body.roundoff != null){
-    //     res.invoice.roundoff = req.body.roundoff;
-    // }
-    // if(req.body.city != null){
-    //     res.invoice.city = req.body.city;
-    // }
-    // if(req.body.extra1 != null){
-    //     res.invoice.extra1 = req.body.extra1;
-    // }
-    // if(req.body.extra2 != null){
-    //     res.invoice.extra2 = req.body.extra2;
-    // }
-    // if(req.body.extra3 != null){
-    //     res.invoice.extra3 = req.body.extra3;
-    // }
-    // if(req.body.extra4 != null){
-    //     res.invoice.extra4 = req.body.extra4;
-    // }
-    // if(req.body.extra5 != null){
-    //     res.invoice.extra5 = req.body.extra5;
-    // }
     try{
         const updateInvoice = await res.invoice.save();
         res.json(updateInvoice);
@@ -359,7 +246,6 @@ router.patch('/:id', getInvoice, async (req, res) => {
 
 //deleting one
 router.delete('/:id', getInvoice, async (req, res) => {
-    // res.send(`deleting user ${req.params.id}`);
     try{
         await res.invoice.remove();
         res.json({message: 'Deleted this invoice'});
@@ -396,7 +282,6 @@ router.delete('/:id', getInvoice, async (req, res) => {
 // })
 
 //getting vendor by user ID
-
 router.get('/findELe/:userid/:vendorid', async (req, res) => {
     try {
         const invoice = await Invoice.aggregate([
@@ -485,7 +370,6 @@ router.get('/findEle/:vendorId', async (req, res) => {
 
 
 //getting invoice of specific vendor by user ID
-
 router.get('/findEle/:userid/:vendorid/:invoiceid', async (req, res) => {
     try {
         const invoice = await Invoice.aggregate([
@@ -494,10 +378,6 @@ router.get('/findEle/:userid/:vendorid/:invoiceid', async (req, res) => {
             {$match: {"businessName._id": req.params.vendorid}},
             {$unwind: "$businessName.invoices"},
             {$match: {"businessName.invoices._id": mongoose.Types.ObjectId(req.params.invoiceid) }},
-            // {$project: {
-            //     "invoice":{
-            //         $push:"$businessName.invoices"}
-            // },
             {$group: {
                 "_id": req.params.vendorid,
                 "invoices": {
@@ -516,7 +396,6 @@ router.get('/findEle/:userid/:vendorid/:invoiceid', async (req, res) => {
 })
 
 //adding inside businessName
-
 router.post('/addEle/:userid', async (req, res) => {
     try {
         const invoice = await Invoice.findOneAndUpdate(
@@ -561,35 +440,18 @@ router.post('/addEle/:userid/:vendorid', async (req, res) => {
             res.status(500).json({message: error.message + " error1"});
         }
     }
-
-    // try {
-    //     const invoice = await Invoice.update(
-    //         {_id: req.params.userid, "businessName._id": req.params.vendorid},
-    //         {$push: {'businessName.$.invoices': req.body.invoices}},
-            
-    //     );
-    //     res.json(invoice);
-    // } catch (error) {
-    //     res.status(500).json({message: error.message});
-    // }
 })
 
 // patching inside invoice of specific vendor by user ID
-
 router.patch('/patchEle/:userid/:vendorid/:invoiceid/:reportId', async (req, res) => {
     try {
         //add invoice to return.js
-
         const invoiceOld = await Invoice.aggregate([
             {$match: {"_id":req.params.userid}},
             {$unwind: "$businessName"},
             {$match: {"businessName._id": req.params.vendorid}},
             {$unwind: "$businessName.invoices"},
             {$match: {"businessName.invoices._id": mongoose.Types.ObjectId(req.params.invoiceid) }},
-            // {$project: {
-            //     "invoice":{
-            //         $push:"$businessName.invoices"}
-            // },
             {$group: {
                 "_id": req.params.vendorid,
                 "invoices": {

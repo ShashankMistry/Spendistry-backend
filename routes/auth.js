@@ -5,7 +5,6 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 // getting all
-
 // router.get('/', async (req, res) => {
 //     // res.send('getting all users');
 //     try {
@@ -16,8 +15,8 @@ const jwt = require('jsonwebtoken');
 //     }
 // })
 
-// getting one
 
+// getting one
 // router.get('/:id', getAuth, (req, res) => {
 //     // res.send(`getting user ${req.params.id}`);
 //     res.json(res.auth);
@@ -26,15 +25,12 @@ const jwt = require('jsonwebtoken');
 // creating one
 router.post('/', async (req, res) => {
 
-    //hashing the password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
     const auth = new Auth({
         _id : req.body._id,
         password : hashedPassword,
-        // LoggedIn : req.body.LoggedIn,
-        // isVerified : req.body.isVerified
     });
     try{
         const savedAuth = await auth.save();
@@ -72,14 +68,7 @@ router.post('/userLogin', async (req, res) => {
 // updating one
 router.patch('/:id', getAuth, async (req, res) => {
     
-    // if(req.body.LoggedIn != null){
-    //     res.auth.LoggedIn = req.body.LoggedIn;
-    // }
-    // if(req.body.isVerified != null){
-    //     res.auth.isVerified = req.body.isVerified;
-    // }
     try{
-        // hash the password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
@@ -96,7 +85,6 @@ router.patch('/:id', getAuth, async (req, res) => {
 
 // deleting one
 router.delete('/:id', getAuth, async (req, res) => {
-    // res.send(`deleting user ${req.params.id}`);
     try{
         await res.auth.remove();
         res.json({message: 'Deleted This Auth'});

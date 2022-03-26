@@ -104,11 +104,7 @@ router.get('/:id', async (req, res) => {
             issuedInvoices: 0,
             roundoff: [0,0]},{vendorDetails: vendorDetails, reportCount: 0});
         }
-        
 
-        // res.send({
-        //     invoiceDetails: mvd, vendorDetails: vendorDetails, reportCount: reportCount
-        // });
         res.send(send);
     } catch (err) {
         res.status(500).json({message: err.message});

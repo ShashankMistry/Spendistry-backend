@@ -119,7 +119,7 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         doc.moveDown(0.4);
 
         
-    
+    // table for items in the invoice
         const table = {
             headers: [
                 {label: 'ITEM',  property: 'itemName'},
@@ -167,8 +167,6 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
 
         doc.fontSize(12).font('Helvetica').text('CGST: '+invoice[0].invoices.invoiceSGST+'%',{
             align: 'left'
-            // x: 100,
-            // y: 500
         });
 
         //empty line
@@ -184,11 +182,6 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         doc.fontSize(12).font('Helvetica').text('UTGST: '+invoice[0].invoices.invoiceUTGST+'%', {
             align: 'left'
         });
-
-        
-    
-
-        
 
         //empty line
         doc.moveDown(0.4);
@@ -206,13 +199,10 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         //empty line
         doc.moveDown(0.4);
 
-        
-        
         //invoice description
         doc.fontSize(12).font('Helvetica').text(invoice[0].invoices.invoiceDescription,{
             align: 'Center'
         });
-
 
         doc.end();
 
@@ -223,7 +213,6 @@ router.get('/:userId/:vendorId/:invoiceId', async (req, res) => {
         console.log(error);
     }
 });
-
 
 
 module.exports = router;

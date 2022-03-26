@@ -1,15 +1,11 @@
-   
 const express = require('express');
-// const { findById } = require('../models/itemPricesList');
 const router = express.Router();
 const ItemPricesSchema = require('../models/itemPricesList');
 const mongoose = require('mongoose');
-// const verify = require('../middleware/verifyUserToken');
 const vendorVerify = require('../middleware/verifyVendorToken');
 
 // getting all
 router.get('/', vendorVerify, async (req, res) => {
-    // res.send('getting all users');
     try {
     const item = await ItemPricesSchema.find();
     res.json(item);
@@ -20,14 +16,11 @@ router.get('/', vendorVerify, async (req, res) => {
 
 // getting one
 router.get('/:id', getItems, (req, res) => {
-    // res.send(`getting user ${req.params.id}`);
     res.json(res.item);
 })
 
 router.get('/price/:id/:ItemsPrices', async (req, res) => {
-    // res.send(`getting user by invoiceSentTo ${req.params.invoiceSentTo}`);
     try {
-    // const itemsPrices = await ItemPricesSchema.find({"_id": req.params.id, "ItemsPrices": {$elemMatch: { "price": req.params.ItemsPrices }}});
     const itemsPrices = await ItemPricesSchema.aggregate([{$match: {"_id": req.params.id}}, {$unwind: "$ItemsPrices"}, {$match: {"ItemsPrices.price": req.params.ItemsPrices}}]);
     res.json(itemsPrices);
     } catch (err) {
@@ -94,7 +87,6 @@ router.patch('/patchEle/:id/:idArr', getItems, async (req, res) => {
 
 // creating one
 router.post('/', async (req, res) => {
-    // res.send(`creating user ${req.body.name}`);
     const item = new ItemPricesSchema({
         _id : req.body._id,
         ItemsPrices: req.body.ItemsPrices
@@ -110,7 +102,6 @@ router.post('/', async (req, res) => {
 
 
 // adding elemet to array
-
 router.patch('/addItems/:id', async (req, res) => {
     try {
         const item = await ItemPricesSchema.findOneAndUpdate({_id: req.params.id},
@@ -124,7 +115,6 @@ router.patch('/addItems/:id', async (req, res) => {
 
 // updating one
 router.patch('/updateItems/:id', getItems, async (req, res) => {
-    // res.send(`updating user ${req.params.id}`);
     if(req.body.ItemsPrices != null){
         res.item.ItemsPrices = req.body.ItemsPrices;
     }
@@ -139,7 +129,6 @@ router.patch('/updateItems/:id', getItems, async (req, res) => {
 
 // deleting one
 router.delete('/delete/:id', getItems, async (req, res) => {
-    // res.send(`deleting user ${req.params.id}`);
     try{
         await res.item.remove();
         res.json({message: 'Deleted This UserItemList'});

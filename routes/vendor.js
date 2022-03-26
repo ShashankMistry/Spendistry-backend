@@ -8,7 +8,6 @@ const fs = require('fs');
 
 //getting all
 router.get('/', async (req, res) => {
-    // res.send('getting all users');
     try {
     const vendor = await Vendor.find();
     res.json(vendor);
@@ -24,12 +23,10 @@ router.get('/:id', getVendor, (req, res) => {
 
 //creating one
 router.post('/', async (req, res) => {
-    // res.send(`creating user ${req.body.name}`);
     const vendor = new Vendor({ 
         fname: req.body.fname,
         lname: req.body.lname,
         email: req.body.email,
-        password: req.body.password,
         mobileNumber: req.body.mobileNumber,
         address: req.body.address,
         _id : req.body._id,
@@ -71,9 +68,7 @@ const upload = multer({storage: storage});
 
 //upload image
 router.post('/uploadImage/:id',upload.single('vendorProfile') ,(req, res) => {
-    // res.send(req.file);
     try {
-        // console.log(req.file);
         res.send('uploaded');
     } catch (error) {
         res.send(505).json({message: error.message});
@@ -85,7 +80,6 @@ router.post('/uploadImage/:id',upload.single('vendorProfile') ,(req, res) => {
 //delete stored image in upload/image folder
 router.delete('/deleteImage/:id', async (req, res) => {
     try {
-        //if statement to check if image exists
         if(fs.existsSync('./upload/images/'+req.params.id+'.jpeg')){
             fs.unlinkSync('./upload/images/'+req.params.id+'.jpeg');
             res.send('deleted');
@@ -102,7 +96,6 @@ router.delete('/deleteImage/:id', async (req, res) => {
 
 // updating one
 router.patch('/:id',getVendor, async (req, res) => {
-    // res.send(`updating user ${req.params.id}`);
     if(req.body.fname != null){
         res.vendor.fname = req.body.fname;
     }
@@ -111,9 +104,6 @@ router.patch('/:id',getVendor, async (req, res) => {
     }
     if(req.body.email != null){
         res.vendor.email = req.body.email;
-    }
-    if(req.body.password != null){
-        res.vendor.password = req.body.password;
     }
     if(req.body.mobileNumber != null){
         res.vendor.mobileNumber = req.body.mobileNumber;
@@ -180,7 +170,6 @@ router.patch('/:id',getVendor, async (req, res) => {
 
 //deleting one
 router.delete('/:id', getVendor, async (req, res) => {
-    // res.send(`deleting user ${req.params.id}`);
     try{
         await res.vendor.remove();
         res.json({message: 'Deleted this vendor'});
