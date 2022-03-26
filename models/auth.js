@@ -6,15 +6,7 @@ const authSchema = new mongoose.Schema({
     },
     password : {
         type: String
-    },
-    // LoggedIn : {
-    //     type: Boolean,
-    //     default: false
-    // },
-    // isVerified : {
-    //     type: Boolean,
-    //     default: false
-    // }
+    }
 });
 
 module.exports = mongoose.model('Auth', authSchema);
