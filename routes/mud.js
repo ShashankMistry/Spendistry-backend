@@ -60,8 +60,15 @@ router.get('/:id', async (req, res) => {
             }},
             {$unwind: '$business'},
             {$group: {      
+                _id:'$business._id',
                 MonthlyTotalAll: {$last: '$MonthlyTotalAll'},
                 AllTimeTotal:{$last: '$AllTimeTotal'},
+               
+                businessTotal:{
+                    $sum: '$business.MonthlyTotal'
+                },
+                businessAllTimeTotal: {$sum: '$business.AllTotal'}
+            
             }
         },
             
