@@ -82,16 +82,14 @@ router.get('/:id', async (req, res) => {
                     $sum: '$business.MonthlyTotal'
                 },
                 businessAllTimeTotal: {$sum: '$business.AllTotal'},
-                invoiceTitle: '$business.invoiceTitle',
-               
             }
         },
             
             {$project: {
                 _id: '$_id',
                 AllTotal: '$businessAllTimeTotal',
-                MonthlyTotal: '$businessTotal',
-                invoiceTitle: '$businessName.invoices.invoiceTitle',
+                MonthlyTotal: '$businessTotal'
+                invoiceTitle: '$business.invoiceTitle',
             }
         },
         
