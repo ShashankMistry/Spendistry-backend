@@ -96,7 +96,7 @@ router.get('/:id', async (req, res) => {
 
         ]);
 
-        var send = Object.assign(encryptedQr, total[0], userDetails, businessDetails);
+        var send = Object.assign({}, encryptedQr, total[0], userDetails, businessDetails);
         
         res.json(send);
 
