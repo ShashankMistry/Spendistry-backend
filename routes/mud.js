@@ -54,23 +54,6 @@ router.get('/:id', async (req, res) => {
             {$unwind: '$businessName.invoices'},
             {$group: {
                 _id: req.params.id,
-                MonthlyTotalAll: {
-                    $sum : {
-                           $cond: {
-                             if: {
-                                 $gte: [
-                                     '$businessName.invoices.invoiceTime',
-                                     Date.now - (1000 * 60 * 60 * 24 * 30)
-                                 ],  
-                             },
-                             then: '$businessName.invoices.roundoff',
-                             else: 0
-                         }
-                     }
-                 },
-                 AllTimeTotal:{
-                     $sum:'$businessName.invoices.roundoff'
-                 },
                  business:{
                     $push:{
                     _id: '$businessName._id',
@@ -94,10 +77,7 @@ router.get('/:id', async (req, res) => {
             }},
             {$unwind: '$business'},
             {$group: {      
-                _id:'$business._id',
-                MonthlyTotalAll: {$last: '$MonthlyTotalAll'},
-                AllTimeTotal:{$last: '$AllTimeTotal'},
-               
+                _id:'$business._id',               
                 businessTotal:{
                     $sum: '$business.MonthlyTotal'
                 },
