@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const Invoice = require('../models/invoice');
-const mongoose = require('mongoose');
-const report = require('../models/report');
 const User = require('../models/user');
 const cryptoJS = require('crypto-js');
 
