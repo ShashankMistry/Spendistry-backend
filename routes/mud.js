@@ -41,14 +41,12 @@ router.get('/:id', async (req, res) => {
         }},
         {$unwind: '$business'},
         {$group: {      
-            _id:'$business._id',
             MonthlyTotalAll: {$last: '$MonthlyTotalAll'},
             AllTimeTotal:{$last: '$AllTimeTotal'},
         }
     },
         
         {$project: {
-            _id: '$_id',
             MonthlyTotalAll: '$MonthlyTotalAll',
             AllTimeTotal:  '$AllTimeTotal',
             qr: encryptedQr
@@ -64,4 +62,4 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-exports.default = router;
+module.exports = router;
