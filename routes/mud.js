@@ -3,7 +3,7 @@ const router = express.Router();
 const Invoice = require('../models/invoice');
 const mongoose = require('mongoose');
 const report = require('../models/report');
-const user = require('../models/user');
+const User = require('../models/user');
 const cryptoJS = require('crypto-js');
 
 //get user dashboard
@@ -46,8 +46,10 @@ router.get('/:id', async (req, res) => {
         },
     
         ]);
+
+        const userDetails = await User.findById(req.params.id);
         
-        res.json(total);
+        res.json({total, userDetails});
 
     } catch (error) {
         res.status(500).send(error);
