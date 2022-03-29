@@ -41,7 +41,6 @@ router.get('/:id', async (req, res) => {
             {$project: {
                 MonthlyTotalAll: '$MonthlyTotalAll',
                 AllTimeTotal:  '$AllTimeTotal',
-                qr: encryptedQr
             }
         },
     
@@ -49,7 +48,7 @@ router.get('/:id', async (req, res) => {
 
         const userDetails = await User.findById(req.params.id);
         
-        res.json({total, userDetails, encryptedQr});
+        res.json({encryptedQr, total, userDetails });
 
     } catch (error) {
         res.status(500).send(error);
