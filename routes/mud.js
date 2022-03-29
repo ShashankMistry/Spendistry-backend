@@ -96,8 +96,12 @@ router.get('/:id', async (req, res) => {
 
         ]);
 
-        var send = Object.assign({}, total[0], {encryptedQr, userDetails, businessDetails});
-        
+        if(total.length > 0){
+            var send = Object.assign({}, total[0], {encryptedQr, userDetails, businessDetails});
+        } else {
+            var send = Object.assign({}, {_id: req.params.id,MonthlyTotalAll:0, AllTimeTotal:0}, {encryptedQr, userDetails, businessDetails:[]});
+        }
+
         res.json(send);
 
     } catch (error) {
