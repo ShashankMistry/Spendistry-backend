@@ -62,6 +62,9 @@ app.use('/loggedInVerify', loggedInVerifyRouter); // verify user is logged in by
 const pdf = require('./routes/pdf');
 app.use('/pdf', pdf); // generate pdf
 
+const mud = require('./routes/mud');
+app.use('/mud', mud); // mobile user dashboard
+
 // Start server
 app.listen (PORT, () => {
   console.log('listening on port', PORT);
