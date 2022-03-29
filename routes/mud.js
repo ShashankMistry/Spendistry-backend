@@ -47,8 +47,76 @@ router.get('/:id', async (req, res) => {
         ]);
 
         const userDetails = await User.findById(req.params.id);
+
+        const businessDetails = await Invoice.aggregate([
+            {$match: { _id: req.params.id}},
+            {$unwind: '$businessName'},
+            {$unwind: '$businessName.invoices'},
+            {$group: {
+                _id: req.params.id,
+                MonthlyTotalAll: {
+                    $sum : {
+                           $cond: {
+                             if: {
+                                 $gte: [
+                                     '$businessName.invoices.invoiceTime',
+                                     Date.now - (1000 * 60 * 60 * 24 * 30)
+                                 ],  
+                             },
+                             then: '$businessName.invoices.roundoff',
+                             else: 0
+                         }
+                     }
+                 },
+                 AllTimeTotal:{
+                     $sum:'$businessName.invoices.roundoff'
+                 },
+                 business:{
+                    $push:{
+                    _id: '$businessName._id',
+                    MonthlyTotal: {
+                        $sum : {
+                            $cond: {
+                              if: {
+                                  $gte: [
+                                      '$businessName.invoices.invoiceTime',
+                                      Date.now - (1000 * 60 * 60 * 24 * 30)
+                                  ],  
+                              },
+                              then: '$businessName.invoices.roundoff',
+                              else: 0
+                          }
+                      }
+                    },
+                    AllTotal: {$sum: '$businessName.invoices.roundoff'}
+                }
+            }
+            }},
+            {$unwind: '$business'},
+            {$group: {      
+                _id:'$business._id',
+                MonthlyTotalAll: {$last: '$MonthlyTotalAll'},
+                AllTimeTotal:{$last: '$AllTimeTotal'},
+               
+                businessTotal:{
+                    $sum: '$business.MonthlyTotal'
+                },
+                businessAllTimeTotal: {$sum: '$business.AllTotal'}
+            
+            }
+        },
+            
+            {$project: {
+                _id: '$_id',
+                AllTotal: '$businessAllTimeTotal',
+                MonthlyTotal: '$businessTotal',
+            }
+        },
         
-        res.json({encryptedQr, total, userDetails });
+
+        ]);
+        
+        res.json({ encryptedQr, total, userDetails, businessDetails });
 
     } catch (error) {
         res.status(500).send(error);
