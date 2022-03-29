@@ -70,7 +70,7 @@ router.get('/:id', async (req, res) => {
                       }
                     },
                     AllTotal: {$sum: '$businessName.invoices.roundoff'},
-                    invoiceTitle: {$first: '$businessName.invoices.invoiceTitle'},   
+                    invoiceTitle: '$businessName.invoices.invoiceTitle',   
                 }
             }
             }},
@@ -81,7 +81,7 @@ router.get('/:id', async (req, res) => {
                     $sum: '$business.MonthlyTotal'
                 },
                 businessAllTimeTotal: {$sum: '$business.AllTotal'},
-                invoiceTitle: {$first: '$business.invoiceTitle'}
+                invoiceTitle: '$business.invoiceTitle'
             }
         },
             
