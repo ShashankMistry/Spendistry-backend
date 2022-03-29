@@ -49,7 +49,7 @@ router.get('/:id', async (req, res) => {
 
         const userDetails = await User.findById(req.params.id);
         
-        res.json({total, userDetails});
+        res.json({total, userDetails, encryptedQr});
 
     } catch (error) {
         res.status(500).send(error);
