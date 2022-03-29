@@ -73,11 +73,8 @@ router.get('/:id', async (req, res) => {
         },
             
             {$project: {
-                _id: '$_id',
                 MonthlyTotalAll: '$MonthlyTotalAll',
                 AllTimeTotal:  '$AllTimeTotal',
-                AllTotal: '$businessAllTimeTotal',
-                MonthlyTotal: '$businessTotal',
                 qr: encryptedQr
             }
         },
