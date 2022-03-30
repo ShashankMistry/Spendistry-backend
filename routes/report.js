@@ -128,6 +128,16 @@ router.get('/reportTo/:reportTo', async (req, res) => {
     }
 });
 
+//get repot by reportBy
+router.get('/reportBy/:reportBy', async (req, res) => {
+    try {
+        const report = await Report.find({reportBy: req.params.reportBy});
+        res.json(report);
+    } catch (err) {
+        res.status(500).json({message: err.message});
+    }
+});
+
 async function getReport(req, res, next) {
     let report;
     try {
