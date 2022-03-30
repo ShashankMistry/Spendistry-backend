@@ -98,14 +98,14 @@ router.get('/:id', async (req, res) => {
 
         ]);
 
-        const reportDetails = await report.find({reportBy: req.params.id});
+        const reportCount = await report.countDocuments({reportBy: req.params.id});
 
 
 
         if(total.length > 0){
-            var send = Object.assign({}, total[0], {encryptedQr, userDetails, businessDetails, reportDetails});
+            var send = Object.assign({}, total[0], {encryptedQr, userDetails, businessDetails, reportCount});
         } else {
-            var send = Object.assign({}, {_id: req.params.id,MonthlyTotalAll:0, AllTimeTotal:0, reportDetails:0}, {encryptedQr, userDetails, businessDetails:[]});
+            var send = Object.assign({}, {_id: req.params.id,MonthlyTotalAll:0, AllTimeTotal:0, reportCount:0}, {encryptedQr, userDetails, businessDetails:[]});
         }
 
         res.json(send);
