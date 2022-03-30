@@ -4,7 +4,7 @@ const Invoice = require('../models/invoice');
 const User = require('../models/user');
 const cryptoJS = require('crypto-js');
 const report = require('../models/report');
-s
+
 
 //get user dashboard
 router.get('/:id', async (req, res) => {
