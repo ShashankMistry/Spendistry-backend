@@ -3,6 +3,8 @@ const router = express.Router();
 const Invoice = require('../models/invoice');
 const User = require('../models/user');
 const cryptoJS = require('crypto-js');
+const report = require('../models/report');
+s
 
 //get user dashboard
 router.get('/:id', async (req, res) => {
@@ -94,10 +96,14 @@ router.get('/:id', async (req, res) => {
 
         ]);
 
+        const reportDetails = await report.find({reportBy: req.params.id});
+
+
+
         if(total.length > 0){
-            var send = Object.assign({}, total[0], {encryptedQr, userDetails, businessDetails});
+            var send = Object.assign({}, total[0], {encryptedQr, userDetails, businessDetails, reportDetails});
         } else {
-            var send = Object.assign({}, {_id: req.params.id,MonthlyTotalAll:0, AllTimeTotal:0}, {encryptedQr, userDetails, businessDetails:[]});
+            var send = Object.assign({}, {_id: req.params.id,MonthlyTotalAll:0, AllTimeTotal:0, reportDetails:0}, {encryptedQr, userDetails, businessDetails:[]});
         }
 
         res.json(send);
