@@ -71,18 +71,19 @@ router.get('/:id', async (req, res) => {
                           }
                       }
                     },
-                    AllTotal: {$sum: '$businessName.invoices.roundoff'}
+                    AllTotal: {$sum: '$businessName.invoices.roundoff'},
+                    invoiceTitle: '$businessName.invoices.invoiceTitle',
+                   
                 }
             }
             }},
             {$unwind: '$business'},
             {$group: {      
-                _id:'$business._id',               
+                _id:'$business._id',            
                 businessTotal:{
                     $sum: '$business.MonthlyTotal'
                 },
-                businessAllTimeTotal: {$sum: '$business.AllTotal'}
-            
+                businessAllTimeTotal: {$sum: '$business.AllTotal'},
             }
         },
             
@@ -90,6 +91,7 @@ router.get('/:id', async (req, res) => {
                 _id: '$_id',
                 AllTotal: '$businessAllTimeTotal',
                 MonthlyTotal: '$businessTotal',
+                invoiceTitle: '$business.invoiceTitle',
             }
         },
         
