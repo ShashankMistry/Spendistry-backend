@@ -75,7 +75,7 @@ router.patch('/:id', getReturn, async (req, res) => {
         res.invoice.invoiceStatus = req.body.invoiceStatus;
     }
     if(req.body.invoiceTitle != null){
-        res.Return.invoiceTitle = req.body.invoiceTitle;
+        res.returnData.invoiceTitle = req.body.invoiceTitle;
     }
     if(req.body.invoiceTotalitems != null){
         res.invoice.invoiceTotalitems = req.body.invoiceTotalitems;
