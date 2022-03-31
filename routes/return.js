@@ -150,7 +150,7 @@ router.patch('/:id', getReturn, async (req, res) => {
         res.invoice.extra5 = req.body.extra5;
     }
     try{
-        const updateInvoice = await res.invoice.save();
+        const updateInvoice = await res.return.save();
         res.json(updateInvoice);
     } catch (err) {
         res.status(400).json({message: err.message});
