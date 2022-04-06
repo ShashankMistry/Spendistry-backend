@@ -164,7 +164,7 @@ router.get('/total/:id/', async(req, res) => {
                 $sum: '$business.MonthlyTotal'
             },
             businessAllTimeTotal: {$sum: '$business.AllTotal'},
-            roundoff: {$push: '$business.roundoff'},
+            roundoff: '$business.roundoff',
            
         }
     },
