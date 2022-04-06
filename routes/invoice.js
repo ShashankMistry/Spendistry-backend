@@ -137,7 +137,7 @@ router.get('/total/:id/', async(req, res) => {
              business:{
                 $push:{
                 _id: '$businessName._id',
-                roundoff: '$roundoff',
+                roundoff: '$businessName.invoices.roundoff',
                 MonthlyTotal: {
                     $sum : {
                         $cond: {
