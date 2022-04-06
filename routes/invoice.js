@@ -117,21 +117,6 @@ router.get('/total/:id/', async(req, res) => {
              AllTimeTotal:{
                  $sum:'$businessName.invoices.roundoff'
              },
-             roundoff:{
-                $push: {
-                    $cond: {
-                        if: {
-                            $gte: [
-                                '$businessName.invoices.invoiceTime',
-                                Date.now - (1000 * 60 * 60 * 24 * 30)
-                            ],
-                        },
-                        then: '$businessName.invoices.roundoff',
-                        else: 0
-                    }
-                }
-                     
-        },
              business:{
                 $push:{
                 _id: '$businessName._id',
@@ -163,6 +148,21 @@ router.get('/total/:id/', async(req, res) => {
                 $sum: '$business.MonthlyTotal'
             },
             businessAllTimeTotal: {$sum: '$business.AllTotal'},
+            roundoff:{
+                $push: {
+                    $cond: {
+                        if: {
+                            $gte: [
+                                '$businessName.invoices.invoiceTime',
+                                Date.now - (1000 * 60 * 60 * 24 * 30)
+                            ],
+                        },
+                        then: '$businessName.invoices.roundoff',
+                        else: 0
+                    }
+                }
+                     
+        },
         }
     },
         
@@ -185,7 +185,8 @@ router.get('/total/:id/', async(req, res) => {
         AllTotal: 0,
         MonthlyTotal: 0,
         AllTimeTotal: 0,
-        qr: cryptoJS.AES.encrypt(req.params.id, process.env.QR_HASH_KEY).toString()
+        qr: cryptoJS.AES.encrypt(req.params.id, process.env.QR_HASH_KEY).toString(),
+        roundoff: [0,0]
     }]);
     } else {
     res.json(total);           
