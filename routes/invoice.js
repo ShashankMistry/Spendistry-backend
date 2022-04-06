@@ -137,7 +137,6 @@ router.get('/total/:id/', async(req, res) => {
                 },
                 AllTotal: {$sum: '$businessName.invoices.roundoff'},
                 roundoff:{
-                    $push: {
                         $cond: {
                             if: {
                                 $gte: [
@@ -148,7 +147,6 @@ router.get('/total/:id/', async(req, res) => {
                             then: '$businessName.invoices.roundoff',
                             else: 0
                         }
-                    }
                          
             },
             }
