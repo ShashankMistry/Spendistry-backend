@@ -63,91 +63,91 @@ router.post('/', async (req, res) => {
 // updating one
 router.patch('/:id', getReturn, async (req, res) => {
     if(req.body.invoiceNumber != null){
-        res.invoice.invoiceNumber = req.body.invoiceNumber;
+        res.return.invoiceNumber = req.body.invoiceNumber;
     }
     if(req.body.invoiceDate != null){
-        res.invoice.invoiceDate = req.body.invoiceDate;
+        res.return.invoiceDate = req.body.invoiceDate;
     }
     if(req.body.invoiceAmount != null){
-        res.invoice.invoiceAmount = req.body.invoiceAmount;
+        res.return.invoiceAmount = req.body.invoiceAmount;
     }
     if(req.body.invoiceStatus != null){
-        res.invoice.invoiceStatus = req.body.invoiceStatus;
+        res.return.invoiceStatus = req.body.invoiceStatus;
     }
     if(req.body.invoiceTitle != null){
         res.return.invoiceTitle = req.body.invoiceTitle;
     }
     if(req.body.invoiceTotalitems != null){
-        res.invoice.invoiceTotalitems = req.body.invoiceTotalitems;
+        res.return.invoiceTotalitems = req.body.invoiceTotalitems;
     }
     if(req.body.invoiceIGST != null){
-        res.invoice.invoiceIGST = req.body.invoiceIGST;
+        res.return.invoiceIGST = req.body.invoiceIGST;
     }
     if(req.body.invoiceCGST != null){
-        res.invoice.invoiceCGST = req.body.invoiceCGST;
+        res.return.invoiceCGST = req.body.invoiceCGST;
     }
     if(req.body.invoiceSGST != null){
-        res.invoice.invoiceSGST = req.body.invoiceSGST;
+        res.return.invoiceSGST = req.body.invoiceSGST;
     }
     if(req.body.invoiceUTGST != null){
-        res.invoice.invoiceUTGST = req.body.invoiceUTGST;
+        res.return.invoiceUTGST = req.body.invoiceUTGST;
     }
     if(req.body.invoiceSentTo != null){
-        res.invoice.invoiceSentTo = req.body.invoiceSentTo;
+        res.return.invoiceSentTo = req.body.invoiceSentTo;
     }
     if(req.body.invoiceSentBy != null){
-        res.invoice.invoiceSentBy = req.body.invoiceSentBy;
+        res.return.invoiceSentBy = req.body.invoiceSentBy;
     }
     if(req.body.invoicePaymentMode != null){
-        res.invoice.invoicePaymentMode = req.body.invoicePaymentMode;
+        res.return.invoicePaymentMode = req.body.invoicePaymentMode;
     }
     if(req.body.invoicePDF != null){
-        res.invoice.invoicePDF = req.body.invoicePDF;
+        res.return.invoicePDF = req.body.invoicePDF;
     }
     if(req.body.invoiceReport != null){
-        res.invoice.invoiceReport = req.body.invoiceReport;
+        res.return.invoiceReport = req.body.invoiceReport;
     }
     if(req.body.invoiceTime != null){
-        res.invoice.invoiceTime = req.body.invoiceTime;
+        res.return.invoiceTime = req.body.invoiceTime;
     }
     if(req.body.discount != null){
-        res.invoice.discount = req.body.discount;
+        res.return.discount = req.body.discount;
     }
     if(req.body.roundoff != null){
-        res.invoice.roundoff = req.body.roundoff;
+        res.return.roundoff = req.body.roundoff;
     }
     if(req.body.reportReason != null){
-        res.invoice.reportReason = req.body.reportReason;
+        res.return.reportReason = req.body.reportReason;
     }
     if(req.body.invoiceDescription != null){
-        res.invoice.invoiceDescription = req.body.invoiceDescription;
+        res.return.invoiceDescription = req.body.invoiceDescription;
     }
     if(req.body.city != null){
-        res.invoice.city = req.body.city;
+        res.return.city = req.body.city;
     }
     if(req.body.state != null){
-        res.invoice.state = req.body.state;
+        res.return.state = req.body.state;
     }
     if(req.body.businessAddress != null){
-        res.invoice.businessAddress = req.body.businessAddress;
+        res.return.businessAddress = req.body.businessAddress;
     }
     if(req.body.businessContactNo != null){
-        res.invoice.businessContactNo = req.body.businessContactNo;
+        res.return.businessContactNo = req.body.businessContactNo;
     }
     if(req.body.extra1 != null){
-        res.invoice.extra1 = req.body.extra1;
+        res.return.extra1 = req.body.extra1;
     }
     if(req.body.extra2 != null){
-        res.invoice.extra2 = req.body.extra2;
+        res.return.extra2 = req.body.extra2;
     }
     if(req.body.extra3 != null){
-        res.invoice.extra3 = req.body.extra3;
+        res.return.extra3 = req.body.extra3;
     }
     if(req.body.extra4 != null){
-        res.invoice.extra4 = req.body.extra4;
+        res.return.extra4 = req.body.extra4;
     }
     if(req.body.extra5 != null){
-        res.invoice.extra5 = req.body.extra5;
+        res.return.extra5 = req.body.extra5;
     }
     try{
         const updateInvoice = await res.return.save();
