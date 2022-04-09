@@ -17,10 +17,10 @@ const jwt = require('jsonwebtoken');
 
 
 // getting one
-// router.get('/:id', getAuth, (req, res) => {
-//     // res.send(`getting user ${req.params.id}`);
-//     res.json(res.auth);
-// })
+router.get('/:id', getAuth, (req, res) => {
+    // res.send(`getting user ${req.params.id}`);
+    res.json(res.auth);
+})
 
 // creating one
 router.post('/', async (req, res) => {
