@@ -20,7 +20,7 @@ Backend for Spendistry: the new-gen invoice system project
 
 4. ```/auth/:id/``` (PATCH Method) to update password.
 
-5.```/auth/:id/``` (DELETE Method) to delete account.
+5. ```/auth/:id/``` (DELETE Method) to delete account.
 
 ### Business Side Account
 
