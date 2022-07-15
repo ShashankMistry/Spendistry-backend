@@ -18,17 +18,17 @@ Backend for Spendistry: the new-gen invoice system project
 
 3. ```/auth/userLogin/``` (POST Method)for user login. email and password are sent through post request.
 
-4. ```/auth/:id``` (PATCH Method) to update password
+4. ```/auth/:id/``` (PATCH Method) to update password.
 
-5.```/auth/:id``` (DELETE Method) to delete account
+5.```/auth/:id/``` (DELETE Method) to delete account
 
 ### Business Side Account
 
-1. ```/authBusiness/:id``` (GET Method) to fetch business side account data
+1. ```/authBusiness/:id/``` (GET Method) to fetch business side account data.
 
-2. ```/authBusiness/``` for creating busness side account
+2. ```/authBusiness/``` for creating busness side account.
 
-3. ```/authBusiness/vendorLogin/``` (POST Method) used to login for business account
+3. ```/authBusiness/vendorLogin/``` (POST Method) used to login for business account.
 
 4. ```/authBusiness/:id/``` (PATCH Method) to update password and encrypt it.
 
@@ -40,7 +40,7 @@ Backend for Spendistry: the new-gen invoice system project
 
 2. ```/user/:id/``` (PATCH Method) to update user data.
 
-3. ```/user/uploadImage/:id/``` (POST Method) to upload profile pic to server
+3. ```/user/uploadImage/:id/``` (POST Method) to upload profile pic to server.
 
 4. ```/user/deleteImage/:id/``` (DELETE Method) to delete profile pic.
 
