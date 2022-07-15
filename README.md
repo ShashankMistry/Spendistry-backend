@@ -20,7 +20,7 @@ Backend for Spendistry: the new-gen invoice system project
 
 4. ```/auth/:id/``` (PATCH Method) to update password.
 
-5.```/auth/:id/``` (DELETE Method) to delete account
+5.```/auth/:id/``` (DELETE Method) to delete account.
 
 ### Business Side Account
 
@@ -88,7 +88,7 @@ Backend for Spendistry: the new-gen invoice system project
 
 ### PDF Download 
 
-1. ```/PDF/:userId/:businessId/:invoiceId/```` (GET Method) to download/get invoice pdf of that specific invoice.
+1. ```/PDF/:userId/:businessId/:invoiceId/``` (GET Method) to download/get invoice pdf of that specific invoice.
 
 ### Report Invoice
 
