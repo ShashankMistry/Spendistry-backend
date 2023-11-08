@@ -35,8 +35,6 @@ router.post('/', async (req, res) => {
         vendorName: req.body.vendorName,
         tollFreeNumber: req.body.tollFreeNumber,
         currentInvoicenumber: req.body.currentInvoicenumber,
-        panNumber: req.body.panNumber,
-        gstNumber: req.body.gstNumber,
         website: req.body.website,
         city: req.body.city,
         state: req.body.state,
@@ -131,12 +129,6 @@ router.patch('/:id',getVendor, async (req, res) => {
     }
     if(req.body.currentInvoiceNumber!= null){
         res.vendor.currentInvoiceNumber = req.body.currentInvoiceNumber;
-    }
-    if(req.body.panNumber!= null){
-        res.vendor.panNumber = req.body.panNumber;
-    }
-    if(req.body.gstNumber!= null){
-        res.vendor.gstNumber = req.body.gstNumber;
     }
     if(req.body.city!= null){
         res.vendor.city = req.body.city;

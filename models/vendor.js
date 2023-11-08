@@ -52,14 +52,6 @@ const vendorSchema = new mongoose.Schema({
         type: Number,
         default: 1
     },
-    panNumber: {
-        type: String,
-    //    required: true
-    },
-    gstNumber: {
-        type: String,
-    //    required: true
-    }, 
     vendorDescription: {
         type: String,
     },

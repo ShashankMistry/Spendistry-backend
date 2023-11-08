@@ -31,25 +31,6 @@ const ReturnSchema = new mongoose.Schema({
         //     }
         // }]
     },
-    invoiceIGST: {
-        type: String
-      
-    },
-    gstNumber: {
-        type: String
-    },
-    invoiceCGST: {
-        type: String
-       
-    },
-    invoiceSGST: {
-        type: String
-   
-    },
-    invoiceUTGST: {
-        type: String
-    
-    },
     invoiceSentTo: {
         type: String
       
