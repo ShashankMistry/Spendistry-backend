@@ -498,10 +498,7 @@ router.patch(
         invoiceStatus: oldInvoice.invoiceStatus,
         invoiceTitle: oldInvoice.invoiceTitle,
         invoiceTotalitems: oldInvoice.invoiceTotalitems,
-        // invoiceIGST: oldInvoice.invoiceIGST,
-        // invoiceCGST: oldInvoice.invoiceCGST,
-        // invoiceSGST: oldInvoice.invoiceSGST,
-        // invoiceUTGST: oldInvoice.invoiceUTGST,
+        invoiceHST: oldInvoice.invoiceHST,
         invoiceSentTo: oldInvoice.invoiceSentTo,
         invoiceSentBy: oldInvoice.invoiceSentBy,
         invoicePaymentMode: oldInvoice.invoicePaymentMode,
@@ -541,10 +538,7 @@ router.patch(
               req.body.invoices.invoiceTotalitems,
             "businessName.$[d].invoices.$[o].invoicePaymentMode":
               req.body.invoices.invoicePaymentMode,
-            // "businessName.$[d].invoices.$[o].invoiceIGST": req.body.invoices.invoiceIGST,
-            // "businessName.$[d].invoices.$[o].invoiceCGST": req.body.invoices.invoiceCGST,
-            // "businessName.$[d].invoices.$[o].invoiceSGST": req.body.invoices.invoiceSGST,
-            // "businessName.$[d].invoices.$[o].invoiceUTGST": req.body.invoices.invoiceUTGST
+            "businessName.$[d].invoices.$[o].invoiceHST": req.body.invoices.invoiceHST
           },
         },
         {

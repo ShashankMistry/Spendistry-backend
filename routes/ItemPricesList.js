@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const ItemPricesSchema = require('../models/itemPricesList');
+const ItemPricesSchema = require('../models/ItemPricesList');
 const mongoose = require('mongoose');
 const vendorVerify = require('../middleware/verifyVendorToken');
 

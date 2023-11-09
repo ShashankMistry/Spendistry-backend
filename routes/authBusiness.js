@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const nodeMailer = require('nodemailer');
 const otp = require('../models/otp');
-const itemsPrices = require('../models/itemPricesList');
+const itemsPrices = require('../models/ItemPricesList');
 const vendor = require('../models/vendor');
 
 
