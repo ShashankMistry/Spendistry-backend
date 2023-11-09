@@ -33,34 +33,10 @@ const invoiceSchema = new mongoose.Schema({
               },
               invoiceTotalitems: {
                 type: Array,
-                // type: [{
-                //     itemName: {
-                //         type: String
-                //     },
-                //     itemPrice: {
-                //         type: String
-                //     }
-                // }]
               },
-              // invoiceIGST: {
-              //     type: String
-
-              // },
-              // gstNumber: {
-              //     type: String
-              // },
-              // invoiceCGST: {
-              //     type: String
-
-              // },
-              // invoiceSGST: {
-              //     type: String
-
-              // },
-              // invoiceUTGST: {
-              //     type: String
-
-              // },
+              invoiceHST: {
+                type: String,
+              },
               invoiceSentTo: {
                 type: String,
               },

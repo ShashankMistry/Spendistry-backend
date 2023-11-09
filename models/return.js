@@ -22,14 +22,9 @@ const ReturnSchema = new mongoose.Schema({
     },
     invoiceTotalitems: {
         type: Array
-        // type: [{
-        //     itemName: {
-        //         type: String
-        //     },
-        //     itemPrice: {
-        //         type: String
-        //     }
-        // }]
+    },
+    invoiceHST: {
+        type: String
     },
     invoiceSentTo: {
         type: String
