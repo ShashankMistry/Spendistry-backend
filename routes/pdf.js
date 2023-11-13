@@ -73,26 +73,26 @@ router.get("/:userId/:vendorId/:invoiceId", async (req, res) => {
       const city = invoice[0].invoices.city.toUpperCase();
 
       //subject to jurisdiction
-      doc
-        .fontSize(13)
-        .font("Helvetica")
-        .text("SUBJECT TO " + city + " JURISDICTION ONLY", {
-          align: "left",
-        });
+      // doc
+      //   .fontSize(13)
+      //   .font("Helvetica")
+      //   .text("SUBJECT TO " + city + " JURISDICTION ONLY", {
+      //     align: "left",
+      //   });
 
-      //empty line
-      doc.moveDown(0.4);
+      // //empty line
+      // doc.moveDown(0.4);
 
       //GST number
-      doc
-        .fontSize(12)
-        .font("Helvetica")
-        .text("GST No.: " + invoice[0].invoices.gstNumber, {
-          align: "left",
-        });
+      // doc
+      //   .fontSize(12)
+      //   .font("Helvetica")
+      //   .text("GST No.: " + invoice[0].invoices.gstNumber, {
+      //     align: "left",
+      //   });
 
       //empty line
-      doc.moveDown(0.4);
+      // doc.moveDown(0.4);
 
       //vendor id
       doc
